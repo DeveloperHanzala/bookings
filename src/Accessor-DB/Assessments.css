@@ -1,0 +1,253 @@
+/* ---------assessment------------------------ */
+
+.multi-step-form {
+   background-color: white;
+   padding: 2%;
+   border-radius: 20px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  /* General Step Styling */
+.step {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e0e0e0; /* Default inactive circle color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  }
+  
+  .step.active .circle {
+    background-color: #003366; /* Active circle color */
+    color: #fff; /* Active text color */
+  }
+  
+  /* Line Styling */
+  .line {
+    flex-grow: 1;
+    height: 2px;
+    background: #e0e0e0; /* Default inactive line color */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .line.active {
+    background:#003366; /* Active line color */
+  }
+  
+  /* Flex Spacing */
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .step + .line {
+    margin-left: 5px; /* Optional spacing */
+    margin-right: 5px; /* Optional spacing */
+  }
+  
+  .form-content {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  textarea {
+    height: 80px;
+    resize: none;
+  }
+  
+  .form-navigation {
+    display: flex;
+    justify-content: center;
+  }
+  
+  button {
+    background:#003366;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background: #e0e0e0;
+    cursor: not-allowed;
+  }
+  .fontass{
+    font-size: 13px;
+  }
+  .fontass2{
+    font-size: 11px;
+  }
+  .inpwall{
+    height: 20px;
+  }
+.inpwall1{
+    height: 40px;
+}
+  .custom-table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    margin: 0 auto; /* Center the container */
+    scrollbar-width: thin; /* Make scrollbar thinner */
+    scrollbar-color: #00336677 #f1f1f1; /* Thumb color and track color */
+  }
+
+  .custom-table {
+    width: 80%;
+    min-width: 900px; /* Ensure horizontal scrollability on smaller screens */
+    border-collapse: collapse;
+  }
+
+  .custom-table thead {
+    background-color: #f8f9fa;
+  }
+
+  .custom-table th, .custom-table td {
+    border: 1px solid #dee2e6; /* Light border for better readability */
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+  }
+
+  .custom-table th {
+    font-weight: bold;
+    background-color: #ffffff;
+  }
+
+  .custom-input {
+    width: 90%;
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+  }
+/* For WebKit browsers (Chrome, Edge, Safari) */
+.table-container::-webkit-scrollbar {
+    width: 8px; /* Set the scrollbar width */
+    height: 8px; /* Set the horizontal scrollbar height */
+  }
+  
+  .table-container::-webkit-scrollbar-thumb {
+    background-color: black; /* Set the scrollbar thumb color */
+    border-radius: 10px; /* Make the scrollbar thumb rounded */
+  }
+  
+  .table-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Set the scrollbar track color */
+    border-radius: 10px; /* Make the scrollbar track rounded */
+  }
+  
+ 
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .custom-table th, .custom-table td {
+      font-size: 12px;
+      padding: 6px;
+    }
+
+    .custom-input {
+      width: 100%;
+      padding: 4px;
+    }
+  }
+.heighfloor{
+    height: auto;
+}
+.fontass1{
+    font-size: 10px;
+  }
+  .thermal-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: auto;
+  }
+
+  .thermal-table th, .thermal-table td {
+    text-align: center;
+    padding: 1px;
+  }
+
+  .thermal-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+
+  .thermal-table td input[type="radio"] {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 768px) {
+    .thermal-table th, .thermal-table td {
+      font-size: 14px;
+      padding: 6px;
+    }
+
+    .overall-mass-label, .overall-mass-input {
+      margin-top: 10px;
+      display: block;
+    }
+  }
+  .coloa {
+    color: #003366; /* Button text color */
+    margin-bottom: 20px; /* Add some spacing between the title and button */
+  }
+
+  .buttonass {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding for a smaller button */
+    background-color:#003366; /* Button background color */
+    color: #fff; /* Button text color */
+    text-align: center;
+    font-size: 14px; /* Adjust text size */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    margin: 10px auto; /* Center the button horizontally */
+  }
+
+  .buttonass:hover {
+    background-color: #004d99; /* Darker shade on hover */
+    color: #fff; /* Button text color */
+  }
+
+  .none {
+    display: none; /* Hide the input field */
+  }
+  .submitimg{
+    width: 150px;
+  }

@@ -1,0 +1,38 @@
+.nav-link.active {
+    color: #0a5cad !important; /* Set the active link color to blue */
+    font-weight: 500;      /* Optional: Make the active link bold */
+  }
+  
+.logbtn{
+    background-color: #0a5cad; /* Set the button background color to blue */
+    color: white;           /* Set the button text color to white */
+    border: none;           /* Remove the default button border */
+    padding: 10px 40px;     /* Set the button padding */
+    cursor: pointer;   
+    font-family: Libre Baskerville;
+    transition: background-color 0.3s ease; /* Add a transition effect for the background color */
+}
+
+.logbtn:hover {
+    color: white;  
+    background-color: #023d77; /* Change the button background color when hovering over it */
+}
+.padright{
+    padding-right: 50px;  /* Add a right padding for spacing */
+}
+
+
+
+
+
+/* -----------------footer--------------- */
+
+.bgfooter{
+    padding: 4% 0;
+    background-color: #003366;
+    color: white !important;
+}
+.bgfooter p{
+   
+    color: white !important;
+}

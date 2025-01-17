@@ -1,0 +1,349 @@
+.homebg{
+    background-image: url(../Images/main-home.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 3% 0;
+}
+.bg-color{
+    background-color: #003366;
+}
+.font-libre{
+    font-family: Libre Baskerville;
+    font-size: 60px;
+    padding: 0 3%;
+}
+.font-libre1{
+  font-family: Libre Baskerville;
+    font-size: 30px;
+    padding: 0 3%;
+    padding-right: 15%;
+    line-height: 2;
+    word-spacing: 3px;
+    color: white;
+  }
+  @media (max-width: 768px) {
+    .font-libre{
+      font-family: Libre Baskerville;
+      font-size: 40px;
+      padding: 0 3%;
+  }
+  .font-libre1{
+    font-family: Libre Baskerville;
+    font-size: 20px;
+    padding: 0 3%;
+    padding-right: 15%;
+    line-height: 2;
+    word-spacing: 3px;
+    color: white;
+  }
+  .nooverflowx{
+    overflow-x: hidden;
+  }
+  }
+  .homebutton{
+    font-size: 25px;
+    font-weight: 700;    
+}
+.width-icon{
+    width: 50px;
+}
+.card{
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.card-img-top{
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+}
+.text-color1{
+    color: #003366;
+}
+.text-color2{
+    background-color: #003366;
+    color: white;
+}
+.bgcolor1{
+    background-color: #01478d;
+    color: white;
+}
+.carousel-control-prev, .carousel-control-next {
+    width: 40px;  /* Adjust width */
+    height: 40px;  /* Adjust height */
+    background-color: #003366 !important;  /* Blue background */
+    border-radius: 50%;  /* Rounded button */
+    border: none;  /* Remove border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.shad{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+  
+.bgimg {
+    position: relative; /* Ensure the pseudo-element is positioned relative to this container */
+    background-image: url(../Images/ber1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+@media (max-width: 576px) {
+  /* Show only one card on extra small screens */
+  #carouselMultiItemExample .carousel-item .container .row .col-lg-4 {
+    display: none;
+  }
+  #carouselMultiItemExample .carousel-item.active .container .row .col-lg-4:first-child {
+    display: block;
+  }
+}
+
+@media (min-width: 576px) {
+  /* Show multiple cards on small screens and above */
+  #carouselMultiItemExample .carousel-item .container .row .col-lg-4 {
+    display: none;
+  }
+  #carouselMultiItemExample .carousel-item.active .container .row .col-lg-4:nth-child(-n+3) {
+    display: block;
+  }
+}
+
+.bgimg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #003366b0; /* Bluish overlay with 40% opacity */
+    z-index: 1; /* Make sure the overlay appears on top of the background */
+}
+
+.bgimg > * {
+    position: relative; /* Ensure child elements are above the overlay */
+    z-index: 2;
+}
+
+/* FAQ Section Container */
+.faq-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Left Section */
+  .faq-left {
+    flex: 1;
+    min-width: 250px;
+    margin-left: 8%;
+  }
+  
+  .faq-left h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .faq-left p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .contact-button {
+    background-color: #ffc107; /* Bootstrap warning color */
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contact-button:hover {
+    background-color: #e0a800;
+  }
+  
+  /* Right Section */
+  .faq-right {
+    flex: 1;
+    min-width: 300px;
+    padding: 0 8% ;
+  }
+  
+  .faq-right h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding-bottom: 5%;
+    border-bottom: 1px solid #000000;
+  }
+  
+  .faq-item {
+    border-bottom: 1px solid #000000;
+    padding: 7% 0;
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    color: #000;
+  }
+  
+  .faq-question:hover {
+    color:#003366;
+  }
+  
+  .faq-icon {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .faq-answer {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.5;
+    padding: 10px 0;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-answer.hide {
+    display: none;
+  }
+  
+  .faq-answer.show {
+    display: block;
+    
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .faq-container {
+      flex-direction: column;
+    }
+  }
+  
+  /* ------------AssessorRegistration------------ */
+  .accessbg{
+    background-image: url(../Images/accessor.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 5% 0;
+  }
+  .accesshead{
+    font-family: Libre Baskerville;
+    color: white;
+    font-size: 50px;
+  }
+  .accesshead1{
+    font-family: Libre Baskerville;
+    color: #003366;
+    font-size: 40px;
+  }
+/* Apply general input styles */
+.inp-col input {
+  background: #b3b3b379;
+  color: white;
+  border: 1px solid #ccc; /* Optional: add border if needed */
+}
+
+/* Style specifically for checkbox */
+.inp-col input[type="checkbox"] {
+  background: #b3b3b379;
+  color: white;
+  border: 1px solid #ccc; /* Optional */
+  position: relative;
+  width: 20px;  /* Adjust the size if needed */
+  height: 20px; /* Adjust the size if needed */
+  appearance: none;  /* Remove default checkbox styling */
+  cursor: pointer;
+}
+
+/* Create custom checkbox appearance */
+.inp-col input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 18px;
+  height: 18px;
+
+}
+
+/* Add tick mark when checkbox is checked */
+.inp-col input[type="checkbox"]:checked::before {
+  content: '\2713';  /* Unicode checkmark symbol */
+  font-size: 14px;
+   
+  background-color: #0D6EFD;
+  color: white;
+  text-align: center;
+  line-height: 18px;
+}
+/* -----------contact-------------- */
+.contactbg{
+  background-image: url(../Images/Contactmain.png);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5% 0;
+}
+.contact2bg{
+  background-image: url(../Images/contact.jpeg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5% 0;
+}
+.contacttext{
+  font-family: Libre Baskerville;
+  color: white;
+  font-size: 50px;
+}
+.contact-p{
+  font-family: sans-serif;
+  color: white;
+  word-spacing: 5px;
+}
+.forma input {
+  background-color: transparent; /* Keeps the background transparent */
+  color: white !important; /* Text color is white */
+  border: 1px solid #ccc; /* Optional: adds a border to the input field */
+}
+
+.forma input::placeholder {
+  color: white; /* Placeholder text color */
+}
+
+.forma input:focus {
+  background-color: transparent; /* Keeps the background transparent when focused */
+  color: white !important; /* Text color stays white on focus */
+  border: 1px solid #00327c; /* Optional: Change border color on focus */
+}
+
+.forma select {
+  background-color: transparent; /* Keeps the background transparent */
+  color: white !important; /* Text color is white */
+  border: 1px solid #ccc; /* Optional: adds a border to the input field */
+}
+.forma select option {
+  background-color: #00327c;
+  color: white; /* Placeholder text color */
+}
+
+.forma select:focus {
+  background-color: transparent; /* Keeps the background transparent when focused */
+  color: white !important; /* Text color stays white on focus */
+  border: 1px solid #00327c; /* Optional: Change border color on focus */
+}
