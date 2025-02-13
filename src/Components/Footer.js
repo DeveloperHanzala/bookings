@@ -4,6 +4,7 @@ import { CiFacebook } from "react-icons/ci";
 import { RiTwitterXFill } from "react-icons/ri";
 import { CiLinkedin } from "react-icons/ci";
 import { SlSocialBehance } from "react-icons/sl";
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return ( 
     <div className='bgfooter px-4 px-md-0'>
@@ -17,11 +18,11 @@ const Footer = () => {
         <div className='col-md-3 d-flex justify-content-start justify-content-md-center'>
             <div className='text-start'>
             <h4>Menu</h4>
-            <p>Home</p>
-            <p>Assessor Registration</p>
-            <p>Get A Ber Cert</p>
-            <p>Educational Resources</p>
-            <p>Contact me</p>
+            <p><Link to={'/'}>Home</Link></p>
+            <p><Link to={'/accessor-registration'}>Assessor Registration</Link></p>
+            <p><Link to={'/booking'}> Get A Ber Cert</Link></p>
+            {/* <p>Educational Resources</p> */}
+            <p><Link to={'/contact'}>Contact me</Link></p>
             </div>
             
         </div>

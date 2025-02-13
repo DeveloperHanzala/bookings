@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Client.css";
 import { AiOutlineBars } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
@@ -10,12 +10,16 @@ import { PiCertificateBold } from "react-icons/pi";
 
 const ClientSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate(); // Initialize navigate
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   const handleLogout = () => {
-    // Your logout logic goes here
-    console.log("User logged out");
+    // Remove access token from localStorage
+    localStorage.removeItem("access_token");
+    
+    // Redirect to login page
+    navigate("/login"); // Replace with your actual login route
   };
 
   return (

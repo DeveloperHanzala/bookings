@@ -1,170 +1,165 @@
 import React from "react";
 
-const Roof = () => {
+const Roof = ({ formData = {}, handleChange }) => {
   return (
     <div className="shadow-sm pb-5">
-      <div className="bg-light rounded  p-3">
-      Roof Construction: Main Dwelling
+      <div className="bg-light rounded p-3">
+        Roof Construction: Main Dwelling
       </div>
       <div className="row p-2 pb-4">
-      <div className=" col-md-7 col-4 d-flex">
+        <div className="col-md-7 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="pitched_insulation_btw_joists"
+              checked={formData.pitched_insulation_btw_joists || false}
+              onChange={handleChange}
             />
           </div>
-          <span className="fontass"> pitched - insulation btw joists</span>
+          <span className="fontass">pitched - insulation btw joists</span>
         </div>
         <div className="col-md-5 col-8 d-flex">
-          
-          <div  className=" ">
-          Roof insulation
-          </div>
+          <div>Roof insulation</div>
         </div>
-        <div className=" col-md-7 col-4  d-flex">
+        <div className="col-md-7 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="pitched_insulation_in_rafters"
+              checked={formData.pitched_insulation_in_rafters || false}
+              onChange={handleChange}
             />
           </div>
           <span className="fontass">pitched - insulation in rafters</span>
         </div>
         <div className="col-md-5 col-8 d-flex">
-          <div className=" col-md-4 mx-1">
+          <div className="col-md-4 mx-1">
             <input
               type="text"
-              name=""
+              name="thinkness"
+              value={formData.thinkness || ""}
               className="inpwall"
+              onChange={handleChange}
             />
           </div>
-          <div  className=" col-md-8 fontass ">
-          thickness (mm)
-          </div>
+          <div className="col-md-8 fontass">thickness (mm)</div>
         </div>
-        <div className=" col-md-7 col-4 d-flex">
+        <div className="col-md-7 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="Flat_insulation_integral"
+              checked={formData.Flat_insulation_integral || false}
+              onChange={handleChange}
             />
           </div>
-          <span className="fontass"> flat - insulation integral</span>
+          <span className="fontass">flat - insulation integral</span>
         </div>
-        <div className="col-md-5 col-8 d-flex ">
-        <div className=" col-md-4 mx-1">
+        <div className="col-md-5 col-8 d-flex">
+          <div className="col-md-4 mx-1">
             <input
               type="checkbox"
-              name=""
-             
+              name="fibre"
+              checked={formData.fibre || false}
+              onChange={handleChange}
             />
           </div>
-          <div  className="  col-md-8 fontass  ">
-          fibre
-          </div>
+          <div className="col-md-8 fontass">fibre</div>
         </div>
-        <div className=" col-md-7 col-4  d-flex">
+        <div className="col-md-7 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="room_in_roof"
+              checked={formData.room_in_roof || false}
+              onChange={handleChange}
             />
           </div>
-         <span className="fontass">room in roof</span>
-        </div>
-       <div className="col-md-5 col-8 justify-content-center mt-2 d-flex">
-        <div className="col-md-12 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass">warmcell</span>
-        </div>
-        
-       </div>
-   
-       <div className=" col-md-7 col-4  d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass">no heat loss roof</span>
+          <span className="fontass">room in roof</span>
         </div>
         <div className="col-md-5 col-8 justify-content-center mt-2 d-flex">
-        
-        <div className="col-md-12 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
+          <div className="col-md-12 d-flex">
+            <div className="mx-2">
+              <input
+                type="checkbox"
+                name="warmcell"
+                checked={formData.warmcell || false}
+                onChange={handleChange} 
+              />
+            </div>
+            <span className="fontass">warmcell</span>
           </div>
-         <span className="fontass"> EPS</span>
-</div>
-       </div>
-
-       <div className=" col-md-5 col-4  d-flex">
+        </div>
+        <div className="col-md-7 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="no_heat_loss_roof"
+              checked={formData.no_heat_loss_roof || false}
+              onChange={handleChange}
             />
           </div>
-         <span className="fontass">other</span>
+          <span className="fontass">no heat loss roof</span>
+        </div>
+        <div className="col-md-5 col-8 justify-content-center mt-2 d-flex">
+          <div className="col-md-12 d-flex">
+            <div className="mx-2">
+              <input
+                type="checkbox"
+                name="eps"
+                checked={formData.eps || false}
+                onChange={handleChange}
+              />
+            </div>
+            <span className="fontass">EPS</span>
+          </div>
+        </div>
+        <div className="col-md-5 col-4 d-flex">
+          <div className="mx-2">
+            <input
+              type="checkbox"
+              name="roof_Construction_Other"
+              checked={formData.roof_Construction_Other || false}
+              onChange={handleChange}
+            />
+          </div>
+          <span className="fontass">other</span>
         </div>
         <div className="col-md-7 col-8 justify-content-center mt-2 d-flex">
-        <div className="col-md-6 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
+          <div className="col-md-6 d-flex">
+            <div className="mx-2">
+              <input
+                type="checkbox"
+                name="roof_construction_unknown"
+                checked={formData.roof_construction_unknown || false}
+                onChange={handleChange}
+              />
+            </div>
+            <span className="fontass">Unknown</span>
           </div>
-         <span className="fontass">Unknown</span>
+          <div className="col-md-6 d-flex">
+            <div className="mx-2">
+              <input
+                type="checkbox"
+                name="dense"
+                checked={formData.dense || false}
+                onChange={handleChange}
+              />
+            </div>
+            <span className="fontass">Dense</span>
+          </div>
         </div>
-        <div className="col-md-6 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass">Dense</span>
-</div>
-       </div>
-      
-
-
-       <div className=" col-md-5 col-4   d-flex">
+        <div className="col-md-5 col-4 d-flex">
           <div className="mx-2">
             <input
               type="text"
-              name=""
+              name="roof_Construction_Other_text"
+              value={formData.roof_Construction_Other_text || ""}
               className="inpwall"
+              onChange={handleChange}
             />
           </div>
-        
         </div>
-      
-
-
-
-
       </div>
     </div>
   );

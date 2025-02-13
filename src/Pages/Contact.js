@@ -26,7 +26,7 @@ const Contact = () => {
         <div className='row contact2bg'>
             <div className='col-md-6 '>
                 <div className='p-4'>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71503.12239552895!2d-3.2879104413652978!3d55.94118074391227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887b800a5982623%3A0x64f2147b7ce71727!2sEdinburgh%2C%20UK!5e0!3m2!1sen!2s!4v1736269819644!5m2!1sen!2s" className='w-100' height={450} style={{border:"0"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1952.9291448798015!2d-9.81030490258172!3d53.76301455580766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4859818cfff67113%3A0xa00c7a99731f2b0!2sClooncarrabaun%2C%20Louisburgh%2C%20Co.%20Mayo%2C%20Ireland!5e0!3m2!1sen!2s!4v1739294457562!5m2!1sen!2s" className='w-100' height={450} style={{border:"0"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
             <div className='col-md-6 p-5 p-md-4'>
@@ -35,7 +35,8 @@ const Contact = () => {
                 <p className='contact-p'>We'd love to hear from you! Whether you have a question about our services, need assistance, or you're in the neighborhood and want to check in, feel free to reach out.</p>
             </div>
             <div >
-                <form className='forma '>
+              <span className='fs-5 text-white contact-p'>info@homecert.ie</span>
+                {/* <form className='forma '>
                     <input type='text' className='form-control p-2 mb-3' placeholder='Name *' />
                     <input type='email' className='form-control p-2 mb-3' placeholder='Email' />
                     <input type='text' className='form-control p-2 mb-3' placeholder='Phone number *' />
@@ -46,12 +47,11 @@ const Contact = () => {
   <option value="service1">Service 1</option>
   <option value="service2">Service 2</option>
   <option value="service3">Service 3</option>
-  {/* Add more options as needed */}
-</select>
+ </select>
 
 <button className='form-control btn btn-warning fw-bold '>Send</button>
 
-                </form>
+                </form> */}
             </div>
 </div>
         </div>

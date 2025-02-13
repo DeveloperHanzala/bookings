@@ -7,6 +7,11 @@ import Login from "./Login";
 import Booking from "./BOOKING PAGES/Booking";
 import AssessorRegistration from "./Pages/AssessorRegistration";
 import Contact from "./Pages/Contact";
+import SignUp from "./SignUp";
+import ThankYou from "./Pages/ThankYou";
+import ForgetPassword from "./Pages/ForgetPassword";
+import Pin from "./Pages/Pin";
+import ConfirmPassword from "./Pages/ConfirmPasword";
 
 // Main layout with Navbar and Footer
 const MainLayout = ({ children }) => (
@@ -45,7 +50,7 @@ const MainApp = () => {
         }
       />
       <Route
-        path="/accessor-registration"
+        path="/assessor-registration"
         element={
           <MainLayout>
             <AssessorRegistration />
@@ -67,6 +72,46 @@ const MainApp = () => {
         element={
           <NoNavbarFooterLayout>
             <Login />
+          </NoNavbarFooterLayout>
+        }
+      />
+      {/* <Route
+        path="/signup"
+        element={
+          <NoNavbarFooterLayout>
+            <SignUp />
+          </NoNavbarFooterLayout>
+        }
+      /> */}
+       <Route
+        path="/thank-you"
+        element={
+          <NoNavbarFooterLayout>
+            <ThankYou />
+          </NoNavbarFooterLayout>
+        }
+      />
+       <Route
+        path="/forget-password"
+        element={
+          <NoNavbarFooterLayout>
+            <ForgetPassword />
+          </NoNavbarFooterLayout>
+        }
+      />
+       <Route
+        path="/forget-password/pin"
+        element={
+          <NoNavbarFooterLayout>
+            <Pin />
+          </NoNavbarFooterLayout>
+        }
+      />
+       <Route
+        path="/confirm-password"
+        element={
+          <NoNavbarFooterLayout>
+            <ConfirmPassword />
           </NoNavbarFooterLayout>
         }
       />

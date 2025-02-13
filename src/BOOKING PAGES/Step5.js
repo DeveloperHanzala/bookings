@@ -4,12 +4,13 @@ import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 const Step5 = ({ nextStep, prevStep, handleChange }) => {
   const [selectedName, setSelectedName] = useState(null);
 
-  // Handle name selection
   const handleNameClick = (name) => {
+    handleChange('bedrooms')(name);
     setSelectedName(name);
-    handleChange(name);  // If you want to pass it to the parent component
+    if (nextStep) {
+      nextStep();
+    } 
   };
-
   const names = [
     "01", "02", "03", "04", // Column 1
     "05", "06", "07", "08", // Column 2

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams, useLocation } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaLongArrowAltRight } from "react-icons/fa";
@@ -14,7 +15,9 @@ const DatePickerComponent = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [day, setDay] = useState(selectedDate ? selectedDate.getDate() : "DAY");
   const [openDropdown, setOpenDropdown] = useState(null); // Track which dropdown is open
-
+  const location = useLocation();
+  const jobData = location.state?.jobData; 
+  console.log(jobData)
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -295,7 +298,8 @@ const DatePickerComponent = () => {
           >
             <FaLongArrowAltLeft />
           </button>
-          <Link to={'/accessor/quote'}>
+          <Link to={`/accessor/quote/${jobData.id}`}
+          state={{ jobData: jobData }}>
           <button
             onClick={nextStep}
             style={{

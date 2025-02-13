@@ -1,6 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 
 const Quote = () => {
+    const { jobId } = useParams();
+      const location = useLocation();
+    const jobData = location.state?.jobData; 
+    console.log(jobData)
+   
+    const [formData, setFormData] = useState({
+        amount: '',
+        VAT_Registered: false,
+        SEAI_Registered: false,
+        insurance: true
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+    const [agreeTerms, setAgreeTerms] = useState(false); // New state for terms checkbox
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+        const token = localStorage.getItem("access_token");
+        
+        if (!agreeTerms) {
+            setError('You must agree to the terms of use');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const storedDate = localStorage.getItem(`jobDate_${jobId}`);
+            const availability = storedDate ? new Date(storedDate).toDateString() : 'Available immediately';
+
+            const payload = {
+                amount: Number(formData.amount).toFixed(2).toString(),
+                availability,
+                VAT_Registered: formData.VAT_Registered,
+                SEAI_Registered: formData.SEAI_Registered,
+                insurance: formData.insurance
+            };
+
+            const response = await fetch(`https://testing.techionik.com/api/jobs/${jobId}/bid/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit quote');
+            }
+
+            setSuccess(true);
+            localStorage.removeItem(`jobDate_${jobId}`);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
   return (
     <>
 
@@ -19,130 +90,142 @@ const Quote = () => {
 
         <div className='container'>
             <div className='row'>
-                <div className='col-md-6'>
-                    <div className='p-5 '>
-                    <div className='shadow round text-center'>
-                            <div className=' bg-primary round text-light'>
-                                <h2 className='display-6 '>Job Details</h2>
-                            </div>
-                            <div className='d-flex p-4 justify-content-between'>
-                                <div>
-                                    <span>Location:</span>
-                                </div>
-                                <div>
-                                    <span>Ballybofey, Co. Donegal</span>
-                                </div>
-                            </div>
-                            <div className='d-flex p-4 justify-content-between'>
-                                <div>
-                                    <span>Eircode:</span>
-                                </div>
-                                <div>
-                                    <span>F93WE1C</span>
-                                </div>
-                            </div>
+            <div className='col-md-6'>
+        <div className='p-5 '>
+          <div className='shadow round text-center'>
+            <div className=' bg-primary round text-light'>
+              <h2 className='display-6 '>Job Details</h2>
+            </div>
+            
+            <div className='d-flex p-4 justify-content-between'>
+              <div><span>Location:</span></div>
+              <div><span>{jobData?.nearest_town || 'N/A'}, Co. {jobData?.county || 'N/A'}</span></div>
+            </div>
 
-                            <div className='d-flex p-4 justify-content-between'>
-                                <div>
-                                    <span>Property Type:</span>
-                                </div>
-                                <div>
-                                    <span>Detached</span>
-                                </div>
-                            </div>
-                            <div className='d-flex p-4 justify-content-between'>
-                                <div>
-                                    <span>Size:</span>
-                                </div>
-                                <div>
-                                    <span>185 - 210 Sq. mt</span>
-                                </div>
-                            </div>
-                            <div className='d-flex p-4 justify-content-between'>
-                                <div>
-                                    <span>Beds:</span>
-                                </div>
-                                <div>
-                                    <span>05</span>
-                                </div>
-                            </div>
-                            <div className='d-flex p-4 justify-content-between'>
-                                <div>
-                                    <span>Heat Pump:</span>
-                                </div>
-                                <div>
-                                    <span>None</span>
-                                </div>
-                            </div>
+            <div className='d-flex p-4 justify-content-between'>
+              <div><span>Eircode:</span></div>
+              <div><span>F93WE1C</span></div>
+            </div>
 
-                            <div className='d-flex p-4 justify-content-between'>
-                                <div>
-                                    <span>Additions:</span>
-                                </div>
-                                <div>
-                                    <span>None</span>
-                                </div>
-                            </div>
-                            <div className='d-flex p-4 justify-content-between'>
-                                <div>
-                                    <span>Purpose:</span>
-                                </div>
-                                <div>
-                                    <span>Letting</span>
-                                </div>
-                            </div>
-                    </div>
+            <div className='d-flex p-4 justify-content-between'>
+              <div><span>Property Type:</span></div>
+              <div><span>{jobData?.building_type || 'N/A'}</span></div>
+            </div>
 
-                    </div>
-                </div>
-                <div className='col-md-6'>
+            <div className='d-flex p-4 justify-content-between'>
+              <div><span>Size:</span></div>
+              <div><span>{jobData?.property_size || 'N/A'}</span></div>
+            </div>
+
+            <div className='d-flex p-4 justify-content-between'>
+              <div><span>Beds:</span></div>
+              <div><span>{jobData?.bedrooms || 'N/A'}</span></div>
+            </div>
+
+            <div className='d-flex p-4 justify-content-between'>
+              <div><span>Heat Pump:</span></div>
+              <div><span>{jobData?.heat_pump_installed || 'N/A'}</span></div>
+            </div>
+
+            <div className='d-flex p-4 justify-content-between'>
+              <div><span>Additions:</span></div>
+              <div><span>{jobData?.additional_features || 'N/A'}</span></div>
+            </div>
+
+            <div className='d-flex p-4 justify-content-between'>
+              <div><span>Purpose:</span></div>
+              <div><span>{jobData?.ber_purpose ? 
+                jobData.ber_purpose.charAt(0).toUpperCase() + jobData.ber_purpose.slice(1) 
+                : 'N/A'}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+               
+            <div className='col-md-6'>
                 <div className='p-5 '>
-                    <div className='shadow round  text-center'>
+                    <form onSubmit={handleSubmit}>
+                        <div className='shadow round  text-center'>
                             <div className=' bg-primary round text-light'>
                                 <h2 className='display-6 '>Your Quote</h2>
                             </div>
+                            
                             <div className=' p-4 text-center'>
                                 <div>
-                                    <span>Include SEAI fees.</span>
+                                    <input 
+                                        id='seai' 
+                                        type='checkbox' 
+                                        name="SEAI_Registered"
+                                        checked={formData.SEAI_Registered}
+                                        onChange={handleInputChange}
+                                    />
+                                    <label htmlFor="seai">SEAI registered.</label>
                                 </div>
-                                
                             </div>
+                            
                             <div className=' p-4 text-center'>
                                 <div>
-                                    <span>Include VAT (if registered).</span>
+                                    <input 
+                                        id='vat' 
+                                        type='checkbox' 
+                                        name="VAT_Registered"
+                                        checked={formData.VAT_Registered}
+                                        onChange={handleInputChange}
+                                    />
+                                    <label htmlFor="vat">VAT (if registered).</label>
                                 </div>
-                                
                             </div>
+
                             <div className=' p-4 text-center'>
                                 <div>
                                     <span>Include €30 Website fee.</span>
                                 </div>
-                                
                             </div>
+
                             <div className=' p-3 text-center'>
-                                <div >
-                                    <span className='border border-primary px-5 p-3'>€170</span>
+                                <div>
+                                    <div className='px-5'>
+                                        <input 
+                                            className='border text-center border-primary px-5 p-3' 
+                                            placeholder='170'
+                                            name="amount"
+                                            type="text"
+                                            value={formData.amount}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
                                     <p className='mt-3'>Eg. 170, no euro sign or cents.</p>
                                 </div>
-                                
                             </div>
+
                             <div className=' pb-4 text-center'>
                                 <div className='px-5'>
-                                    <input type='checkbox' className='mx-2' />
-                                    <span>I agree to the <span className='text-danger'>  terms of use </span> <br/> and I am available from Mon 06 Jan.</span>
-                                   
-                                </div>
+                                    <input 
+                                        type='checkbox' 
+                                        className='mx-2' 
+                                        checked={agreeTerms}
+                                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                                        required
+                                    />
+                                    <span>I agree to the <span className='text-danger'>terms of use</span> <br/> and I am available from Mon 06 Jan.</span>
                                 
-                            </div>
-                            <div className=' pb-4 text-center'>
-                                <div className='px-5'>
-                                  <button className='btn btn-primary px-5'>Submit Quote</button>
-                                </div>
+                                    </div>
+
+                                <button
+              type="submit"
+              className='btn btn-primary px-5'
+              disabled={loading}
+            >
+              {loading ? 'Submitting...' : 'Submit Quote'}
+            </button>
+                                
                                 
                             </div>
                             
 
                     </div>
+                    </form>
 
                     </div>
                 </div>

@@ -6,8 +6,11 @@ const Step4 = ({ nextStep, prevStep, handleChange }) => {
 
   // Handle name selection
   const handleNameClick = (name) => {
+    handleChange('property_size')(name);
     setSelectedName(name);
-    handleChange(name);  // If you want to pass it to the parent component
+    if (nextStep) {
+      nextStep();
+    } 
   };
 
   const names = [

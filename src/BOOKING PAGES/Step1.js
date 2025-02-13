@@ -6,8 +6,9 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
-const Step1 = ({ nextStep, prevStep, handleChange }) => {
+const Step1 = ({  nextStep, prevStep, handleChange, formData }) => {
   const [selectedDate, setSelectedDate] = useState(null);
+
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const [day, setDay] = useState(selectedDate ? selectedDate.getDate() : "DAY");
@@ -15,8 +16,14 @@ const Step1 = ({ nextStep, prevStep, handleChange }) => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    handleChange("date")({ target: { value: date } }); // Update parent state
+    handleChange("preferred_date")(date.toISOString().split("T")[0]);
+    if (nextStep) {
+      nextStep();
+    }// Automatically move to the next step
   };
+  
+
+
 
   const handleMonthChange = (newMonth) => {
     setMonth(newMonth);

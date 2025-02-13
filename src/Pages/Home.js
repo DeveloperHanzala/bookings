@@ -540,7 +540,7 @@ const Home = () => {
        <div className='text-center pb-5'>
         <h2 className='pt-5 '>Are You a BER Assessor?</h2>
         <p className='text-light'>Register with BerCert.com and receive local job leads, straight to your phone.</p>
-        <Link to="/accessor-registration#assessor" className="btn btn-warning fs-5 fw-bold mt-4 px-5">
+        <Link to="/assessor-registration#assessor" className="btn btn-warning fs-5 fw-bold mt-4 px-5">
   Join Now
 </Link>
        </div>

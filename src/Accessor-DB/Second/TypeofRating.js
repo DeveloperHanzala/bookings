@@ -1,74 +1,80 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const TypeofRating = () => {
+const TypeofRating = ({ formData, handleChange }) => {
   const [firstSectionChecked, setFirstSectionChecked] = useState({
-    DetachedHouse: false,
-    semiDetached: false,
+    new_final_dwelling: false,
+    existing_dwelling: false,
   });
 
   const [secondSectionChecked, setSecondSectionChecked] = useState({
-    endOfTerrace: false,
-    midTerrace: false,
-    groundFloorApartment: false,
-    midFloorApartment: false,
-    topFloorApartment: false,
-    basementApartment: false,
-    maisonette: false,
+    new_owner_occupation: false,
+    sale: false,
+    private_letting: false,
+    social_housing_letting: false,
+    grant_support: false,
+    major_renovation: false,
+    purpose_of_rating_other: false,
   });
 
-  const handleFirstSectionChange = (e) => {
-    const { name } = e.target;
+  useEffect(() => {
     setFirstSectionChecked({
-      DetachedHouse: name === "DetachedHouse",
-      semiDetached: name === "semiDetached",
+      new_final_dwelling: formData.new_final_dwelling,
+      existing_dwelling: formData.existing_dwelling,
     });
+
+    setSecondSectionChecked({
+      new_owner_occupation: formData.new_owner_occupation,
+      sale: formData.sale,
+      private_letting: formData.private_letting,
+      social_housing_letting: formData.social_housing_letting,
+      grant_support: formData.grant_support,
+      major_renovation: formData.major_renovation,
+      purpose_of_rating_other: formData.purpose_of_rating_other,
+    });
+  }, [formData]);
+
+  const handleFirstSectionChange = (e) => {
+    const { name, checked } = e.target;
+    const updatedState = {
+      new_final_dwelling: name === 'new_final_dwelling' ? checked : false,
+      existing_dwelling: name === 'existing_dwelling' ? checked : false,
+    };
+
+    setFirstSectionChecked(updatedState);
+    handleChange({ target: { name, value: checked } });
   };
 
   const handleSecondSectionChange = (e) => {
-    const { name } = e.target;
-    setSecondSectionChecked({
-      endOfTerrace: name === "endOfTerrace",
-      midTerrace: name === "midTerrace",
-      groundFloorApartment: name === "groundFloorApartment",
-      midFloorApartment: name === "midFloorApartment",
-      topFloorApartment: name === "topFloorApartment",
-      basementApartment: name === "basementApartment",
-      maisonette: name === "maisonette",
-    });
+    const { name, checked } = e.target;
+    const updatedState = {
+      ...secondSectionChecked,
+      [name]: checked,
+    };
+
+    setSecondSectionChecked(updatedState);
+    handleChange({ target: { name, value: checked } });
+  };
+
+  const labels = {
+    new_final_dwelling: 'New Final Dwelling',
+    existing_dwelling: 'Existing Dwelling',
+    new_owner_occupation: 'New: Owner Occupation',
+    sale: 'Sale',
+    private_letting: 'Private Letting',
+    social_housing_letting: 'Social Housing Letting',
+    grant_support: 'Grant Support',
+    major_renovation: 'Major Renovation',
+    purpose_of_rating_other: 'Other',
   };
 
   const checkedLabels = (section) => {
     return Object.entries(section)
       .filter(([_, isChecked]) => isChecked)
-      .map(([key]) => {
-        switch (key) {
-          case 'DetachedHouse':
-            return 'new-final dwelling';
-          case 'semiDetached':
-            return 'existing dwelling';
-          case 'endOfTerrace':
-            return 'new: owner occupation';
-          case 'midTerrace':
-            return 'sale';
-          case 'groundFloorApartment':
-            return 'private letting';
-          case 'midFloorApartment':
-            return 'social housing letting';
-          case 'topFloorApartment':
-            return 'grant support';
-          case 'basementApartment':
-            return 'major renovation';
-          case 'maisonette':
-            return 'Other';
-          default:
-            return '';
-        }
-      });
+      .map(([key]) => labels[key]);
   };
 
   return (
     <>
-      {/* Section 1: Detached, semi-detached */}
       <div className="shadow-sm">
         <div className="bg-light rounded p-3">
           {checkedLabels(firstSectionChecked).length > 0
@@ -76,32 +82,22 @@ const TypeofRating = () => {
             : 'Type of Rating'}
         </div>
         <div className="p-2">
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="DetachedHouse"
-                checked={firstSectionChecked.DetachedHouse}
-                onChange={handleFirstSectionChange}
-              />
+          {Object.keys(firstSectionChecked).map((key) => (
+            <div className="d-flex" key={key}>
+              <div className="mx-2">
+                <input
+                  type="checkbox"
+                  name={key}
+                  checked={firstSectionChecked[key]}
+                  onChange={handleFirstSectionChange}
+                />
+              </div>
+              {labels[key]}
             </div>
-            new-final dwelling
-          </div>
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="semiDetached"
-                checked={firstSectionChecked.semiDetached}
-                onChange={handleFirstSectionChange}
-              />
-            </div>
-            existing dwelling
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Section 2: End of terrace, mid terrace, apartments */}
       <div className="shadow-sm mt-2">
         <div className="bg-light rounded p-3">
           {checkedLabels(secondSectionChecked).length > 0
@@ -109,83 +105,19 @@ const TypeofRating = () => {
             : 'Purpose of Rating'}
         </div>
         <div className="p-2">
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="endOfTerrace"
-                checked={secondSectionChecked.endOfTerrace}
-                onChange={handleSecondSectionChange}
-              />
+          {Object.keys(secondSectionChecked).map((key) => (
+            <div className="d-flex" key={key}>
+              <div className="mx-2">
+                <input
+                  type="checkbox"
+                  name={key}
+                  checked={secondSectionChecked[key]}
+                  onChange={handleSecondSectionChange}
+                />
+              </div>
+              {labels[key]}
             </div>
-            new: owner occupation
-          </div>
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="midTerrace"
-                checked={secondSectionChecked.midTerrace}
-                onChange={handleSecondSectionChange}
-              />
-            </div>
-            sale
-          </div>
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="groundFloorApartment"
-                checked={secondSectionChecked.groundFloorApartment}
-                onChange={handleSecondSectionChange}
-              />
-            </div>
-            private letting
-          </div>
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="midFloorApartment"
-                checked={secondSectionChecked.midFloorApartment}
-                onChange={handleSecondSectionChange}
-              />
-            </div>
-            social housing letting
-          </div>
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="topFloorApartment"
-                checked={secondSectionChecked.topFloorApartment}
-                onChange={handleSecondSectionChange}
-              />
-            </div>
-            grant support
-          </div>
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="basementApartment"
-                checked={secondSectionChecked.basementApartment}
-                onChange={handleSecondSectionChange}
-              />
-            </div>
-            major renovation
-          </div>
-          <div className="d-flex">
-            <div className="mx-2">
-              <input
-                type="checkbox"
-                name="maisonette"
-                checked={secondSectionChecked.maisonette}
-                onChange={handleSecondSectionChange}
-              />
-            </div>
-            Other
-          </div>
+          ))}
         </div>
       </div>
     </>

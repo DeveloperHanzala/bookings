@@ -20,7 +20,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul className="navbar-nav me-auto mb-2 px-5 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-2 px-0 px-md-5 mb-lg-0">
             <li className="nav-item">
               <Link
                 to="/"
@@ -31,20 +31,21 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/accessor-registration"
-                className={`nav-link mx-2 ${location.pathname === '/accessor-registration' ? 'active' : ''}`}
-              >
-                Assessor Registration
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
                 to="/booking"
                 className={`nav-link mx-2 ${location.pathname === '/booking' ? 'active' : ''}`}
               >
                 Get A Ber Cert
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                to="/assessor-registration"
+                className={`nav-link mx-2 ${location.pathname === '/assessor-registration' ? 'active' : ''}`}
+              >
+                Assessor Registration
+              </Link>
+            </li>
+            
             {/* <li className="nav-item">
               <a
                 className={`nav-link mx-2 ${location.pathname === '/educational-resources' ? 'active' : ''}`}

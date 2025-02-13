@@ -70,7 +70,7 @@ const AdminApp = () => {
         }
       />
       <Route
-        path="/client-profile"
+        path="/client-profile/:id"
         element={
           <MainLayout>
             <ClientProfile />

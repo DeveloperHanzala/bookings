@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-const Summary = ({ formData, prevStep }) => {
+const Summaryss = ({ formData, prevStep, handleChange, submitForm }) => {
   const [formValues, setFormValues] = useState({
     name: formData.name || "",
     email: formData.email || "",
@@ -17,6 +17,13 @@ const Summary = ({ formData, prevStep }) => {
       ...formValues,
       [name]: type === "checkbox" ? checked : value,
     });
+  };
+  const handleMobileChange = (e) => {
+    handleChange('mobile')(e.target.value);
+  };
+
+  const handleCountryCode = (e) => {
+    handleChange('countryCode')(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -41,7 +48,7 @@ const Summary = ({ formData, prevStep }) => {
     <div className="d-flex justify-content-center align-items-center vh-100">
       <div className=" p-4" >
         <h5 className="text-center mb-3">Last Step! Get your BER quotes in Cavan</h5>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => { e.preventDefault(); submitForm(); }}>
           {/* Name */}
           <div className="mb-3 row">
             <label htmlFor="name" className="col-sm-4 col-form-label">Your Name *</label>
@@ -50,8 +57,8 @@ const Summary = ({ formData, prevStep }) => {
                 type="text"
                 id="name"
                 name="name"
-                value={formValues.name}
-                onChange={handleInputChange}
+                value={formData.name || ''}
+                onChange={(e) => handleChange('name')(e.target.value)}
                 className="form-control"
                 required
               />
@@ -66,8 +73,8 @@ const Summary = ({ formData, prevStep }) => {
                 type="email"
                 id="email"
                 name="email"
-                value={formValues.email}
-                onChange={handleInputChange}
+                value={formData.email_address || ''}
+                onChange={(e) => handleChange('email_address')(e.target.value)}
                 className="form-control"
                 required
               />
@@ -81,25 +88,23 @@ const Summary = ({ formData, prevStep }) => {
               {/* Country Code Dropdown */}
               <select
                 name="countryCode"
-                value={formValues.countryCode}
-                onChange={handleInputChange}
+                value={formData.countryCode}
+                onChange={handleCountryCode}
                 className="form-select me-2"
                 style={{ width: "30%" }}
                 required
               >
-                <option value="+1">+1 (USA)</option>
+               <option value="+353">+353 (Ireland)</option>
                 <option value="+44">+44 (UK)</option>
-                <option value="+61">+61 (Australia)</option>
-                <option value="+91">+91 (India)</option>
-                {/* Add more country options here */}
+                <option value="+1">+1 (USA)</option>
               </select>
               {/* Phone Number Input */}
               <input
                 type="text"
                 id="mobile"
                 name="mobile"
-                value={formValues.mobile}
-                onChange={handleInputChange}
+                value={formData.mobile || ''}
+                onChange={handleMobileChange}
                 className="form-control"
                 style={{ width: "70%" }}
                 required
@@ -140,4 +145,4 @@ const Summary = ({ formData, prevStep }) => {
   );
 };
 
-export default Summary;
+export default Summaryss;

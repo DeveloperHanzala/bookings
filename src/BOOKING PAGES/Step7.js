@@ -3,13 +3,13 @@ import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const Step7 = ({ nextStep, prevStep, handleChange }) => {
   const [selectedName, setSelectedName] = useState(null);
-
-  // Handle name selection
   const handleNameClick = (name) => {
+    handleChange('heat_pump_installed')(name);
     setSelectedName(name);
-    handleChange(name);  // If you want to pass it to the parent component
+    if (nextStep) {
+      nextStep();
+    } 
   };
-
   const names = [
     "No", "Air Source", "Ground Source", // Column 1
     // "05", "06", "07", "08", // Column 2

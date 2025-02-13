@@ -22,8 +22,11 @@ const Step2 = ({ nextStep, prevStep, handleChange }) => {
 
   // Call the handleChange function from the parent to update the state
   useEffect(() => {
-    handleChange({ hour, minute, ampm });
-  }, [hour, minute, ampm, handleChange]);
+    const formattedTime = `${hour}:${minute.toString().padStart(2, '0')} ${ampm}`;
+    handleChange('preferred_time')(formattedTime);
+    
+  }, [hour, minute, ampm]);
+  // ... rest of the component
 
   return (
     <>

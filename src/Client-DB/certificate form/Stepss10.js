@@ -6,8 +6,11 @@ const Step10 = ({ nextStep, prevStep, handleChange }) => {
 
   // Handle name selection
   const handleNameClick = (name) => {
+    handleChange('ber_purpose')(name);
     setSelectedName(name);
-    handleChange(name);  // If you want to pass it to the parent component
+    if (nextStep) {
+      nextStep();
+    } 
   };
 
   const names = [
@@ -35,8 +38,8 @@ const Step10 = ({ nextStep, prevStep, handleChange }) => {
       <div className="container mt-5 mb-5">
         <div className="row">
           {/* Column 1 */}
-          <div className="col-12">
-            <div className="d-flex flex-row">
+          <div className="col-12 col-md-12 px-5 px-md-0">
+            <div className="d-flex flex-column flex-md-row">
               {names.slice(0, 4).map((name) => (
                 <button
                   key={name}

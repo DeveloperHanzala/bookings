@@ -1,52 +1,67 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const Age = () => {
+const Age = ({ id, formData, handleChange }) => {
   const [checkedItems, setCheckedItems] = useState({
-    DetachedHouse:false,
-    semiDetached: false,
-    endOfTerrace: false,
-    midTerrace: false,
-    groundFloorApartment: false,
-    midFloorApartment: false,
-    topFloorApartment: false,
-    basementApartment: false,
-    maisonette: false,
+    pre_1900: false,
+    between_1900_and_1929: false,
+    between_1930_and_1949: false,
+    between_1950_and_1966: false,
+    between_1967_and_1977: false,
+    between_1978_and_1982: false,
+    between_1983_and_1993: false,
+    between_1994_and_1999: false,
+    from_2000_onwards: false,
   });
 
-  const handleCheckboxChange = (e) => {
-    const { name } = e.target;
-
-    // Set the selected checkbox to true and others to false
-    setCheckedItems((prevState) => {
-      const newCheckedItems = Object.keys(prevState).reduce((acc, key) => {
-        acc[key] = key === name;
-        return acc;
-      }, {});
-      return newCheckedItems;
+  useEffect(() => {
+    setCheckedItems({
+      pre_1900: formData?.pre_1900 || false,
+      between_1900_and_1929: formData?.between_1900_and_1929 || false,
+      between_1930_and_1949: formData?.between_1930_and_1949 || false,
+      between_1950_and_1966: formData?.between_1950_and_1966 || false,
+      between_1967_and_1977: formData?.between_1967_and_1977 || false,
+      between_1978_and_1982: formData?.between_1978_and_1982 || false,
+      between_1983_and_1993: formData?.between_1983_and_1993 || false,
+      between_1994_and_1999: formData?.between_1994_and_1999 || false,
+      from_2000_onwards: formData?.from_2000_onwards || false,
     });
+  }, [formData]);
+  
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+
+    const newCheckedItems = Object.keys(checkedItems).reduce((acc, key) => {
+      acc[key] = key === name ? checked : false;
+      return acc;
+    }, {});
+
+    setCheckedItems(newCheckedItems);
+
+    handleChange({ target: { name, value: checked } });
   };
 
   const checkedLabels = Object.entries(checkedItems)
     .filter(([_, isChecked]) => isChecked)
     .map(([key]) => {
       switch (key) {
-        case 'DetachedHouse':
+        case 'pre_1900':
           return 'pre 1900';
-        case 'semiDetached':
+        case 'between_1900_and_1929':
           return '1900 - 1929';
-        case 'endOfTerrace':
+        case 'between_1930_and_1949':
           return '1930 - 1949';
-        case 'midTerrace':
+        case 'between_1950_and_1966':
           return '1950 - 1966';
-        case 'groundFloorApartment':
+        case 'between_1967_and_1977':
           return '1967 - 1977';
-        case 'midFloorApartment':
+        case 'between_1978_and_1982':
           return '1978 - 1982';
-        case 'topFloorApartment':
+        case 'between_1983_and_1993':
           return '1983 - 1993';
-        case 'basementApartment':
+        case 'between_1994_and_1999':
           return '1994 - 1999';
-        case 'maisonette':
+        case 'from_2000_onwards':
           return '2000 - onwards';
         default:
           return '';
@@ -56,110 +71,24 @@ const Age = () => {
   return (
     <div className="shadow-sm pb-5">
       <div className="bg-light rounded p-3">
-        {checkedLabels.length > 0 ? checkedLabels.join(', ') : ' Age: Extension'}
+        {checkedLabels.length > 0 ? checkedLabels.join(', ') : 'Age: Extension'}
       </div>
       <div className="p-2">
-      <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="DetachedHouse"
-              checked={checkedItems.DetachedHouse}
-              onChange={handleCheckboxChange}
-            />
+        {Object.keys(checkedItems).map((key) => (
+          <div key={key} className="d-flex">
+            <div className="mx-2">
+              <input
+                type="checkbox"
+                name={key}
+                checked={checkedItems[key]}
+                onChange={handleCheckboxChange}
+              />
+            </div>
+            {checkedLabels.find((label) =>
+              label.toLowerCase().includes(key.replace(/_/g, ' '))
+            ) || key.replace(/_/g, ' ')}
           </div>
-          pre 1900
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="semiDetached"
-              checked={checkedItems.semiDetached}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          1900 - 1929
-        </div>
-
-        
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="endOfTerrace"
-              checked={checkedItems.endOfTerrace}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          1930 - 1949
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="midTerrace"
-              checked={checkedItems.midTerrace}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          1950 - 1966
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="groundFloorApartment"
-              checked={checkedItems.groundFloorApartment}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          1967 - 1977
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="midFloorApartment"
-              checked={checkedItems.midFloorApartment}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          1978 - 1982
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="topFloorApartment"
-              checked={checkedItems.topFloorApartment}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          1983 - 1993
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="basementApartment"
-              checked={checkedItems.basementApartment}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          1994 - 1999
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="maisonette"
-              checked={checkedItems.maisonette}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          2000 - onwards
-        </div>
+        ))}
       </div>
     </div>
   );

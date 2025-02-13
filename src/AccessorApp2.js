@@ -9,6 +9,7 @@ import MyQoutes from "./Accessor-DB/MyQoutes";
 import MyClients from "./Accessor-DB/MyClients";
 import Preferences from "./Accessor-DB/Preferences";
 import Assessments from "./Accessor-DB/Assessments";
+import Assessmentsone from "./Accessor-DB/Assessmentsone";
 import ContactInfo from "./Accessor-DB/ContactInfo";
 
 const MainLayout = ({ children }) => (
@@ -75,6 +76,14 @@ const MainLayout = ({ children }) => (
             </MainLayout>
           }
         />
+         <Route
+          path="/assessment/:id"
+          element={
+            <MainLayout>
+              <Assessmentsone />
+            </MainLayout>
+          }
+        />
 
 <Route
           path="/contacts"
@@ -86,7 +95,7 @@ const MainLayout = ({ children }) => (
         />
 
         <Route
-          path="/quote"
+          path="/quote/:jobId" 
           element={
             <NoSidebarLayout>
               <Quote />
@@ -94,7 +103,7 @@ const MainLayout = ({ children }) => (
           }
         />
         <Route
-          path="/date"
+          path="/date/:jobId"
           element={
             <NoSidebarLayout>
               <DatePickerComponent />

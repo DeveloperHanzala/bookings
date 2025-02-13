@@ -74,7 +74,7 @@ const MainLayout = ({ children }) => (
           }
         />
         <Route
-          path="/date"
+          path="/date/:jobId"
           element={
             <NoSidebarLayout>
               <ClientCerti />

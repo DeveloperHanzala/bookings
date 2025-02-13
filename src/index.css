@@ -1,13 +1,34 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Helvetica Neue Regular', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue Regular';
+  src: url('../helvetic-neue/HelveticaNeueLight.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.ikcalasss input{
+  border: 1px solid rgb(80, 80, 80);
+}
+.ikcalasss select{
+  border: 1px solid rgb(80, 80, 80);
+}
+.ikcalasss :checked {
+  border: 1px solid rgb(80, 80, 80);
+}
+.heighlight1{
+  color: #003366;
+  font-weight: bold;
+}
+.cursor-pointer{
+  cursor: pointer;
 }

@@ -1,829 +1,301 @@
-import React, { useEffect } from 'react';
-import { Link,useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
+
 const AssessorRegistration = () => {
     const currentYear = new Date().getFullYear();
-
-    // Create an array of years starting from the current year
-    const years = [];
-    for (let i = currentYear; i <= currentYear + 100; i++) {
-      years.push(i);
-    }
-
+    const years = Array.from({ length: 101 }, (_, i) => currentYear - i);
     const location = useLocation();
+    const navigate = useNavigate();
+    const [counties] = useState([
+        'Carlow', 'Cavan', 'Clare', 'Cork', 'Donegal', 'Dublin',
+        'Galway', 'Kerry', 'Kildare', 'Kilkenny', 'Laois', 'Leitrim',
+        'Limerick', 'Longford', 'Louth', 'Mayo', 'Meath', 'Monaghan',
+        'Offaly', 'Roscommon', 'Sligo', 'Tipperary', 'Waterford',
+        'Westmeath', 'Wexford', 'Wicklow'
+    ]);
+
+    const [formData, setFormData] = useState({
+        email: '',
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        password: '',
+        home_county: '',
+        SEAI_registration: '',
+        SEAI_accessor_since: currentYear,
+        professional_insurance_policy_holder: false,
+        VAT_registered: false,
+        domestic_or_commercial: '',
+        selected_counties: [],
+        user_type: 'accessor',
+        is_staff: false,
+        is_superuser: false
+    });
+
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-      // Check if a hash exists in the URL
-      if (location.hash) {
-        const element = document.getElementById(location.hash.replace('#', ''));
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' }); // Smoothly scroll to the element
+        if (location.hash) {
+            const element = document.getElementById(location.hash.replace('#', ''));
+            element?.scrollIntoView({ behavior: 'smooth' });
         }
-      }
     }, [location]);
-  return (
-    <>
-    <div className='conatiner-fluid accessbg' id='assessor'>
-        <div className='text-center'>
-            <h1 className='accesshead'>Assessor Registration</h1>
-            <p><Link to={"/"} className='decnone'> Home <IoIosArrowForward /></Link>  <span className='text-warning'> Assessor Registration</span></p>
-        </div>
-    </div>
 
-    <div className='container  p-md-0 mt-5 mb-5'>
-        <div className='text-center'> 
+    const handleInputChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleCountyChange = (county) => {
+        setFormData(prev => ({
+            ...prev,
+            selected_counties: prev.selected_counties.includes(county)
+                ? prev.selected_counties.filter(c => c !== county)
+                : [...prev.selected_counties, county]
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError(null);
+
+        const payload = {
+            ...formData,
+            SEAI_accessor_since: `${formData.SEAI_accessor_since}-01-01`,
+            professional_insurance_policy_holder: formData.professional_insurance_policy_holder === "true",
+            VAT_registered: formData.VAT_registered === "true",
+        };
+
+        try {
+            const response = await fetch('https://testing.techionik.com/api/create/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Registration failed');
+            }
+
+            setSuccess(true);
+            setTimeout(() => navigate('/login'), 2000);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
+    return (
+        <>
+            <div className='container-fluid accessbg' id='assessor'>
+                {/* ... existing header code ... */}
+            </div>
+
+            <div className='container p-md-0 mt-5 mb-5'>
+                <form className='container px-5 mt-4' onSubmit={handleSubmit}>
+                <div className='text-center'> 
     <h1 className='accesshead1'>Sign up to get more BER jobs in your Area</h1>
         </div>
-        <form className='container px-5 mt-4'>
-        <div className='row'>
-            <div className='col-md-6'>
-            <div className="mb-3 row">
-            <label htmlFor="name" className="col-sm-4 fw-bold col-form-label">First Name </label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                id="name"
-                name="name"
-               
-                className="form-control"
-                required
-              />
-            </div>
-          </div>
+                    <div className='row ikcalasss'>
+                        {/* Left Column */}
+                        <div className='col-md-6'>
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">First Name</label>
+                                <div className="col-sm-8">
+                                    <input
+                                        name="first_name"
+                                        value={formData.first_name}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-          {/* Email */}
-          <div className="mb-3 row">
-            <label htmlFor="email" className="col-sm-4  fw-bold col-form-label">Email Address</label>
-            <div className="col-sm-8">
-              <input
-                type="email"
-                id="email"
-                name="email"
-         
-                className="form-control"
-                required
-              />
-            </div>
-          </div>
+                            {/* Email */}
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">Email</label>
+                                <div className="col-sm-8">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-          {/* Mobile */}
-          <div className="mb-3 row">
-            <label htmlFor="mobile" className="col-sm-4 fw-bold col-form-label">Mobile Phone</label>
-            <div className="col-sm-8 d-flex">
-              {/* Phone Number Input */}
-              <input
-                type="text"
-                id="mobile"
-                name="mobile"
-                className="form-control"
-               
-                required
-              />
-            </div>
-          </div>
-          {/* SEAI Registration */}
-           <div className="mb-3 row">
-            <label htmlFor="sai" className="col-sm-4 fw-bold col-form-label">SEAI Registration #</label>
-            <div className="col-sm-8 d-flex">
-              {/* Phone Number Input */}
-              <input
-                type="text"
-                id="sai"
-                name="mobile"
-                className="form-control"
-               
-                required
-              />
-            </div>
-          </div>
- {/* Professional insurance 
-policy holder */}
-          <div className="mb-3 row">
-            <label htmlFor="prof" className="col-sm-6 fw-bold col-form-label">Professional insurance 
-            policy holder</label>
-            <div className="col-sm-6 d-flex">
-            <select id='prof' className='form-control'>
-                <option>
-                    No
-                </option>
-                <option>
-                   Yes
-                </option>
-             </select>
-            </div>
-          </div>
+                            {/* Phone */}
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">Phone</label>
+                                <div className="col-sm-8">
+                                    <input
+                                        name="phone_number"
+                                        value={formData.phone_number}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                            </div>
 
+                            {/* SEAI Registration */}
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">SEAI Registration #</label>
+                                <div className="col-sm-8">
+                                    <input
+                                        name="SEAI_registration"
+                                        value={formData.SEAI_registration}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                            </div>
 
+                            {/* Insurance Policy */}
+                            <div className="mb-3 row">
+                                <label className="col-sm-6 fw-bold col-form-label">Professional Insurance</label>
+                                <div className="col-sm-6">
+                                    <select
+                                        name="professional_insurance_policy_holder"
+                                        value={formData.professional_insurance_policy_holder}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                    >
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-            </div>
-            <div className='col-md-6'>
-            <div className="mb-3 row">
-            <label htmlFor="lname" className="col-sm-4 fw-bold col-form-label">Last Name </label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                id="lname"
-                name="name"
-               
-                className="form-control"
-                required
-              />
-            </div>
-          </div>
+                        {/* Right Column */}
+                        <div className='col-md-6'>
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">Last Name</label>
+                                <div className="col-sm-8">
+                                    <input
+                                        name="last_name"
+                                        value={formData.last_name}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                            </div>
 
-    
-          <div className="mb-3 row">
-            <label htmlFor="pass" className="col-sm-4  fw-bold col-form-label">Password</label>
-            <div className="col-sm-8">
-              <input
-                type="email"
-                id="pass"
-                name="email"
-         
-                className="form-control"
-                required
-              />
-            </div>
-          </div>
+                            {/* Password */}
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">Password</label>
+                                <div className="col-sm-8">
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                        required
+                                    />
+                                </div>
+                            </div>
 
+                            {/* Home County */}
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">Home County</label>
+                                <div className="col-sm-8">
+                                    <select
+                                        name="home_county"
+                                        value={formData.home_county}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                    >
+                                        {counties.map(county => (
+                                            <option key={county} value={county}>{county}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
 
-            <div className="mb-3 row">
-            <label htmlFor="home" className="col-sm-4 fw-bold col-form-label">Home Country</label>
-            <div className="col-sm-8 d-flex">
-            <select id='home' className='form-control'>
-            <option>
-            Carlow
-                </option>
-                <option>
-                   Yes
-                </option>
-             </select>
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label htmlFor="assessorYear" className="col-sm-4 fw-bold col-form-label">
-              SEAI Assessor since
-            </label>
-            <div className="col-sm-8">
-              <select
-                id="assessorYear"
-                name="assessorYear"
-               
-                className="form-control"
-                required
-              >
-                <option value="" disabled>Select Year</option>
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-            <div className="mb-3 row">
-            <label htmlFor="vat" className="col-sm-4 fw-bold col-form-label">VAT Registered</label>
-            <div className="col-sm-8 d-flex">
-            <select id='vat' className='form-control'>
-                <option>
-                    No
-                </option>
-                <option>
-                   Yes
-                </option>
-             </select>
-            </div>
-          </div>
-            </div>
-            <div className="mb-3 row">
-            <label htmlFor="d-c" className="col-sm-4 fw-bold col-form-label">Domestic or Commercial</label>
-            <div className="col-sm-8 d-flex">
-             <select id='d-c' className='form-control w-100'>
-                <option>
-                    Domestic Accessor
-                </option>
-                <option>
-                    Commercial Accessor
-                </option>
-             </select>
-            </div>
-          </div>
-        </div>
+                            {/* SEAI Since */}
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">SEAI Since</label>
+                                <div className="col-sm-8">
+                                    <select
+                                        name="SEAI_accessor_since"
+                                        value={formData.SEAI_accessor_since}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                    >
+                                        {years.map(year => (
+                                            <option key={year} value={year}>{year}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
 
-        </form>
-    </div>
+                            {/* VAT Registered */}
+                            <div className="mb-3 row">
+                                <label className="col-sm-4 fw-bold col-form-label">VAT Registered</label>
+                                <div className="col-sm-8">
+                                    <select
+                                        name="VAT_registered"
+                                        value={formData.VAT_registered}
+                                        onChange={handleInputChange}
+                                        className="form-control"
+                                    >
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<div className='container mt-5 mb-5'>
-    <div className='text-center pb-4'>
+                    {/* Counties Selection */}
+                    <div className='row mt-4  ikcalasss'>
+                    <div className='text-center pb-4'>
               <h1 className='accesshead1'>Select the counties you would like to receive jobs in:</h1>  
     </div>
-    <div className='row no-overflow-x'>
-          <div className='col-md-2 col-6'>
-                <div className='d-flex  align-items-center flex-column justify-content-center'>
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co1"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co1">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co2"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co2">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co3"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co3">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co4"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co4">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co5"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co5">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co6"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co6">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-                  </div>
-            </div> 
-
-             <div className='col-md-2  col-6'>
-             <div className='d-flex  align-items-center flex-column justify-content-center'>
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co1"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co1">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co2"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co2">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co3"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co3">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co4"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co4">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co5"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co5">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co6"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co6">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-                  </div>
-            </div>     
-
-             <div className='col-md-2  col-6'>
-             <div className='d-flex  align-items-center flex-column justify-content-center'>
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co1"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co1">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co2"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co2">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co3"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co3">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co4"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co4">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co5"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co5">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co6"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co6">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-                  </div>
-            </div>   
-
-             <div className='col-md-2  col-6'>
-             <div className='d-flex  align-items-center flex-column justify-content-center'>
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co1"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co1">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co2"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co2">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co3"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co3">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co4"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co4">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co5"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co5">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co6"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co6">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-                  </div>
-            </div> 
-
-             <div className='col-md-2  col-6'>
-             <div className='d-flex  align-items-center flex-column justify-content-center'>
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co1"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co1">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co2"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co2">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co3"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co3">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co4"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co4">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co5"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co5">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co6"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co6">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-                  </div>
-            </div>     
-
-             <div className='col-md-2  col-6'>
-             <div className='d-flex  align-items-center flex-column justify-content-center'>
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co1"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co1">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co2"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co2">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co3"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co3">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co4"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co4">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co5"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co5">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-
-                <div className='pb-4 d-flex inp-col'>
-                <input
-              type="checkbox"
-              id="co6"
-              name="agreeToTerms"
-              className="form-check-input p-2 shadow-sm"
-              required
-            />
-        
-                <label className="form-check-label mx-2" htmlFor="co6">
-                Co. Carlow
-                </label>
-  
-
-                </div>
-                  </div>
-            </div>          
-    </div>
-</div>
-
-
-
-    </>
-  )
-}
-
-export default AssessorRegistration
+                        {counties.map((county, index) => (
+                            <div className='col-md-2 col-6 '  key={county}>
+                                <div className="form-check">
+                                    <input
+                                        type="checkbox"
+                                        id={`county-${index}`}
+                                        checked={formData.selected_counties.includes(county)}
+                                        onChange={() => handleCountyChange(county)}
+                                        className="form-check-input"
+                                    />
+                                    <label className="form-check-label" htmlFor={`county-${index}`}>
+                                        Co. {county}
+                                    </label>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className='text-center mt-4'>
+                        <button type="submit" className='btn button2 fs-5'>
+                            Submit Application
+                        </button>
+                        {error && <div className="alert alert-danger mt-3">{error}</div>}
+                        {success && <div className="alert alert-success mt-3">Registration successful!</div>}
+                    </div>
+                </form>
+            </div>
+        </>
+    );
+};
+
+export default AssessorRegistration;

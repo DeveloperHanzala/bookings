@@ -1,6 +1,13 @@
 .nav-link.active {
     color: #0a5cad !important; /* Set the active link color to blue */
-    font-weight: 500;      /* Optional: Make the active link bold */
+    font-weight: 500;  
+    font-family: 'Helvetica Neue Black bold', sans-serif;
+  }
+  @font-face {
+    font-family: 'Helvetica Neue Black bold';
+    src: url('../../helvetic-neue/HelveticaNeueBold.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
   }
   
 .logbtn{
@@ -35,4 +42,8 @@
 .bgfooter p{
    
     color: white !important;
+}
+a{
+    color: white;
+    text-decoration: none;
 }

@@ -1,53 +1,28 @@
-import { useState } from 'react';
+import React from 'react';
 
-const HouseTypes = () => {
-  const [checkedItems, setCheckedItems] = useState({
-    DetachedHouse:false,
-    semiDetached: false,
-    endOfTerrace: false,
-    midTerrace: false,
-    groundFloorApartment: false,
-    midFloorApartment: false,
-    topFloorApartment: false,
-    basementApartment: false,
-    maisonette: false,
-  });
-
-  const handleCheckboxChange = (e) => {
-    const { name } = e.target;
-
-    // Set the selected checkbox to true and others to false
-    setCheckedItems((prevState) => {
-      const newCheckedItems = Object.keys(prevState).reduce((acc, key) => {
-        acc[key] = key === name;
-        return acc;
-      }, {});
-      return newCheckedItems;
-    });
-  };
-
-  const checkedLabels = Object.entries(checkedItems)
+const HouseTypes = ({ id, formData, handleChange }) => {
+  const checkedLabels = Object.entries(formData)
     .filter(([_, isChecked]) => isChecked)
     .map(([key]) => {
       switch (key) {
         case 'DetachedHouse':
           return 'Detached House';
         case 'semiDetached':
-          return 'semi detached house';
+          return 'Semi Detached House';
         case 'endOfTerrace':
-          return 'end of terrace';
+          return 'End of Terrace';
         case 'midTerrace':
-          return 'mid terrace';
+          return 'Mid Terrace';
         case 'groundFloorApartment':
-          return 'ground floor apartment';
+          return 'Ground Floor Apartment';
         case 'midFloorApartment':
-          return 'mid floor apartment';
+          return 'Mid Floor Apartment';
         case 'topFloorApartment':
-          return 'top-floor apartment';
+          return 'Top-Floor Apartment';
         case 'basementApartment':
-          return 'basement apartment';
+          return 'Basement Apartment';
         case 'maisonette':
-          return 'maisonette';
+          return 'Maisonette';
         default:
           return '';
       }
@@ -55,109 +30,23 @@ const HouseTypes = () => {
 
   return (
     <div className="shadow-sm pb-5">
-      <div className="bg-light rounded  p-3">
+      <div className="bg-light rounded p-3">
         {checkedLabels.length > 0 ? checkedLabels.join(', ') : 'No house type selected'}
       </div>
       <div className="p-2 pb-4">
-      <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="DetachedHouse"
-              checked={checkedItems.DetachedHouse}
-              onChange={handleCheckboxChange}
-            />
+        {['DetachedHouse', 'semiDetached', 'endOfTerrace', 'midTerrace', 'groundFloorApartment', 'midFloorApartment', 'topFloorApartment', 'basementApartment', 'maisonette'].map((houseType) => (
+          <div className="d-flex" key={houseType}>
+            <div className="mx-2">
+              <input
+                type="checkbox"
+                name={houseType}
+                checked={formData[houseType]}
+                onChange={handleChange} // Trigger parent's handleChange to update state and send the API request
+              />
+            </div>
+            {houseType.replace(/([A-Z])/g, ' $1').trim()} {/* Converts camelCase to readable string */}
           </div>
-          Detached House
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="semiDetached"
-              checked={checkedItems.semiDetached}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          semi detached house
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="endOfTerrace"
-              checked={checkedItems.endOfTerrace}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          end of terrace
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="midTerrace"
-              checked={checkedItems.midTerrace}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          mid terrace
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="groundFloorApartment"
-              checked={checkedItems.groundFloorApartment}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          ground floor apartment
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="midFloorApartment"
-              checked={checkedItems.midFloorApartment}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          mid floor apartment
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="topFloorApartment"
-              checked={checkedItems.topFloorApartment}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          top-floor apartment
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="basementApartment"
-              checked={checkedItems.basementApartment}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          basement apartment
-        </div>
-        <div className="d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name="maisonette"
-              checked={checkedItems.maisonette}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          maisonette
-        </div>
+        ))}
       </div>
     </div>
   );

@@ -315,3 +315,78 @@
 .round{
     border-radius: 5px !important;
 }
+.county-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.county-card:hover {
+  transform: translateY(-2px);
+}
+
+.selected-county {
+  background-color: #0d6efd !important;
+  color: white;
+}
+.button1{
+  background-color: #003366;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.button1:hover{
+  background-color: #002953;
+  color: white;
+}
+/* Notification Banner Styles */
+.notification-banner {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 5px;
+  z-index: 9999;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slide-in 0.5s ease-out;
+}
+
+/* Success Banner */
+.notification-banner.success {
+  background-color: #ffffff; /* Green */
+  color: #28a745;
+}
+
+/* Error Banner */
+.notification-banner.error {
+  background-color: #ffffff; /* Red */
+  color: #dc3545;
+}
+
+/* Slide-in animation */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Optional: Highlight selected counties */
+.selected-county {
+  background-color: #003366;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.county-card:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}

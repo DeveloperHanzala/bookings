@@ -1,231 +1,135 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const WallConstruction = () => {
+const WallConstruction = ({ formData = {}, handleChange }) => {
   return (
     <div className="shadow-sm pb-5">
-      <div className="bg-light rounded  p-3">
-      Wall construction Main Wall
+      <div className="bg-light rounded p-3">
+        Wall construction Main Wall
       </div>
       <div className="row p-2 pb-4">
-      <div className=" col-md-5 col-4 d-flex">
+        {/* Stone Checkbox */}
+        <div className="col-md-5 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="stone"
+              checked={formData.stone || false} // default to false if undefined
+              onChange={handleChange}
             />
           </div>
-          <span className="fontass"> stone</span>
+          <span className="fontass">stone</span>
         </div>
-        <div className="col-md-7 col-8 d-flex">
-          <div className=" col-md-4 mx-2">
-            <input
-              type="text"
-              name=""
-              className="inpwall"
-            />
-          </div>
-          <div  className=" col-md-8 fontass ">
-          wall thickness (mm)
-          </div>
-        </div>
-        <div className=" col-md-5 col-4  d-flex">
+
+        {/* Solid Brick Checkbox */}
+        <div className="col-md-5 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="solid_brick"
+              checked={formData.solid_brick || false} // default to false if undefined
+              onChange={handleChange}
             />
           </div>
           <span className="fontass">solid brick</span>
         </div>
-        <div className="col-md-7 col-8 d-flex">
-          <div className=" col-md-4 mx-1">
-            <input
-              type="text"
-              name=""
-              className="inpwall"
-            />
-          </div>
-          <div  className=" col-md-8 fontass ">
-          is wall semi exposed?
-          </div>
-        </div>
-        <div className=" col-md-5 col-4 d-flex">
+
+        {/* Cavity Checkbox */}
+        <div className="col-md-5 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="cavity"
+              checked={formData.cavity || false} // default to false if undefined
+              onChange={handleChange}
             />
           </div>
           <span className="fontass">cavity</span>
         </div>
-        <div className="col-md-7 col-8 text-center">
-          <div  className=" fw-bold  ">
-          Wall Insulation
-          </div>
-        </div>
-        <div className=" col-md-5 col-4  d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass"> solid concrete</span>
-        </div>
-       <div className="col-md-7 col-8 justify-content-center mt-2 d-flex">
-        <div className="col-md-5 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass"> as built</span>
-        </div>
-        <div className="col-md-5 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass"> bead</span>
-</div>
-       </div>
-   
-       <div className=" col-md-5 col-4  d-flex">
-          <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass">hollow block</span>
-        </div>
-        <div className="col-md-7 col-8 justify-content-center mt-2 d-flex">
-        <div className="col-md-6 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass">cavity fill</span>
-        </div>
-        <div className="col-md-5 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass"> EPS</span>
-</div>
-       </div>
 
-       <div className=" col-md-5 col-4  d-flex">
+        {/* Other components... */}
+        {/* Solid Concrete */}
+        <div className="col-md-5 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="solid_concrete"
+              checked={formData.solid_concrete || false} // default to false if undefined
+              onChange={handleChange}
             />
           </div>
-         <span className="fontass">timber frame</span>
+          <span className="fontass">solid concrete</span>
         </div>
-        <div className="col-md-7 col-8 justify-content-center mt-2 d-flex">
-        <div className="col-md-6 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass">external</span>
-        </div>
-        <div className="col-md-6 d-flex">
-        <div className="mx-2">
-            <input
-              type="checkbox"
-              name=""
-              
-            />
-          </div>
-         <span className="fontass"> min fibre</span>
-</div>
-       </div>
-       <div className=" col-md-5 col-4  d-flex">
+
+        {/* Hollow Block */}
+        <div className="col-md-5 col-4 d-flex">
           <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="hollow_block"
+              checked={formData.hollow_block || false} // default to false if undefined
+              onChange={handleChange}
             />
           </div>
-         <span className="fontass">other/unknown</span>
+          <span className="fontass">hollow block</span>
         </div>
-        <div className="col-md-7 col-8 justify-content-center mt-2 d-flex">
-        <div className="col-md-6 d-flex">
-        <div className="mx-2">
+
+        {/* Timber Frame */}
+        <div className="col-md-5 col-4 d-flex">
+          <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="timber_frame"
+              checked={formData.timber_frame || false} // default to false if undefined
+              onChange={handleChange}
             />
           </div>
-         <span className="fontass">internal</span>
+          <span className="fontass">timber frame</span>
         </div>
-        <div className="col-md-6 d-flex">
-        <div className="mx-2">
+
+        {/* Other/Unknown */}
+        <div className="col-md-5 col-4 d-flex">
+          <div className="mx-2">
             <input
               type="checkbox"
-              name=""
-              
+              name="other_unknown"
+              checked={formData.other_unknown || false} // default to false if undefined
+              onChange={handleChange}
             />
           </div>
-         <span className="fontass">dense</span>
-</div>
-       </div>
+          <span className="fontass">other/unknown</span>
+        </div>
 
-
-       <div className=" col-md-5 col-4   d-flex">
+        {/* Insulation Thickness if Observable */}
+        <div className="col-md-12 mt-2 col-4 align-items-center justify-content-center d-flex">
+          <span className="fontass">Insulation thickness if observable (mm)</span>
           <div className="mx-2">
             <input
               type="text"
-              name=""
+              name="insulation_thickness_observable"
+              value={formData.insulation_thickness_observable || ""}
+              onChange={handleChange}
               className="inpwall"
             />
           </div>
-        
         </div>
-        <div className=" col-md-12 mt-2 col-4 align-items-center justify-content-center d-flex">
-        <span className="fontass">insulation thickness if observable(mm)</span>
+
+        {/* Other Inputs */}
+        <div className="col-md-12 mt-2">
           <div className="mx-2">
             <input
               type="text"
-              name=""
+              name="other_unknow_text"
+              value={formData.other_unknow_text || ""}
+              onChange={handleChange}
               className="inpwall"
             />
           </div>
-        
         </div>
-
-
-
-
       </div>
     </div>
   );
 };
+
+
 
 export default WallConstruction;

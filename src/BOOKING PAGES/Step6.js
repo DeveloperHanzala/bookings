@@ -4,10 +4,12 @@ import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 const Step6 = ({ nextStep, prevStep, handleChange }) => {
   const [selectedName, setSelectedName] = useState(null);
 
-  // Handle name selection
   const handleNameClick = (name) => {
+    handleChange('additional_features')(name);
     setSelectedName(name);
-    handleChange(name);  // If you want to pass it to the parent component
+    if (nextStep) {
+      nextStep();
+    } 
   };
 
   const names = [

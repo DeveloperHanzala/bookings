@@ -6,13 +6,21 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
 
   // Handle name selection
   const handleNameClick = (name) => {
+    handleChange('county')(name);
     setSelectedName(name);
-    handleChange(name);  // If you want to pass it to the parent component
+    if (nextStep) {
+      nextStep();
+    } 
   };
 
   const names = [
-    "Carlow", "Cavan", "Carlow","Cork", // Column 1
-     "Carlow", "Cavan", "Carlow","Cork", // Column 2
+    "Carlow", "Cavan", "Clare", "Cork",
+    "Donegal", "Dublin", "Galway", "Kerry",
+    "Kildare", "Kilkenny", "Laois", "Leitrim",
+    "Limerick", "Longford", "Louth", "Mayo",
+    "Meath", "Monaghan", "Offaly", "Roscommon",
+    "Sligo", "Tipperary", "Waterford", "Westmeath",
+    "Wexford", "Wicklow",
   ];
 
   return (
@@ -33,95 +41,24 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
 
       {/* Name Selector Section using Bootstrap Grid */}
       <div className="container mt-5 mb-5">
-        <div className="row">
-          {/* Column 1 */}
-          <div className="col-12">
-            <div className="d-flex flex-row">
-              {names.slice(0, 4).map((name) => (
-                <button
-                  key={name}
-                  className={`btn mx-2 step3button w-100 mb-2 ${name === selectedName ? "selected" : ""}`}
-                  onClick={() => handleNameClick(name)}
-                >
-                  {name}
-                </button>
-              ))}
+      <div className="row">
+          {Array.from({ length: Math.ceil(names.length / 4) }, (_, rowIndex) => (
+            <div key={rowIndex} className="col-12 col-md-12 px-5 px-md-0">
+              <div className="d-flex flex-column flex-md-row">
+                {names.slice(rowIndex * 4, rowIndex * 4 + 4).map((name) => (
+                  <button
+                    key={name}
+                    className={`btn mx-2 step3button w-100 mb-2 ${
+                      name === selectedName ? "selected" : ""
+                    }`}
+                    onClick={() => handleNameClick(name)}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-          
-          {/* Column 2 */}
-          <div className="col-12">
-            <div className="d-flex flex-row">
-              {names.slice(4, 8).map((name) => (
-                <button
-                  key={name}
-                  className={`btn mx-2 step3button w-100 mb-2 ${name === selectedName ? "selected" : ""}`}
-                  onClick={() => handleNameClick(name)}
-                >
-                  {name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-           {/* Column 1 */}
-           <div className="col-12">
-            <div className="d-flex flex-row">
-              {names.slice(0, 4).map((name) => (
-                <button
-                  key={name}
-                  className={`btn mx-2 step3button w-100 mb-2 ${name === selectedName ? "selected" : ""}`}
-                  onClick={() => handleNameClick(name)}
-                >
-                  {name}
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          {/* Column 2 */}
-          <div className="col-12">
-            <div className="d-flex flex-row">
-              {names.slice(4, 8).map((name) => (
-                <button
-                  key={name}
-                  className={`btn mx-2 step3button w-100 mb-2 ${name === selectedName ? "selected" : ""}`}
-                  onClick={() => handleNameClick(name)}
-                >
-                  {name}
-                </button>
-              ))}
-            </div>
-          </div>
-           {/* Column 1 */}
-           <div className="col-12">
-            <div className="d-flex flex-row">
-              {names.slice(0, 4).map((name) => (
-                <button
-                  key={name}
-                  className={`btn mx-2 step3button w-100 mb-2 ${name === selectedName ? "selected" : ""}`}
-                  onClick={() => handleNameClick(name)}
-                >
-                  {name}
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          {/* Column 2 */}
-          <div className="col-12">
-            <div className="d-flex flex-row">
-              {names.slice(4, 8).map((name) => (
-                <button
-                  key={name}
-                  className={`btn mx-2 step3button w-100 mb-2 ${name === selectedName ? "selected" : ""}`}
-                  onClick={() => handleNameClick(name)}
-                >
-                  {name}
-                </button>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       {/* Navigation Buttons */}
       <div style={{ marginTop: "20px", display:"flex", alignItems:"center",justifyContent:"center" }}>
