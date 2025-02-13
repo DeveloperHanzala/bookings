@@ -751,7 +751,7 @@ individual_chp: false,
   });
   const accessToken = localStorage.getItem("access_token");
   
-  const apiUrl = `https://testing.techionik.com/api/assessment/${id}/`;
+  const apiUrl = `https://booking.homecert.ie/api/assessment/${id}/`;
 
   // Handle input change and send PUT request
   const handleChange = async (e) => {

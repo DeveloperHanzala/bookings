@@ -22,7 +22,7 @@ const ConfirmPassword = () => {
     }
   
     try {
-      const response = await axios.post("https://testing.techionik.com/api/reset-password/", {
+      const response = await axios.post("https://booking.homecert.ie/api/reset-password/", {
         pin,
         new_password: newPassword,
       });

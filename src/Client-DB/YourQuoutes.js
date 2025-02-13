@@ -23,7 +23,7 @@ const YourQuotes = () => {
 
     try {
       const response = await axios.get(
-        `https://testing.techionik.com/api/bids/${bid.id}/`,
+        `https://booking.homecert.ie/api/bids/${bid.id}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const YourQuotes = () => {
 
     try {
       const response = await axios.post(
-        `https://testing.techionik.com/api/bids/${selectedBid.id}/accept/`,
+        `https://booking.homecert.ie/api/bids/${selectedBid.id}/accept/`,
         {},
         {
           headers: {
@@ -79,7 +79,7 @@ const YourQuotes = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await axios.get(
-        `https://testing.techionik.com/api/bids/${bid.id}/`,
+        `https://booking.homecert.ie/api/bids/${bid.id}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

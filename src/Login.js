@@ -33,7 +33,7 @@ const Login = () => {
         ? { email: formData.email, phone_number: formData.phone }
         : { email: formData.email, password: formData.password };
 
-      const response = await axios.post("https://testing.techionik.com/api/signin/", requestData);
+      const response = await axios.post("https://booking.homecert.ie/api/signin/", requestData);
 
       const userTypeMapping = {
         "Homeowners": "client",

@@ -25,7 +25,7 @@ const Assessments = () => {
   const fetchJobs = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await axios.get("https://testing.techionik.com/api/projects/", {
+      const response = await axios.get("https://booking.homecert.ie/api/projects/", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setJobs(response.data || []); // Ensure we have an array
@@ -41,7 +41,7 @@ const Assessments = () => {
     const token = localStorage.getItem("access_token");
     if (!token) return;
     axios
-      .get("https://testing.techionik.com/api/notifications/", {
+      .get("https://booking.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -59,7 +59,7 @@ const Assessments = () => {
     // Create an array of POST requests (one for each notification)
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )

@@ -42,7 +42,7 @@ const Quote = () => {
                 insurance: formData.insurance
             };
 
-            const response = await fetch(`https://testing.techionik.com/api/jobs/${jobId}/bid/`, {
+            const response = await fetch(`https://booking.homecert.ie/api/jobs/${jobId}/bid/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ const MyQoutes = () => {
     const fetchQuotes = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        const response = await fetch("https://testing.techionik.com/api/my-quotes/", {
+        const response = await fetch("https://booking.homecert.ie/api/my-quotes/", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -52,7 +52,7 @@ const MyQoutes = () => {
     if (!token) return;
 
     axios
-      .get("https://testing.techionik.com/api/notifications/", {
+      .get("https://booking.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -70,7 +70,7 @@ const MyQoutes = () => {
     // Send a request for each notification to mark it as read
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )

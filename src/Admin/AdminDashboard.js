@@ -73,9 +73,9 @@ const AdminDashboard = () => {
         };
 
         const [resAccessors, resClients, resPendingJobs] = await Promise.all([
-          fetch('https://testing.techionik.com/api/admin/total-accessors/', { headers }),
-          fetch('https://testing.techionik.com/api/admin/total-clients/', { headers }),
-          fetch('https://testing.techionik.com/api/admin/total-pending-jobs/', { headers }),
+          fetch('https://booking.homecert.ie/api/admin/total-accessors/', { headers }),
+          fetch('https://booking.homecert.ie/api/admin/total-clients/', { headers }),
+          fetch('https://booking.homecert.ie/api/admin/total-pending-jobs/', { headers }),
         ]);
 
         const [accessorsData, clientsData, pendingJobsData] = await Promise.all([
@@ -113,7 +113,7 @@ const AdminDashboard = () => {
     const token = localStorage.getItem("access_token");
     if (!token) return;
 
-    axios.get('https://testing.techionik.com/api/notifications/', {
+    axios.get('https://booking.homecert.ie/api/notifications/', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )

@@ -20,7 +20,7 @@ const BERMembers = () => {
 
   // Fetch BER members
   useEffect(() => {
-    axios.get('https://testing.techionik.com/api/bermember/', {
+    axios.get('https://booking.homecert.ie/api/bermember/', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -38,7 +38,7 @@ const BERMembers = () => {
 
   // Fetch notifications
   useEffect(() => {
-    axios.get('https://testing.techionik.com/api/notifications/', {
+    axios.get('https://booking.homecert.ie/api/notifications/', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -58,7 +58,7 @@ const BERMembers = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )

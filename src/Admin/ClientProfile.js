@@ -15,7 +15,7 @@ const ClientProfile = () => {
 
   useEffect(() => {
     if (id && accessToken) {
-      axios.get(`https://testing.techionik.com/api/client/${id}/`, {
+      axios.get(`https://booking.homecert.ie/api/client/${id}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }

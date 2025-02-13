@@ -30,7 +30,7 @@ const Preferences = () => {
   const updatePreferences = async (county, isSelected) => {
     try {
       const access_token = localStorage.getItem('access_token');
-      const response = await fetch('https://testing.techionik.com/api/preference/', {
+      const response = await fetch('https://booking.homecert.ie/api/preference/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const Preferences = () => {
     if (!token) return;
 
     axios
-      .get("https://testing.techionik.com/api/notifications/", {
+      .get("https://booking.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -90,7 +90,7 @@ const Preferences = () => {
     // Create an array of POST requests—one for each notification
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )

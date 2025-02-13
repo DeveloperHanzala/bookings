@@ -24,7 +24,7 @@ const ActiveJobs = () => {
       }
 
       try {
-        const response = await fetch('https://testing.techionik.com/api/admin/ejobs/', {
+        const response = await fetch('https://booking.homecert.ie/api/admin/ejobs/', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ const ActiveJobs = () => {
 
   // Fetch notifications from API on mount
   useEffect(() => {
-    axios.get('https://testing.techionik.com/api/notifications/', {
+    axios.get('https://booking.homecert.ie/api/notifications/', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -94,7 +94,7 @@ const ActiveJobs = () => {
     // Create a POST request for each notification
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )

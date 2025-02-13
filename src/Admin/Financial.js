@@ -26,7 +26,7 @@ const Financial = () => {
 
   // Fetch notifications on mount
   useEffect(() => {
-    axios.get('https://testing.techionik.com/api/notifications/', {
+    axios.get('https://booking.homecert.ie/api/notifications/', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -46,7 +46,7 @@ const Financial = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )

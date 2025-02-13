@@ -25,7 +25,7 @@ const LiveJobs = () => {
   const fetchJobs = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await axios.get("https://testing.techionik.com/api/jobs/", {
+      const response = await axios.get("https://booking.homecert.ie/api/jobs/", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -50,7 +50,7 @@ const LiveJobs = () => {
     if (!token) return; // Avoid making requests if token is missing
 
     axios
-      .get("https://testing.techionik.com/api/notifications/", {
+      .get("https://booking.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -68,7 +68,7 @@ const LiveJobs = () => {
     // Create an array of POST requests—one for each notification.
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )

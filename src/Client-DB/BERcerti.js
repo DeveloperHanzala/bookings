@@ -16,7 +16,7 @@ const BERcerti = () => {
   const handleAddButtonClick = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await fetch('https://testing.techionik.com/api/client/jobs/create/', {
+      const response = await fetch('https://booking.homecert.ie/api/client/jobs/create/', {
         method: 'GET', // Changed to POST if needed by your API
         headers: {
           Authorization: `Bearer ${token}`
@@ -49,7 +49,7 @@ const BERcerti = () => {
   // Fetch notifications on mount
   useEffect(() => {
     if (!accessToken) return;
-    axios.get('https://testing.techionik.com/api/notifications/', {
+    axios.get('https://booking.homecert.ie/api/notifications/', {
       headers: { Authorization: `Bearer ${accessToken}` }
     })
       .then(response => {
@@ -66,7 +66,7 @@ const BERcerti = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )

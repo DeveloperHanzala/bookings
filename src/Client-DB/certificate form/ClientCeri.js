@@ -67,7 +67,7 @@ const ClientCerti = () => {
     console.log("Final Payload:", JSON.stringify(payload, null, 2));
     const token = localStorage.getItem("access_token");
     try {
-      const response = await fetch(`https://testing.techionik.com/api/job/${jobId}/update/`, {
+      const response = await fetch(`https://booking.homecert.ie/api/job/${jobId}/update/`, {
         method: 'PUT',
         headers: { 
           Authorization: `Bearer ${token}`,

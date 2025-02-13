@@ -28,7 +28,7 @@ const ClientDashboard = () => {
   useEffect(() => {
     if (!accessToken) return;
     axios
-      .get("https://testing.techionik.com/api/notifications/", {
+      .get("https://booking.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((response) => {
@@ -44,7 +44,7 @@ const ClientDashboard = () => {
   const fetchJobs = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await axios.get("https://testing.techionik.com/api/jobs-bids/", {
+      const response = await axios.get("https://booking.homecert.ie/api/jobs-bids/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -63,7 +63,7 @@ const ClientDashboard = () => {
 
     const markReadPromises = notifications.map((notification) =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )

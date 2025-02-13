@@ -39,7 +39,7 @@ const Booking = () => {
   useEffect(() => {
     const fetchQuoteId = async () => {
       try {
-        const response = await fetch('https://testing.techionik.com/api/get-quote/');
+        const response = await fetch('https://booking.homecert.ie/api/get-quote/');
         const data = await response.json();
         setQuoteId(data.quote.id); // Get ID from quote object
         setAssessmentId(data.assessment_id);
@@ -84,7 +84,7 @@ const Booking = () => {
     console.log("Final Payload:", JSON.stringify(payload, null, 2));
   
     try {
-      const response = await fetch(`https://testing.techionik.com/api/get-quote/${quoteId}/`, {
+      const response = await fetch(`https://booking.homecert.ie/api/get-quote/${quoteId}/`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload) // Send flat structure without "quote" wrapper

@@ -57,7 +57,7 @@ const Buildings = () => {
 
   // Fetch assets data on mount
   useEffect(() => {
-    axios.get('https://testing.techionik.com/api/job-search/')
+    axios.get('https://booking.homecert.ie/api/job-search/')
       .then(response => {
         setAssetsData(response.data);
         setFilteredData(response.data);
@@ -68,7 +68,7 @@ const Buildings = () => {
   // Fetch notifications on mount
   useEffect(() => {
     if (!accessToken) return;
-    axios.get('https://testing.techionik.com/api/notifications/', {
+    axios.get('https://booking.homecert.ie/api/notifications/', {
       headers: { Authorization: `Bearer ${accessToken}` }
     })
       .then(response => {
@@ -86,7 +86,7 @@ const Buildings = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://testing.techionik.com/api/notifications/${notification.id}/mark-as-read/`,
+        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
