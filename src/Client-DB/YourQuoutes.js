@@ -17,7 +17,7 @@ const YourQuotes = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-  
+
   const handleOpenModal = async (bid) => {
     setSelectedBid(bid);
     setShowModal(true);
@@ -40,6 +40,48 @@ const YourQuotes = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // New function to switch modals without clearing bid details
+  const handleSwitchToQuoteModal = async (bid) => {
+    // Close profile modal but keep bid details intact
+    setShowModal(false);
+    setLoading(true);
+    
+    const token = localStorage.getItem("access_token");
+    try {
+      // Optionally, re-fetch the details if needed:
+      const response = await axios.get(
+        `https://backend.homecert.ie/api/bids/${bid.id}/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setBidDetails(response.data);
+      setSelectedBid(bid);
+      setShowQuote(true);
+    } catch (error) {
+      console.error("Error fetching quote details:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Close profile modal (when user clicks the "X" button)
+  const handleCloseModal = () => {
+    setShowModal(false);
+    // Optionally, you may clear bid data here if it’s not needed afterward:
+    setSelectedBid(null);
+    setBidDetails(null);
+  };
+
+  // Close quote modal
+  const handleQuoteModalClose = () => {
+    setShowQuote(false);
+    setSelectedBid(null);
+    setBidDetails(null);
   };
 
   const handleAcceptQuote = async () => {
@@ -70,42 +112,8 @@ const YourQuotes = () => {
     }
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedBid(null);
-    setBidDetails(null);
-  };
-
-  const handleQuoteModal = async (bid) => {
-    setSelectedBid(bid);
-    setLoading(true);
-    
-    const token = localStorage.getItem("access_token");
-    try {
-      const response = await axios.get(
-        `https://backend.homecert.ie/api/bids/${bid.id}/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setBidDetails(response.data);
-      setShowQuote(true);
-    } catch (error) {
-      console.error("Error fetching quote details:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleQuoteModalClose = () => {
-    setShowQuote(false);
-    setSelectedBid(null);
-    setBidDetails(null);
-  };
-
-  if (!bids.length) return <div className="text-center mt-5">No bids available for this job</div>;
+  if (!bids.length)
+    return <div className="text-center mt-5">No bids available for this job</div>;
 
   return (
     <div className="container p-5">
@@ -129,21 +137,26 @@ const YourQuotes = () => {
           <tbody>
             {bids.map((bid, index) => (
               <tr key={bid.id}>
-                <td  data-label="No">{index + 1}</td>
-                <td  data-label="Quote">${bid.amount}</td>
-                <td data-label="Submitted Date">{new Date(bid.created_at).toLocaleDateString()}</td>
+                <td data-label="No">{index + 1}</td>
+                <td data-label="Quote">${bid.amount}</td>
+                <td data-label="Submitted Date">
+                  {new Date(bid.created_at).toLocaleDateString()}
+                </td>
                 <td data-label="Assessor ID">#{bid.assessor.id}</td>
                 <td data-label="Profile">
-                  <span  className="btn button3">
-                  View Profile
-                  <RiArrowRightUpLine
-                    style={{ cursor: "pointer" }}
+                  <button 
+                    className="btn button3"
                     onClick={() => handleOpenModal(bid)}
-                  />
-                  </span>
+                  >
+                    View Profile
+                    <RiArrowRightUpLine style={{ marginLeft: 5 }} />
+                  </button>
                 </td>
                 <td data-label="Action" className="text-center">
-                  <button className="btn btn-success" onClick={() => handleQuoteModal(bid)}>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => handleSwitchToQuoteModal(bid)}
+                  >
                     Accept Quote
                   </button>
                 </td>
@@ -198,16 +211,18 @@ const YourQuotes = () => {
                   )}
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={handleCloseModal}
+                  >
                     Close
                   </button>
                   <button
                     type="button"
                     className="btn button12"
-                    onClick={() => {
-                      handleQuoteModal(selectedBid);
-                      handleCloseModal();
-                    }}
+                    // Using the new function to switch modals:
+                    onClick={() => handleSwitchToQuoteModal(selectedBid)}
                   >
                     Accept ${selectedBid.amount} Quote
                   </button>
@@ -236,7 +251,9 @@ const YourQuotes = () => {
                     onClick={handleQuoteModalClose}
                   ></button>
                 </div>
-                <h6 className="mt-3 mx-3 mb-3">Instantly confirm your booking below:</h6>
+                <h6 className="mt-3 mx-3 mb-3">
+                  Instantly confirm your booking below:
+                </h6>
                 <div className="modal-body">
                   {loading ? (
                     <div className="text-center">
@@ -262,12 +279,16 @@ const YourQuotes = () => {
                       </div>
                       <div className="d-flex mt-2 align-items-center justify-content-between">
                         <span>Available From:</span>
-                        <span>{new Date(bidDetails.created_at).toLocaleDateString()}</span>
+                        <span>
+                          {new Date(bidDetails.created_at).toLocaleDateString()}
+                        </span>
                       </div>
 
                       <div className="bg-light p-3 d-flex mt-2 align-items-center justify-content-between">
                         <span>
-                          <span className="fw-bold text-success">Total Price: </span>
+                          <span className="fw-bold text-success">
+                            Total Price:{" "}
+                          </span>
                           <br />
                           <span className="fontquote">
                             *Inclusive of SEAI fees and VAT (if applicable)
@@ -287,14 +308,16 @@ const YourQuotes = () => {
 
                       <div className="text-center mt-2 fontquote">
                         <p>
-                          Confirm your booking instantly by paying the booking deposit,
-                          then pay the balance (${bidDetails.amount - 50}) to your assessor
-                          on the day of your assessment.
+                          Confirm your booking instantly by paying the booking
+                          deposit, then pay the balance (${bidDetails.amount - 50})
+                          to your assessor on the day of your assessment.
                         </p>
                       </div>
                     </div>
                   ) : (
-                    <div className="text-danger">Failed to load bid details</div>
+                    <div className="text-danger">
+                      Failed to load bid details
+                    </div>
                   )}
                 </div>
                 <div className="modal-footer">
@@ -317,6 +340,7 @@ const YourQuotes = () => {
             </div>
           </div>
         )}
+
       </div>
     </div>
   );
