@@ -9,6 +9,9 @@ const AdminClients = () => {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   // Notifications state
   const [notifications, setNotifications] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -26,7 +29,7 @@ const AdminClients = () => {
           "Content-Type": "application/json",
         };
 
-        const response = await axios.get('https://booking.homecert.ie/api/admin/clients/', { headers });
+        const response = await axios.get('https://backend.homecert.ie/api/admin/clients/', { headers });
         setClients(response.data); // Assuming the API returns an array of clients
         setLoading(false);
       } catch (error) {
@@ -42,7 +45,7 @@ const AdminClients = () => {
   useEffect(() => {
     if (!accessToken) return;
 
-    axios.get('https://booking.homecert.ie/api/notifications/', {
+    axios.get('https://backend.homecert.ie/api/notifications/', {
       headers: { Authorization: `Bearer ${accessToken}` }
     })
       .then(response => {
@@ -61,7 +64,7 @@ const AdminClients = () => {
     // Create a POST request for each notification
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
@@ -189,15 +192,15 @@ const AdminClients = () => {
             <tbody>
               {clients.map((client, index) => (
                 <tr key={client.id}>
-                  <td className='border-0'>{index + 1}</td>
-                  <td className='border-0 fw-bold'>
+                  <td data-label="No" className='border-0'>{index + 1}</td>
+                  <td data-label="Name" className='border-0 fw-bold'>
                     <Link to={`/admin/client-profile/${client.id}`} style={{ textDecoration: "none", color: "black" }}>
                       {client.name}
                     </Link>
                   </td>
-                  <td className='border-0'>{client.email}</td>
-                  <td className='border-0'>{client.job_count}</td>
-                  <td className='border-0'>
+                  <td data-label="E-mail" className='border-0'>{client.email}</td>
+                  <td data-label="Active Jobs" className='border-0'>{client.job_count}</td>
+                  <td  data-label="Status" className='border-0'>
                     <button className='btn btn-success'>Active</button>
                   </td>
                 </tr>

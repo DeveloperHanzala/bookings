@@ -27,6 +27,9 @@ const AdminDashboard = () => {
   // Get the access token
   const accessToken = localStorage.getItem("access_token");
 
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   // Card data state (for admin stats)
   const [cardData, setCardData] = useState([
     {
@@ -61,6 +64,8 @@ const AdminDashboard = () => {
     "#9966FF",
     "#FF9F40",
   ];
+  const first = localStorage.getItem("first");
+  const last = localStorage.getItem("last");
 
   // Fetch card data when component mounts
   useEffect(() => {
@@ -73,9 +78,9 @@ const AdminDashboard = () => {
         };
 
         const [resAccessors, resClients, resPendingJobs] = await Promise.all([
-          fetch('https://booking.homecert.ie/api/admin/total-accessors/', { headers }),
-          fetch('https://booking.homecert.ie/api/admin/total-clients/', { headers }),
-          fetch('https://booking.homecert.ie/api/admin/total-pending-jobs/', { headers }),
+          fetch('https://backend.homecert.ie/api/admin/total-accessors/', { headers }),
+          fetch('https://backend.homecert.ie/api/admin/total-clients/', { headers }),
+          fetch('https://backend.homecert.ie/api/admin/total-pending-jobs/', { headers }),
         ]);
 
         const [accessorsData, clientsData, pendingJobsData] = await Promise.all([
@@ -113,7 +118,7 @@ const AdminDashboard = () => {
     const token = localStorage.getItem("access_token");
     if (!token) return;
 
-    axios.get('https://booking.homecert.ie/api/notifications/', {
+    axios.get('https://backend.homecert.ie/api/notifications/', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -130,7 +135,7 @@ const AdminDashboard = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -245,8 +250,8 @@ const AdminDashboard = () => {
           <div className="container-fluid bgdash">
             <div className="row">
               <div className="col-md-8 text-light">
-                <h1 className="display-5">Welcome To Company Name</h1>
-                <h2 className="dashfont">Admin Name</h2>
+                <h1 className="display-5">Welcome To Homecert.ie</h1>
+                <h2 className="dashfont">{first + " " + last}</h2>
               </div>
               <div className="col-md-4">
                 <img src={img1} alt="" className="img-fluid" />

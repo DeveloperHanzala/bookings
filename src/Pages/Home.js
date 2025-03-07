@@ -39,17 +39,17 @@ const Home = () => {
     {/* -----------header----------- */}
     <div className='container-fluid bg-color' >
         <div className='row homebg'>
-            <div className='col-md-12  text-white'>
+            <div className='col-md-12 text-center text-md-start text-white'>
                 <div className='row'>
 
                 <div className='col-md-3'>
             
                 </div>
-                <div className='col-md-6 col-12'>
+                <div className='col-md-6 col-12 kmk'>
                 <h1 className='font-libre'>Where Innovation Meets Energy Excellence</h1>
-                <p className='font-libre1'>Fast, Reliable & Hassle-Free
+                <p className='font-libre1 '>Fast, Reliable & Hassle-Free
                 Get the Best Quotes from local BER Assessors Today</p>
-                <div className='px-4'>
+                <div className='px-4 text-center text-md-start'>
                 <Link to={'/booking'}><button className='btn btn-warning homebutton'>Book an Energy Assessment</button></Link>
                 </div>
                
@@ -80,7 +80,7 @@ const Home = () => {
 
 
   {/* -----------thirdsection----------- */}
-    <div className='container px-4 nooverflowx px-md-0 pt-5 pb-5'>
+    <div className='container px-4 text-center text-md-start nooverflowx px-md-0 pt-5 pb-5'>
         <h5 className='text-warning'>Expertise</h5>
         <h2 className='mb-5 text-color1'>Find a Local BER Assessor Today</h2>
         <div className='row'>
@@ -115,8 +115,8 @@ const Home = () => {
    
    
     {/* -----------fourthsection----------- */}
-    <div className='text-color2 px-4 nooverflowx px-md-0  mt-5 mb-5'>
-    <div className='container  pt-5 pb-5'>
+    <div className='container-fluid text-color2 px-4 nooverflowx px-md-0  mt-5 mb-5'>
+    <div className='container nooverflowx pt-5 pb-5'>
        <div className='text-center'>
         <h2 className='mb-5'>How BerCert Works</h2>
        </div>
@@ -155,7 +155,7 @@ const Home = () => {
   {/* -----------fourthsection----------- */}
 
  {/* -----------fifthsection----------- */}
- <div className='container px-4 px-md-0 nooverflowx pt-5 pb-5'>
+ <div className='container px-4 px-md-0 text-center text-md-start nooverflowx pt-5 pb-5'>
        
         <h2 className='mb-5 text-color1'>Why Choose Us?</h2>
         <div className='row'>
@@ -550,9 +550,9 @@ const Home = () => {
   {/* -----------seventhsection----------- */}
 
 {/* -----------eighthsection----------- */}
-  <div className="faq-container mb-5 mb-md-0 pb-md-4 pb-5">
+  <div className="faq-container  mb-5 mb-md-0 pb-md-4 pb-5">
       {/* Left Section */}
-      <div className="faq-left">
+      <div className="faq-left text-center text-md-start">
         <h3>Common</h3>
         <p>
           Find answers to frequently asked questions about our consulting

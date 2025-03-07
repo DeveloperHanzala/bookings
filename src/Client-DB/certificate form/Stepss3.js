@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight,FaLongArrowAltLeft } from "react-icons/fa";
 
 const Stepss3 = ({ nextStep, prevStep, handleChange }) => {
@@ -21,6 +21,9 @@ const Stepss3 = ({ nextStep, prevStep, handleChange }) => {
     "Detached", "Semi-detached", "Mid-terrace", "Apartment",
     "Duplex", "Bunglow", "Multi-unit", "Other"
   ];
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handleNameClick = (displayName) => {
     const apiValue = validOptions[displayName];
@@ -37,7 +40,8 @@ const Stepss3 = ({ nextStep, prevStep, handleChange }) => {
         <div>
           <div className="row">
             <div className="col-md-12 text-center">
-              <h1 className="step1font text-light">What type of property is it?</h1>
+            <h1 className="step1font d-none d-md-block text-light">What type of property is it?</h1>
+              <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}} >What type of property is it?</p>
               <p className="step1para text-light">Assessors need this information to give you an accurate price</p>
             </div>
           </div>

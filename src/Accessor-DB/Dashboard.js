@@ -20,6 +20,9 @@ const Dashboard = () => {
   const [toastMessage, setToastMessage] = useState("");
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
 
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   useEffect(() => {
     fetchJobs();
   }, []);
@@ -29,7 +32,7 @@ const Dashboard = () => {
     if (!token) return; // Avoid making requests if token is missing
 
     axios
-      .get("https://booking.homecert.ie/api/notifications/", {
+      .get("https://backend.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -43,7 +46,7 @@ const Dashboard = () => {
   const fetchJobs = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await axios.get("https://booking.homecert.ie/api/jobs/", {
+      const response = await axios.get("https://backend.homecert.ie/api/jobs/", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -62,16 +65,18 @@ const Dashboard = () => {
       setLoading(false);
     }
   };
-
+  const first = localStorage.getItem("first");
+  const last = localStorage.getItem("last");
   // Handler to mark all notifications as read.
   const handleMarkAllAsRead = async () => {
     const token = localStorage.getItem("access_token");
+   
     if (!token || notifications.length === 0) return;
 
     // Create an array of POST requests, one for each notification.
     const markReadPromises = notifications.map(notification => 
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -120,7 +125,13 @@ const Dashboard = () => {
         </div>
       )}
 
-      <div className="container">
+
+
+
+
+
+
+      <div className="container-fluid">
         <div className="row">
           {/* Top right: Profile image and notifications */}
           <div className="col-md-12 text-end position-relative">
@@ -179,7 +190,7 @@ const Dashboard = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Company Name <IoIosArrowForward /> <span className="text-dark">Dashboard</span>
+              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Dashboard</span>
             </p>  
           </div>
 
@@ -194,26 +205,26 @@ const Dashboard = () => {
           </div>
 
           {/* Dashboard Header */}
-          <div className="container-fluid bgdash">
+          <div className="container-fluid nooverflowy  bgdash">
             <div className="row">
-              <div className="col-md-8 text-light">
-                <h1 className="display-5">Welcome To Company Name</h1>
-                <h2 className="dashfont">Assessor Name</h2>
+              <div className="col-md-8 col-10 text-light">
+                <h1 className="display-5">Welcome To Homecert.ie</h1>
+                <h2 className="dashfont">{first + " " + last}</h2>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-4 col-10">
                 <img src={img1} alt="Dashboard" className="img-fluid" />
               </div>
             </div>
           </div>
 
           {/* Jobs Table */}
-          <div className="container mt-5 mb-4">
+          <div className="container-fluid mt-5 mb-4">
             <div>
               <h3>Your live jobs are listed below:</h3>
             </div>
 
-            <div className="col-md-12">
-              <div style={{ overflowX: 'auto' }}>
+            <div className="col-md-12 col-12">
+              <div style={{ overflowX: "auto" }}>
                 <table className="table table-bordered">
                   <thead>
                     <tr className="text-center">
@@ -234,17 +245,17 @@ const Dashboard = () => {
                     {jobs.length > 0 ? (
                       jobs.map((job, index) => (
                         <tr className="text-center" key={job.id}>
-                          <td>{index + 1}</td>
-                          <td>{new Date(job.created_at).toLocaleDateString()}</td>
-                          <td>{job.town || "N/A"}</td>
-                          <td>{job.county || "N/A"}</td>
-                          <td>{job.building_type || "N/A"}</td>
-                          <td>{job.property_size || "N/A"}</td>
-                          <td>{job.bedrooms || "N/A"}</td>
-                          <td>{job.heat_pump_installed || "N/A"}</td>
-                          <td>{job.ber_purpose || "N/A"}</td>
-                          <td>{job.additional_features || "N/A"}</td>
-                          <td>{job.preferred_date || "N/A"}</td>
+                          <td data-label="No">{index + 1}</td>
+                          <td data-label="Job Posted">{new Date(job.created_at).toLocaleDateString()}</td>
+                          <td data-label="Town">{job.town || "N/A"}</td>
+                          <td data-label="County">{job.county || "N/A"}</td>
+                          <td data-label="Type">{job.building_type || "N/A"}</td>
+                          <td data-label="Sq. Mt.">{job.property_size || "N/A"}</td>
+                          <td data-label="Beds">{job.bedrooms || "N/A"}</td>
+                          <td data-label="Heat Pump">{job.heat_pump_installed || "N/A"}</td>
+                          <td data-label="Purpose">{job.ber_purpose || "N/A"}</td>
+                          <td data-label="Addition">{job.additional_features || "N/A"}</td>
+                          <td data-label="Preferred Date">{job.preferred_date || "N/A"}</td>
                         </tr>
                       ))
                     ) : (

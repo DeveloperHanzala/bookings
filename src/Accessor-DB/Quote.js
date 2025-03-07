@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useLocation,useNavigate } from 'react-router-dom';
 
 const Quote = () => {
     const { jobId } = useParams();
       const location = useLocation();
+      const navigate = useNavigate();
     const jobData = location.state?.jobData; 
-    console.log(jobData)
-   
+    const selectedDate = location.state?.selectedDate; 
+    console.log("the job data is" + selectedDate)
+     useEffect(() => {
+       window.scrollTo({ top: 0, behavior: "smooth" });
+     }, []);
     const [formData, setFormData] = useState({
         amount: '',
         VAT_Registered: false,
@@ -42,7 +46,7 @@ const Quote = () => {
                 insurance: formData.insurance
             };
 
-            const response = await fetch(`https://booking.homecert.ie/api/jobs/${jobId}/bid/`, {
+            const response = await fetch(`https://backend.homecert.ie/api/jobs/${jobId}/bid/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +58,7 @@ const Quote = () => {
             if (!response.ok) {
                 throw new Error('Failed to submit quote');
             }
-
+            navigate('/accessor/live-jobs'); 
             setSuccess(true);
             localStorage.removeItem(`jobDate_${jobId}`);
         } catch (err) {
@@ -102,10 +106,10 @@ const Quote = () => {
               <div><span>{jobData?.nearest_town || 'N/A'}, Co. {jobData?.county || 'N/A'}</span></div>
             </div>
 
-            <div className='d-flex p-4 justify-content-between'>
+            {/* <div className='d-flex p-4 justify-content-between'>
               <div><span>Eircode:</span></div>
               <div><span>F93WE1C</span></div>
-            </div>
+            </div> */}
 
             <div className='d-flex p-4 justify-content-between'>
               <div><span>Property Type:</span></div>
@@ -208,7 +212,10 @@ const Quote = () => {
                                         onChange={(e) => setAgreeTerms(e.target.checked)}
                                         required
                                     />
-                                    <span>I agree to the <span className='text-danger'>terms of use</span> <br/> and I am available from Mon 06 Jan.</span>
+                                   <span>I agree to the <span className='text-danger'>terms of use</span> <br/> and I am available from  
+     {""} {selectedDate ? new Date(selectedDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' }) : 'N/A'}
+</span>
+
                                 
                                     </div>
 

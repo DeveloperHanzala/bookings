@@ -3,7 +3,7 @@ import React from 'react';
 const Roomdata = ({ formData, handleChange }) => {
   return (
     <>
-      <div className='container shadow-sm p-5 custom-table-container'>
+      <div className='container shadow-sm p-md-5 p-0 custom-table-container'>
         <div className='bg-light text-center p-4'>
           <span className='fw-bold fs-4'> ROOM DATA</span>
         </div>
@@ -21,7 +21,7 @@ const Roomdata = ({ formData, handleChange }) => {
           <tbody>
             {[1, 2, 3, 4, 5].map((roomNumber) => (
               <tr key={roomNumber}>
-                <td>
+                <td data-label="Chimney or Flueless">
                   <input
                     type="text"
                     className="custom-input"
@@ -30,7 +30,7 @@ const Roomdata = ({ formData, handleChange }) => {
                     onChange={handleChange}
                   />
                 </td>
-                <td>
+                <td data-label="Open Flues">
                   <input
                     type="text"
                     className="custom-input"
@@ -39,7 +39,7 @@ const Roomdata = ({ formData, handleChange }) => {
                     onChange={handleChange}
                   />
                 </td>
-                <td>
+                <td data-label="Fans / vents">
                   <input
                     type="text"
                     className="custom-input"
@@ -48,7 +48,7 @@ const Roomdata = ({ formData, handleChange }) => {
                     onChange={handleChange}
                   />
                 </td>
-                <td>
+                <td data-label="Rads with or w/o TRVs?">
                   <input
                     type="text"
                     className="custom-input"
@@ -57,7 +57,7 @@ const Roomdata = ({ formData, handleChange }) => {
                     onChange={handleChange}
                   />
                 </td>
-                <td>
+                <td data-label="Number of fixed lights">
                   <input
                     type="text"
                     className="custom-input"
@@ -66,7 +66,7 @@ const Roomdata = ({ formData, handleChange }) => {
                     onChange={handleChange}
                   />
                 </td>
-                <td>
+                <td data-label="What type of fixed lights? Use more than 1 row if needed">
                   <input
                     type="text"
                     className="custom-input"

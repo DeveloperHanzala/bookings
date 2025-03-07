@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Booking.css";
@@ -22,7 +22,9 @@ const Step1 = ({  nextStep, prevStep, handleChange, formData }) => {
     }// Automatically move to the next step
   };
   
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
 
   const handleMonthChange = (newMonth) => {
@@ -50,10 +52,11 @@ const Step1 = ({  nextStep, prevStep, handleChange, formData }) => {
   return (
         <>
 <div className="container-fluid step1bg">
-<div>
+<div className="paDa">
     <div className="row">
         <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">Your Preferred Date</h1>
+            <h1 className="step1font d-none d-md-block text-light" >Your Preferred Date</h1>
+            <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}}>Your Preferred Date</p>
             <p className="step1para text-light">Not sure yet? Just select 'I'm <span className="text-warning"> Flexible'</span></p>
 
         </div>
@@ -62,7 +65,7 @@ const Step1 = ({  nextStep, prevStep, handleChange, formData }) => {
 </div>
 </div>
 
-    <div className="container pt-5 pb-5" style={{ textAlign: "center", marginTop: "50px" }}>
+    <div className="container pt-0 pt-md-5 pb-5" style={{ textAlign: "center" }}>
       <div className="date-picker-wrapper" style={{ display: "inline-block", marginTop: "20px" }}>
         <DatePicker
           selected={selectedDate}
@@ -298,7 +301,7 @@ const Step1 = ({  nextStep, prevStep, handleChange, formData }) => {
             fontSize: "14px",
           }}
         >
-          <FaLongArrowAltLeft />
+          Back
         </button>
         <button
           onClick={() => selectedDate && nextStep()} // Move to next step only if date is selected
@@ -313,7 +316,7 @@ const Step1 = ({  nextStep, prevStep, handleChange, formData }) => {
           }}
           disabled={!selectedDate}
         >
-          <FaLongArrowAltRight />
+         Forward 
         </button>
       </div>
     </div>

@@ -19,12 +19,15 @@ const MyQoutes = () => {
   const [toastMessage, setToastMessage] = useState("");
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
 
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   // Fetch quotes on mount
   useEffect(() => {
     const fetchQuotes = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        const response = await fetch("https://booking.homecert.ie/api/my-quotes/", {
+        const response = await fetch("https://backend.homecert.ie/api/my-quotes/", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -52,7 +55,7 @@ const MyQoutes = () => {
     if (!token) return;
 
     axios
-      .get("https://booking.homecert.ie/api/notifications/", {
+      .get("https://backend.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -70,7 +73,7 @@ const MyQoutes = () => {
     // Send a request for each notification to mark it as read
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -117,7 +120,7 @@ const MyQoutes = () => {
         </div>
       )}
 
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           {/* Top Bar: Profile Image, Arrow and Notifications */}
           <div className="col-md-12 text-end position-relative">
@@ -176,7 +179,7 @@ const MyQoutes = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Company Name <IoIosArrowForward /> <span className="text-dark">My Qoutes</span>
+              Homecert.ie <IoIosArrowForward /> <span className="text-dark">My Qoutes</span>
             </p>
           </div>
 
@@ -193,10 +196,10 @@ const MyQoutes = () => {
           <p className="mx-5">Here's your live pending quotes.</p>
 
           {/* Quotes Table */}
-          <div className="container mt-5 mb-4">
-            <div className="col-md-12">
-              <div style={{ overflowX: 'auto', maxWidth: '100%' }}>
-                <table className="table table-bordered" style={{ minWidth: '800px' }}>
+          <div className="container-fluid mt-5 mb-4">
+            <div className="col-md-12 ">
+              <div style={{ overflowX: "auto" }}>
+                <table className="table table-bordered">
                   <thead>
                     <tr className="text-center">
                       <th>No</th>
@@ -218,21 +221,21 @@ const MyQoutes = () => {
                   <tbody>
                     {quotes.map((quote, index) => (
                       <tr className="text-center" key={quote.bid_id}>
-                        <td>{index + 1}</td>
-                        <td>{new Date(quote.job.preferred_date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}</td>
-                        <td>{quote.job.nearest_town}</td>
-                        <td>{quote.job.county}</td>
-                        <td>{quote.job.property_type}</td>
-                        <td>{quote.job.property_size}</td>
-                        <td>{quote.job.bedrooms}</td>
-                        <td>{quote.job.heat_pump_installed}</td>
-                        <td>{quote.job.ber_purpose}</td>
-                        <td>{quote.job.additional_features}</td>
-                        <td>{new Date(quote.job.preferred_date).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' })}</td>
-                        <td className="text-danger">
+                        <td data-label="No">{index + 1}</td>
+                        <td data-label="Job Posted">{new Date(quote.job.preferred_date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}</td>
+                        <td data-label="Town">{quote.job.nearest_town}</td>
+                        <td data-label="County">{quote.job.county}</td>
+                        <td data-label="Type">{quote.job.property_type}</td>
+                        <td data-label="Sq. Mt.">{quote.job.property_size}</td>
+                        <td data-label="Beds">{quote.job.bedrooms}</td>
+                        <td data-label="Heat Pump">{quote.job.heat_pump_installed}</td>
+                        <td data-label="Purpose">{quote.job.ber_purpose}</td>
+                        <td data-label="Addition">{quote.job.additional_features}</td>
+                        <td data-label="Survey Date">{new Date(quote.job.preferred_date).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' })}</td>
+                        <td data-label="Lowest Quote" className="text-danger">
                           €{quote.job.lowest_bid?.amount.toFixed(2) || 'N/A'}
                         </td>
-                        <td>€{quote.amount.toFixed(2)}</td>
+                        <td data-label="My Quote">€{quote.amount.toFixed(2)}</td>
                         {/* <td>Re-Quote</td> */}
                       </tr>
                     ))}

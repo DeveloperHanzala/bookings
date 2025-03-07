@@ -33,102 +33,102 @@ const FloorArea = ({ formData, handleChange }) => {
             <tbody>
               {/* Ground Floor */}
               <tr>
-                <td>Ground / Lowest Floor</td>
-                <td><input type="text" className="custom-input" name="ground_storey_heigh" value={formData.ground_storey_heigh || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_total_floor_area" value={formData.ground_total_floor_area || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_floor_1" value={formData.ground_heatloss_floor_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_floor_2" value={formData.ground_heatloss_floor_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_floor_3" value={formData.ground_heatloss_floor_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_floor_4" value={formData.ground_heatloss_floor_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_perimeter" value={formData.ground_heatloss_perimeter || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_wall_1" value={formData.ground_heatloss_wall_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_wall_2" value={formData.ground_heatloss_wall_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_wall_3" value={formData.ground_heatloss_wall_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_wall_4" value={formData.ground_heatloss_wall_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_roof_1" value={formData.ground_heatloss_roof_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_roof_2" value={formData.ground_heatloss_roof_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_roof_3" value={formData.ground_heatloss_roof_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="ground_heatloss_roof_4" value={formData.ground_heatloss_roof_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Ground / Lowest Floor" ><span className='d-none d-md-block'>Ground / Lowest Floor</span></td>
+                <td data-label="Storey height (m)"><input type="text" className="custom-input border-2 border-md-0" name="ground_storey_heigh" value={formData.ground_storey_heigh || ''} onChange={handleChange} /></td>
+                <td data-label="Total floor area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_total_floor_area" value={formData.ground_total_floor_area || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_floor_1" value={formData.ground_heatloss_floor_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_floor_2" value={formData.ground_heatloss_floor_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_floor_3" value={formData.ground_heatloss_floor_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_floor_4" value={formData.ground_heatloss_floor_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Perimeter (m)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_perimeter" value={formData.ground_heatloss_perimeter || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_wall_1" value={formData.ground_heatloss_wall_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_wall_2" value={formData.ground_heatloss_wall_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_wall_3" value={formData.ground_heatloss_wall_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_wall_4" value={formData.ground_heatloss_wall_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_roof_1" value={formData.ground_heatloss_roof_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_roof_2" value={formData.ground_heatloss_roof_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_roof_3" value={formData.ground_heatloss_roof_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="ground_heatloss_roof_4" value={formData.ground_heatloss_roof_4 || ''} onChange={handleChange} /></td>
               </tr>
 
               {/* First Floor */}
               <tr>
-                <td>First / Next Floor</td>
-                <td><input type="text" className="custom-input" name="first_storey_heigh" value={formData.first_storey_heigh || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_total_floor_area" value={formData.first_total_floor_area || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_floor_1" value={formData.first_heatloss_floor_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_floor_2" value={formData.first_heatloss_floor_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_floor_3" value={formData.first_heatloss_floor_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_floor_4" value={formData.first_heatloss_floor_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_perimeter" value={formData.first_heatloss_perimeter || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_wall_1" value={formData.first_heatloss_wall_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_wall_2" value={formData.first_heatloss_wall_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_wall_3" value={formData.first_heatloss_wall_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_wall_4" value={formData.first_heatloss_wall_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_roof_1" value={formData.first_heatloss_roof_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_roof_2" value={formData.first_heatloss_roof_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_roof_3" value={formData.first_heatloss_roof_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="first_heatloss_roof_4" value={formData.first_heatloss_roof_4 || ''} onChange={handleChange} /></td>
+                <td data-label="First / Next Floor" ><span className='d-none d-md-block'>First / Next Floor</span></td>
+                <td data-label="Storey height (m)"><input type="text" className="custom-input border-2 border-md-0" name="first_storey_heigh" value={formData.first_storey_heigh || ''} onChange={handleChange} /></td>
+                <td data-label="Total floor area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_total_floor_area" value={formData.first_total_floor_area || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_floor_1" value={formData.first_heatloss_floor_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_floor_2" value={formData.first_heatloss_floor_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_floor_3" value={formData.first_heatloss_floor_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_floor_4" value={formData.first_heatloss_floor_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Perimeter (m)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_perimeter" value={formData.first_heatloss_perimeter || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_wall_1" value={formData.first_heatloss_wall_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_wall_2" value={formData.first_heatloss_wall_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_wall_3" value={formData.first_heatloss_wall_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_wall_4" value={formData.first_heatloss_wall_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_roof_1" value={formData.first_heatloss_roof_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_roof_2" value={formData.first_heatloss_roof_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_roof_3" value={formData.first_heatloss_roof_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="first_heatloss_roof_4" value={formData.first_heatloss_roof_4 || ''} onChange={handleChange} /></td>
               </tr>
 
               {/* Second Floor */}
               <tr>
-                <td>Second / Next Floor</td>
-                <td><input type="text" className="custom-input" name="second_storey_heigh" value={formData.second_storey_heigh || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_total_floor_area" value={formData.second_total_floor_area || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_floor_1" value={formData.second_heatloss_floor_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_floor_2" value={formData.second_heatloss_floor_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_floor_3" value={formData.second_heatloss_floor_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_floor_4" value={formData.second_heatloss_floor_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_perimeter" value={formData.second_heatloss_perimeter || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_wall_1" value={formData.second_heatloss_wall_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_wall_2" value={formData.second_heatloss_wall_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_wall_3" value={formData.second_heatloss_wall_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_wall_4" value={formData.second_heatloss_wall_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_roof_1" value={formData.second_heatloss_roof_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_roof_2" value={formData.second_heatloss_roof_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_roof_3" value={formData.second_heatloss_roof_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="second_heatloss_roof_4" value={formData.second_heatloss_roof_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Second / Next Floor" ><span className='d-none d-md-block'>Second / Next Floor</span></td>
+                <td data-label="Storey height (m)"><input type="text" className="custom-input border-2 border-md-0" name="second_storey_heigh" value={formData.second_storey_heigh || ''} onChange={handleChange} /></td>
+                <td data-label="Total floor area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_total_floor_area" value={formData.second_total_floor_area || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_floor_1" value={formData.second_heatloss_floor_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_floor_2" value={formData.second_heatloss_floor_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_floor_3" value={formData.second_heatloss_floor_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_floor_4" value={formData.second_heatloss_floor_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Perimeter (m)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_perimeter" value={formData.second_heatloss_perimeter || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_wall_1" value={formData.second_heatloss_wall_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_wall_2" value={formData.second_heatloss_wall_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_wall_3" value={formData.second_heatloss_wall_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_wall_4" value={formData.second_heatloss_wall_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_roof_1" value={formData.second_heatloss_roof_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_roof_2" value={formData.second_heatloss_roof_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_roof_3" value={formData.second_heatloss_roof_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="second_heatloss_roof_4" value={formData.second_heatloss_roof_4 || ''} onChange={handleChange} /></td>
               </tr>
 
               {/* Third Floor */}
               <tr>
-                <td>Third / Next Floor</td>
-                <td><input type="text" className="custom-input" name="third_storey_heigh" value={formData.third_storey_heigh || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_total_floor_area" value={formData.third_total_floor_area || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_floor_1" value={formData.third_heatloss_floor_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_floor_2" value={formData.third_heatloss_floor_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_floor_3" value={formData.third_heatloss_floor_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_floor_4" value={formData.third_heatloss_floor_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_perimeter" value={formData.third_heatloss_perimeter || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_wall_1" value={formData.third_heatloss_wall_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_wall_2" value={formData.third_heatloss_wall_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_wall_3" value={formData.third_heatloss_wall_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_wall_4" value={formData.third_heatloss_wall_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_roof_1" value={formData.third_heatloss_roof_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_roof_2" value={formData.third_heatloss_roof_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_roof_3" value={formData.third_heatloss_roof_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="third_heatloss_roof_4" value={formData.third_heatloss_roof_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Third / Next Floor" ><span className='d-none d-md-block'>Third / Next Floor </span></td>
+                <td data-label="Storey height (m)"><input type="text" className="custom-input border-2 border-md-0" name="third_storey_heigh" value={formData.third_storey_heigh || ''} onChange={handleChange} /></td>
+                <td data-label="Total floor area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_total_floor_area" value={formData.third_total_floor_area || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_floor_1" value={formData.third_heatloss_floor_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_floor_2" value={formData.third_heatloss_floor_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_floor_3" value={formData.third_heatloss_floor_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_floor_4" value={formData.third_heatloss_floor_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Perimeter (m)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_perimeter" value={formData.third_heatloss_perimeter || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_wall_1" value={formData.third_heatloss_wall_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_wall_2" value={formData.third_heatloss_wall_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_wall_3" value={formData.third_heatloss_wall_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_wall_4" value={formData.third_heatloss_wall_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_roof_1" value={formData.third_heatloss_roof_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_roof_2" value={formData.third_heatloss_roof_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_roof_3" value={formData.third_heatloss_roof_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="third_heatloss_roof_4" value={formData.third_heatloss_roof_4 || ''} onChange={handleChange} /></td>
               </tr>
 
               {/* Basement */}
               <tr>
-                <td>Basement</td>
-                <td><input type="text" className="custom-input" name="basement_storey_heigh" value={formData.basement_storey_heigh || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_total_floor_area" value={formData.basement_total_floor_area || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_floor_1" value={formData.basement_heatloss_floor_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_floor_2" value={formData.basement_heatloss_floor_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_floor_3" value={formData.basement_heatloss_floor_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_floor_4" value={formData.basement_heatloss_floor_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_perimeter" value={formData.basement_heatloss_perimeter || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_wall_1" value={formData.basement_heatloss_wall_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_wall_2" value={formData.basement_heatloss_wall_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_wall_3" value={formData.basement_heatloss_wall_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_wall_4" value={formData.basement_heatloss_wall_4 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_roof_1" value={formData.basement_heatloss_roof_1 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_roof_2" value={formData.basement_heatloss_roof_2 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_roof_3" value={formData.basement_heatloss_roof_3 || ''} onChange={handleChange} /></td>
-                <td><input type="text" className="custom-input" name="basement_heatloss_roof_4" value={formData.basement_heatloss_roof_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Basement"> <span className='d-none d-md-block'>Basement</span></td>
+                <td data-label="Storey height (m)"><input type="text" className="custom-input border-2 border-md-0" name="basement_storey_heigh" value={formData.basement_storey_heigh || ''} onChange={handleChange} /></td>
+                <td data-label="Total floor area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_total_floor_area" value={formData.basement_total_floor_area || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_floor_1" value={formData.basement_heatloss_floor_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_floor_2" value={formData.basement_heatloss_floor_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_floor_3" value={formData.basement_heatloss_floor_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Floor 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_floor_4" value={formData.basement_heatloss_floor_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Perimeter (m)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_perimeter" value={formData.basement_heatloss_perimeter || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_wall_1" value={formData.basement_heatloss_wall_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_wall_2" value={formData.basement_heatloss_wall_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_wall_3" value={formData.basement_heatloss_wall_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Wall 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_wall_4" value={formData.basement_heatloss_wall_4 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 1 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_roof_1" value={formData.basement_heatloss_roof_1 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 2 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_roof_2" value={formData.basement_heatloss_roof_2 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 3 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_roof_3" value={formData.basement_heatloss_roof_3 || ''} onChange={handleChange} /></td>
+                <td data-label="Heatloss Roof 4 Area (m2)"><input type="text" className="custom-input border-2 border-md-0" name="basement_heatloss_roof_4" value={formData.basement_heatloss_roof_4 || ''} onChange={handleChange} /></td>
               </tr>
             </tbody>
           </table>

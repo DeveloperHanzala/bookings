@@ -7,20 +7,20 @@ import { SlSocialBehance } from "react-icons/sl";
 import { Link } from 'react-router-dom';
 const Footer = () => {
   return ( 
-    <div className='bgfooter px-4 px-md-0'>
-        <div className='container'>
+    <div className='container-fluid bgfooter px-4 px-md-0' style={{overflowX:'none'}}>
+        <div className=''>
 <div className='row'>
-        <div className='col-md-3 '>
-            <h1>Logoipsm</h1>
-            <p>Logo is a platform that helps freelancers manage their finances by offering tools for budgeting, saving, and tracking income. It also provides credit-building and financial insights to support better financial health.</p>
+        <div className='col-md-3 px-md-5'>
+            <h1>HomeCert.ie</h1>
+            <p>HomeCet.ie offers the best prices in Ireland for your BER Certificate. We provide access to a wide network of BER Assessors, ensuring the lowest prices.</p>
         </div>
            
         <div className='col-md-3 d-flex justify-content-start justify-content-md-center'>
             <div className='text-start'>
             <h4>Menu</h4>
             <p><Link to={'/'}>Home</Link></p>
-            <p><Link to={'/accessor-registration'}>Assessor Registration</Link></p>
             <p><Link to={'/booking'}> Get A Ber Cert</Link></p>
+            <p><Link to={'/accessor-registration'}>Assessor Registration</Link></p>
             {/* <p>Educational Resources</p> */}
             <p><Link to={'/contact'}>Contact me</Link></p>
             </div>

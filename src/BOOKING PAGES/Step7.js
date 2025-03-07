@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const Step7 = ({ nextStep, prevStep, handleChange }) => {
@@ -14,14 +14,17 @@ const Step7 = ({ nextStep, prevStep, handleChange }) => {
     "No", "Air Source", "Ground Source", // Column 1
     // "05", "06", "07", "08", // Column 2
   ];
-
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   return (
     <div>
 <div className="container-fluid step3bg">
-<div>
+<div  className="paDa">
     <div className="row">
         <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">Is there a heat pump installed?</h1>
+            <h1 className="step1font d-none d-md-block text-light">Is there a heat pump installed?</h1>
+            <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}} >Is there a heat pump installed?</p>
             <p className="step1para text-light">Click here if you are unsure.</p>
 
         </div>
@@ -32,10 +35,10 @@ const Step7 = ({ nextStep, prevStep, handleChange }) => {
 
 
       {/* Name Selector Section using Bootstrap Grid */}
-      <div className="container mt-5 mb-5">
+      <div className="container-fluid nooverflowx mt-5 mb-5">
         <div className="row">
           {/* Column 1 */}
-          <div className="col-12 col-md-12 px-5 px-md-0">
+          <div className="col-12 col-md-12 px-5 px-md-0 marg">
             <div className="d-flex flex-column flex-md-row">
               {names.slice(0, 4).map((name) => (
                 <button
@@ -50,7 +53,7 @@ const Step7 = ({ nextStep, prevStep, handleChange }) => {
           </div>
           
           {/* Column 2 */}
-          <div className="col-12 col-md-12 px-5 px-md-0">
+          <div className="col-12 col-md-12 px-5 px-md-0 marg">
             <div className="d-flex flex-column flex-md-row">
               {names.slice(4, 8).map((name) => (
                 <button
@@ -80,7 +83,7 @@ const Step7 = ({ nextStep, prevStep, handleChange }) => {
             fontSize: "14px",
           }}
         >
-          <FaLongArrowAltLeft />
+         Back
         </button>
 
         {/* Next Button (Step3) */}
@@ -97,7 +100,7 @@ const Step7 = ({ nextStep, prevStep, handleChange }) => {
           }}
           disabled={!selectedName} // Disable next step if no selection is made
         >
-          <FaLongArrowAltRight />
+         Forward
         </button>
       </div>
       </div>

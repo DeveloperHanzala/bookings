@@ -19,7 +19,10 @@ const Step2 = ({ nextStep, prevStep, handleChange }) => {
       setMinute(value); // Set minute
     }
   };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  
   // Call the handleChange function from the parent to update the state
   useEffect(() => {
     const formattedTime = `${hour}:${minute.toString().padStart(2, '0')} ${ampm}`;
@@ -31,10 +34,11 @@ const Step2 = ({ nextStep, prevStep, handleChange }) => {
   return (
     <>
     <div className="container-fluid step2bg">
-<div>
+<div className="paDa">
     <div className="row">
         <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">Your Preferred Time</h1>
+            <h1 className="step1font d-none d-md-block text-light" >Your Preferred Time</h1>
+            <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}} >Your Preferred Time</p>
             <p className="step1para text-light">A typical BER assessment takes around<span className="text-warning">  1-hour.</span></p>
 
         </div>
@@ -42,7 +46,7 @@ const Step2 = ({ nextStep, prevStep, handleChange }) => {
 
 </div>
 </div>
-    <div className="time-picker-container pt-5 pb-5">
+    <div className="time-picker-container pt-4 pt-md-5 pb-5">
       <h2>Select Time</h2>
 
       {/* Time Display */}
@@ -115,7 +119,7 @@ const Step2 = ({ nextStep, prevStep, handleChange }) => {
             fontSize: "14px",
           }}
         >
-          <FaLongArrowAltLeft />
+          Back
         </button>
 
         {/* Next Button (Step3) */}
@@ -132,7 +136,7 @@ const Step2 = ({ nextStep, prevStep, handleChange }) => {
           }}
           disabled={hour === null || minute === null} // Disable next step if no valid time
         >
-          <FaLongArrowAltRight />
+          Forward 
         </button>
       </div>
     </div>

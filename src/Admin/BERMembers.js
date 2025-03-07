@@ -15,12 +15,14 @@ const BERMembers = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const accessToken = localStorage.getItem("access_token");
 
   // Fetch BER members
   useEffect(() => {
-    axios.get('https://booking.homecert.ie/api/bermember/', {
+    axios.get('https://backend.homecert.ie/api/bermember/', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -38,7 +40,7 @@ const BERMembers = () => {
 
   // Fetch notifications
   useEffect(() => {
-    axios.get('https://booking.homecert.ie/api/notifications/', {
+    axios.get('https://backend.homecert.ie/api/notifications/', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -58,7 +60,7 @@ const BERMembers = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
@@ -176,10 +178,10 @@ const BERMembers = () => {
         </div>
       </div>
 
-      <div className="table-responsive mt-3">
+      <div className="table-responsive  mt-3">
         <h5 className='mb-3'>All Assessors</h5>
-        <table className="table table-bordered">
-          <thead className="border-0">
+        <table className="table table-bordered ">
+          <thead className="border-0 ">
             <tr className='border-0'>
               <th className='border-0 table-light1'>No</th>
               <th className='border-0 table-light1'>Name</th>
@@ -192,18 +194,18 @@ const BERMembers = () => {
           <tbody>
             {members.length > 0 ? (
               members.map((member, index) => (
-                <tr key={index} className='border-0'>
-                  <td className='border-0'>{index + 1}</td>
-                  <td className='border-0'>{member.name || 'Not Available'}</td>
-                  <td className='border-0'>{member.email || 'Not Available'}</td>
-                  <td className='border-0'>{member.total_projects || 0}</td>
-                  <td className='border-0'>
+                <tr key={index} className='border-0 shadow'>
+                  <td  data-label="No" className='border-0'>{index + 1}</td>
+                  <td  data-label="Name" className='border-0'>{member.name || 'Not Available'}</td>
+                  <td  data-label="E-mail" className='border-0'>{member.email || 'Not Available'}</td>
+                  <td  data-label="Active Jobs" className='border-0'>{member.total_projects || 0}</td>
+                  <td  data-label="Certification Status" className='border-0'>
                     <Link className='text-dark' to='/admin/ber-member-certificate'>
                       View certificate
                       <MdArrowOutward color='white' className='rounded-circle mx-2' style={{ backgroundColor: "#003366" }} />
                     </Link>
                   </td>
-                  <td className='border-0'>
+                  <td  data-label="Status" className='border-0'>
                     <Link to={''}>
                       <button className={`btn ${member.is_active ? 'btn-success' : 'btn-warning'}`}>
                         {member.is_active ? 'Active' : 'Inactive'}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const Step5 = ({ nextStep, prevStep, handleChange }) => {
@@ -11,6 +11,9 @@ const Step5 = ({ nextStep, prevStep, handleChange }) => {
       nextStep();
     } 
   };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const names = [
     "01", "02", "03", "04", // Column 1
     "05", "06", "07", "08", // Column 2
@@ -22,7 +25,8 @@ const Step5 = ({ nextStep, prevStep, handleChange }) => {
 <div>
     <div className="row">
         <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">How many bedrooms?</h1>
+        <h1 className="step1font d-none d-md-block text-light">How many bedrooms?</h1>
+            <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}} >How many bedrooms?</p>
             <p className="step1para text-light">Please include all bedrooms regardless of their use.</p>
 
         </div>

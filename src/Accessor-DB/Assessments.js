@@ -16,7 +16,9 @@ const Assessments = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [notifToast, setNotifToast] = useState("");
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   // Fetch jobs/assessments on mount
   useEffect(() => {
     fetchJobs();
@@ -25,7 +27,7 @@ const Assessments = () => {
   const fetchJobs = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await axios.get("https://booking.homecert.ie/api/projects/", {
+      const response = await axios.get("https://backend.homecert.ie/api/projects/", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setJobs(response.data || []); // Ensure we have an array
@@ -41,7 +43,7 @@ const Assessments = () => {
     const token = localStorage.getItem("access_token");
     if (!token) return;
     axios
-      .get("https://booking.homecert.ie/api/notifications/", {
+      .get("https://backend.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -59,7 +61,7 @@ const Assessments = () => {
     // Create an array of POST requests (one for each notification)
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -100,7 +102,7 @@ const Assessments = () => {
         </div>
       )}
 
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           {/* Header Section with Notifications */}
           <div className="col-md-12 text-end position-relative">
@@ -159,7 +161,7 @@ const Assessments = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Company Name <IoIosArrowForward /> <span className="text-dark">Active Jobs</span>
+              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Active Jobs</span>
             </p>  
           </div>
 
@@ -201,22 +203,22 @@ const Assessments = () => {
                     ) : jobs.length > 0 ? (
                       jobs.map((job, index) => (
                         <tr className="text-center" key={job.id}>
-                          <td>{index + 1}</td>
-                          <td>{job.created_at ? new Date(job.created_at).toLocaleDateString() : "N/A"}</td>
-                          <td>{job.job_details?.nearest_town || "N/A"}</td>
-                          <td>{job.job_details?.county || "N/A"}</td>
-                          <td>{job.job_details?.building_type || "N/A"}</td>
-                          <td>{job.job_details?.property_size || "N/A"}</td>
-                          <td>{job.job_details?.bedrooms || "N/A"}</td>
-                          <td>{job.job_details?.heat_pump_installed || "N/A"}</td>
-                          <td>{job.job_details?.purpose || "N/A"}</td>
-                          <td>{job.job_details?.additional_features || "N/A"}</td>
-                          <td>{job.job_details?.preferred_date || "N/A"}</td>
-                          <td>
-                            Assessment{" "}
+                          <td data-label="No">{index + 1}</td>
+                          <td data-label="Job Posted">{job.created_at ? new Date(job.created_at).toLocaleDateString() : "N/A"}</td>
+                          <td data-label="Town">{job.job_details?.nearest_town || "N/A"}</td>
+                          <td data-label="County">{job.job_details?.county || "N/A"}</td>
+                          <td data-label="Type">{job.job_details?.building_type || "N/A"}</td>
+                          <td data-label="Sq. MT.">{job.job_details?.property_size || "N/A"}</td>
+                          <td data-label="Beds">{job.job_details?.bedrooms || "N/A"}</td>
+                          <td data-label="Heat Pumps">{job.job_details?.heat_pump_installed || "N/A"}</td>
+                          <td data-label="Purpose">{job.job_details?.purpose || "N/A"}</td>
+                          <td data-label="Addition">{job.job_details?.additional_features || "N/A"}</td>
+                          <td data-label="Preferred Date">{job.job_details?.preferred_date || "N/A"}</td>
+                          <td data-label="Assessment">
+                           
                             {job.assessment_ids?.length > 0 ? (
-                              <Link className="mx-2" to={`/accessor/assessment/${job.assessment_ids[0]}`}>
-                                <RiArrowRightUpLine style={{ backgroundColor: "#003366", color: "white", borderRadius: "5px" }} />
+                              <Link className="mx-2 text-dark" to={`/accessor/assessment/${job.assessment_ids[0]}`}>
+                                 Assessment{" "}<RiArrowRightUpLine style={{ backgroundColor: "#003366", color: "white", borderRadius: "5px" }} />
                               </Link>
                             ) : (
                               "N/A"

@@ -17,16 +17,18 @@ const Contact = () => {
   return (
     <>
        <div id='get-in-touch' className='conatiner-fluid contactbg'>
-        <div className='text-center'>
-            <h1 className='accesshead'>Contact</h1>
-            <p><Link to={"/"} className='decnone'> Home <IoIosArrowForward /></Link>  <span className='text-warning'> Contact</span></p>
+        <div className='text-center paDa '>
+          <div className='pt-4 pt-md-0'>
+            <h1 className='accesshead pt-5 pt-md-0'>Contact</h1>
+            {/* <p><Link to={"/"} className='decnone'> Home <IoIosArrowForward /></Link>  <span className='text-warning'> Contact</span></p> */}
+          </div>
         </div>
     </div>
     <div className='container mt-5 mb-5'>
         <div className='row contact2bg'>
             <div className='col-md-6 '>
                 <div className='p-4'>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1952.9291448798015!2d-9.81030490258172!3d53.76301455580766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4859818cfff67113%3A0xa00c7a99731f2b0!2sClooncarrabaun%2C%20Louisburgh%2C%20Co.%20Mayo%2C%20Ireland!5e0!3m2!1sen!2s!4v1739294457562!5m2!1sen!2s" className='w-100' height={450} style={{border:"0"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d578358.5936340848!2d-9.90701149674225!3d53.951138055495925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48595d749ddbec0d%3A0x91b3fcc43f2cb67c!2sMayo%2C%20Co.%20Mayo%2C%20Ireland!5e0!3m2!1sen!2s!4v1740081277388!5m2!1sen!2s" className='w-100' height={450} style={{border:"0"}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
             <div className='col-md-6 p-5 p-md-4'>

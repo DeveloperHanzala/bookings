@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const Step7 = ({ nextStep, prevStep, handleChange }) => {
@@ -10,6 +10,9 @@ const Step7 = ({ nextStep, prevStep, handleChange }) => {
       nextStep();
     } 
   };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const names = [
     "No", "Air Source", "Ground Source", // Column 1
     // "05", "06", "07", "08", // Column 2
@@ -21,7 +24,8 @@ const Step7 = ({ nextStep, prevStep, handleChange }) => {
 <div>
     <div className="row">
         <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">Is there a heat pump installed?</h1>
+        <h1 className="step1font d-none d-md-block text-light">Is there a heat pump installed?</h1>
+            <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}} >Is there a heat pump installed?</p>
             <p className="step1para text-light">Click here if you are unsure.</p>
 
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const Step6 = ({ nextStep, prevStep, handleChange }) => {
@@ -11,7 +11,9 @@ const Step6 = ({ nextStep, prevStep, handleChange }) => {
       nextStep();
     } 
   };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const names = [
     "Attic Conversion", "Garage Conversion", "Conservatory", "01 Story Extension", // Column 1
     "02 Story Extension", "03 Story Extension", "Multiple Additions", "None", // Column 2
@@ -23,7 +25,8 @@ const Step6 = ({ nextStep, prevStep, handleChange }) => {
 <div>
     <div className="row">
         <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">Any additional features?</h1>
+        <h1 className="step1font d-none d-md-block text-light">Any additional features?</h1>
+            <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}} >Any additional features?</p>
             <p className="step1para text-light">Select 'mutiple additions' if you have more than one.</p>
 
         </div>

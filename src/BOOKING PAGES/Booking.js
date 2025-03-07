@@ -39,7 +39,7 @@ const Booking = () => {
   useEffect(() => {
     const fetchQuoteId = async () => {
       try {
-        const response = await fetch('https://booking.homecert.ie/api/get-quote/');
+        const response = await fetch('https://backend.homecert.ie/api/get-quote/');
         const data = await response.json();
         setQuoteId(data.quote.id); // Get ID from quote object
         setAssessmentId(data.assessment_id);
@@ -84,7 +84,7 @@ const Booking = () => {
     console.log("Final Payload:", JSON.stringify(payload, null, 2));
   
     try {
-      const response = await fetch(`https://booking.homecert.ie/api/get-quote/${quoteId}/`, {
+      const response = await fetch(`https://backend.homecert.ie/api/get-quote/${quoteId}/`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload) // Send flat structure without "quote" wrapper
@@ -102,7 +102,11 @@ const Booking = () => {
       console.error("Submission error:", error);
     }
   };
-  
+  const values = formData.county;
+  localStorage.setItem("countyselected", values);
+  console.log(values);
+
+ 
 
   switch (step) {
     case 1: return <Step1 nextStep={nextStep} handleChange={handleChange} formData={formData} />;
@@ -113,7 +117,7 @@ const Booking = () => {
     case 6: return <Step6 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
     case 7: return <Step7 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
     case 8: return <Step8 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 9: return <Step9 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 9: return <Step9 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData}   values={values} />;
     case 10: return <Step10 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
     case 11: return <Summary formData={formData} prevStep={prevStep} handleChange={handleChange} submitForm={submitForm} />;
     default: return null;

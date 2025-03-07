@@ -33,12 +33,12 @@ const Login = () => {
         ? { email: formData.email, phone_number: formData.phone }
         : { email: formData.email, password: formData.password };
 
-      const response = await axios.post("https://booking.homecert.ie/api/signin/", requestData);
+      const response = await axios.post("https://backend.homecert.ie/api/signin/", requestData);
 
       const userTypeMapping = {
         "Homeowners": "client",
         "Ber Assessor": "accessor",
-        "Admin": "accessor"
+        "Admin": "admin"
       };
 
       const expectedUserType = userTypeMapping[userType];
@@ -55,6 +55,8 @@ const Login = () => {
 
       if (response.data.access) {
         localStorage.setItem("access_token", response.data.access);
+        localStorage.setItem("first", response.data.first_name);
+        localStorage.setItem("last", response.data.last_name);
       }
 
       switch (userType) {
@@ -136,10 +138,13 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <Link to={"/"}>
+      <Link to={"/"} >
         <IoMdCloseCircle size={20} color="#003366" />
       </Link>
       <div className="login-left">
+      <Link to={"/"} className="d-md-none d-block">
+        <IoMdCloseCircle size={20} color="#003366" />
+      </Link>
         <div className="text-center">
           <h1>LOGIN</h1>
           <p>How to get started?</p>

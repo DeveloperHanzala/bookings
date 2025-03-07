@@ -15,7 +15,7 @@ const ForgetPassword = () => {
     setError('');
 
     try {
-      const response = await axios.post("https://booking.homecert.ie/api/forgot-password/", { email });
+      const response = await axios.post("https://backend.homecert.ie/api/forgot-password/", { email });
 
       if (response.data && response.data.email) {
         localStorage.setItem("userEmail", response.data.email);

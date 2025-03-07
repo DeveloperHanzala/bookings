@@ -14,6 +14,11 @@ const ActiveJobs = () => {
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
   const accessToken = localStorage.getItem("access_token");
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+
   // Fetch jobs from API
   useEffect(() => {
     const fetchJobs = async () => {
@@ -24,7 +29,7 @@ const ActiveJobs = () => {
       }
 
       try {
-        const response = await fetch('https://booking.homecert.ie/api/admin/ejobs/', {
+        const response = await fetch('https://backend.homecert.ie/api/admin/ejobs/', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -32,7 +37,7 @@ const ActiveJobs = () => {
         });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`https error! status: ${response.status}`);
         }
 
         const data = await response.json();
@@ -72,7 +77,7 @@ const ActiveJobs = () => {
 
   // Fetch notifications from API on mount
   useEffect(() => {
-    axios.get('https://booking.homecert.ie/api/notifications/', {
+    axios.get('https://backend.homecert.ie/api/notifications/', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -94,7 +99,7 @@ const ActiveJobs = () => {
     // Create a POST request for each notification
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -218,17 +223,17 @@ const ActiveJobs = () => {
                 </thead>
                 <tbody>
                   {jobs.map((job, index) => (
-                    <tr key={job.id} className='border-0 text-center'>
-                      <td className='border-0'>{index + 1}</td>
-                      <td className='border-0'>{formatDate(job.created_at)}</td>
-                      <td className='border-0'>{job.county || '-'}</td>
-                      <td className='border-0'>{job.building_type || '-'}</td>
-                      <td className='border-0'>{job.property_size || '-'}</td>
-                      <td className='border-0'>{job.bedrooms || '-'}</td>
-                      <td className='border-0'>{job.heat_pump_installed || '-'}</td>
-                      <td className='border-0'>{job.ber_purpose || '-'}</td>
-                      <td className='border-0'>{formatDate(job.preferred_date)}</td>
-                      <td className='border-0'>
+                    <tr key={job.id} className='border-0 text-center shadow'>
+                      <td  data-label="No" className='border-0'>{index + 1}</td>
+                      <td  data-label="Job Posted" className='border-0'>{formatDate(job.created_at)}</td>
+                      <td  data-label="County" className='border-0'>{job.county || '-'}</td>
+                      <td  data-label="Type" className='border-0'>{job.building_type || '-'}</td>
+                      <td  data-label="Sq. Mt." className='border-0'>{job.property_size || '-'}</td>
+                      <td  data-label="Beds" className='border-0'>{job.bedrooms || '-'}</td>
+                      <td  data-label="Heat Pump" className='border-0'>{job.heat_pump_installed || '-'}</td>
+                      <td  data-label="Purpose" className='border-0'>{job.ber_purpose || '-'}</td>
+                      <td  data-label="Preferred Date" className='border-0'>{formatDate(job.preferred_date)}</td>
+                      <td  data-label="Status" className='border-0'>
                         <button className={`btn ${getStatusButtonClass(job.status)}`}>
                           {job.status}
                         </button>

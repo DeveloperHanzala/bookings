@@ -16,6 +16,8 @@ const AdminSidebar = () => {
   const handleLogout = () => {
     // Remove access token from localStorage
     localStorage.removeItem("access_token");
+    localStorage.removeItem("first");
+    localStorage.removeItem("last");
     
     // Redirect to login page
     navigate("/login"); // Replace with your actual login route
@@ -29,7 +31,7 @@ const AdminSidebar = () => {
         onClick={toggleSidebar}
         aria-label="Toggle Sidebar"
       >
-        {isOpen ? <CgClose size={30} /> : <AiOutlineBars size={30} className="" />}
+        {isOpen ? <CgClose size={20} color="white" /> : <AiOutlineBars size={20} color="white" className="" />}
       </button>
 
       {/* Sidebar */}
@@ -103,6 +105,11 @@ const AdminSidebar = () => {
             ><MdAutoGraph size={25} className="mx-2" />
               Finance
             </NavLink>
+          </li>
+          <li className="d-block d-md-none"> 
+          <button className="sidebar-logout btn " onClick={handleLogout}>
+          Logout
+        </button>
           </li>
         
         </ul>

@@ -18,7 +18,13 @@ const ClientDashboard = () => {
   const [toastMessage, setToastMessage] = useState("");
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
   const accessToken = localStorage.getItem("access_token");
+  const first = localStorage.getItem("first");
+  const last = localStorage.getItem("last");
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  
   // Fetch jobs when component mounts
   useEffect(() => {
     fetchJobs();
@@ -28,7 +34,7 @@ const ClientDashboard = () => {
   useEffect(() => {
     if (!accessToken) return;
     axios
-      .get("https://booking.homecert.ie/api/notifications/", {
+      .get("https://backend.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((response) => {
@@ -44,7 +50,7 @@ const ClientDashboard = () => {
   const fetchJobs = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await axios.get("https://booking.homecert.ie/api/jobs-bids/", {
+      const response = await axios.get("https://backend.homecert.ie/api/jobs-bids/", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -63,7 +69,7 @@ const ClientDashboard = () => {
 
     const markReadPromises = notifications.map((notification) =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
@@ -107,7 +113,7 @@ const ClientDashboard = () => {
       )}
 
       <div className="dashboard">
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             {/* Header Section with Profile and Notifications */}
             <div className="col-md-12 text-end position-relative">
@@ -167,7 +173,7 @@ const ClientDashboard = () => {
             {/* Breadcrumb */}
             <div className="col-md-12 text-start">
               <p>
-                Company Name <IoIosArrowForward />{" "}
+                Homecert.ie <IoIosArrowForward />{" "}
                 <span className="text-dark">Dashboard</span>
               </p>
             </div>
@@ -186,8 +192,8 @@ const ClientDashboard = () => {
             <div className="container-fluid bgdash">
               <div className="row">
                 <div className="col-md-8 text-light">
-                  <h1 className="display-5">Welcome To Company Name</h1>
-                  <h2 className="dashfont">Client Name</h2>
+                  <h1 className="display-5">Welcome To Homecert.ie</h1>
+                  <h2 className="dashfont"> {first + " " + last} </h2>
                 </div>
                 <div className="col-md-4">
                   <img src={img1} alt="Dashboard" className="img-fluid" />
@@ -215,13 +221,13 @@ const ClientDashboard = () => {
                   {jobs.length > 0 ? (
                     jobs.map((job, index) => (
                       <tr key={job.id}>
-                        <td>{index + 1}</td>
-                        <td>{new Date(job.created_at).toLocaleDateString()}</td>
-                        <td>{job.building_type || "N/A"}</td>
-                        <td>{job.preferred_date || "N/A"}</td>
-                        <td>
+                        <td data-label="No">{index + 1}</td>
+                        <td data-label="Date">{new Date(job.created_at).toLocaleDateString()}</td>
+                        <td data-label="Property">{job.building_type || "N/A"}</td>
+                        <td data-label="Preferred Date">{job.preferred_date || "N/A"}</td>
+                        <td  data-label="Quotes">
                           <Link to="/client/your-quote" state={{ bids: job.bids }}>
-                            <button className="btn btn-success">View Quote</button>
+                            <button className="btn button1">View Quote</button>
                           </Link>
                         </td>
                       </tr>

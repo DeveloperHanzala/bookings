@@ -13,9 +13,12 @@ const ClientProfile = () => {
   const { id } = useParams(); // Extracting client id from the URL params
   const accessToken = localStorage.getItem("access_token");
 
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   useEffect(() => {
     if (id && accessToken) {
-      axios.get(`https://booking.homecert.ie/api/client/${id}/`, {
+      axios.get(`https://backend.homecert.ie/api/client/${id}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+
 
 const Step8 = ({ nextStep, prevStep, handleChange }) => {
   const [selectedName, setSelectedName] = useState(null);
@@ -12,7 +12,10 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
       nextStep();
     } 
   };
-
+  console.log(selectedName)
+  useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   const names = [
     "Carlow", "Cavan", "Clare", "Cork",
     "Donegal", "Dublin", "Galway", "Kerry",
@@ -26,10 +29,11 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
   return (
     <div>
       <div className="container-fluid step3bg">
-        <div>
+        <div  className="paDa">
           <div className="row">
             <div className="col-md-12 text-center">
-              <h1 className="step1font text-light">What county is the property in?</h1>
+              <h1 className="step1font d-none d-md-block text-light">What county is the property in?</h1>
+              <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}} >What county is the property in?</p>
               <p className="step1para text-light">Almost done, just 3 more questions.</p>
             </div>
           </div>
@@ -37,10 +41,10 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
       </div>
 
       {/* Name Selector Section using Bootstrap Grid */}
-      <div className="container mt-5 mb-5">
+      <div className="container-fluid nooverflowx mt-5 mb-5">
         <div className="row">
           {Array.from({ length: Math.ceil(names.length / 4) }, (_, rowIndex) => (
-            <div key={rowIndex} className="col-12 col-md-12 px-5 px-md-0">
+            <div key={rowIndex} className="col-12 col-md-12 px-5 px-md-0  marg">
               <div className="d-flex flex-column flex-md-row">
                 {names.slice(rowIndex * 4, rowIndex * 4 + 4).map((name) => (
                   <button
@@ -57,6 +61,7 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
             </div>
           ))}
         </div>
+       
 
         {/* Navigation Buttons */}
         <div
@@ -81,7 +86,7 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
               fontSize: "14px",
             }}
           >
-            <FaLongArrowAltLeft />
+            Back
           </button>
 
           {/* Next Button */}
@@ -98,7 +103,7 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
             }}
             disabled={!selectedName}
           >
-            <FaLongArrowAltRight />
+           Forward
           </button>
         </div>
       </div>

@@ -17,6 +17,9 @@ const LiveJobs = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
     fetchJobs();
@@ -25,7 +28,7 @@ const LiveJobs = () => {
   const fetchJobs = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await axios.get("https://booking.homecert.ie/api/jobs/", {
+      const response = await axios.get("https://backend.homecert.ie/api/jobs/", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -50,7 +53,7 @@ const LiveJobs = () => {
     if (!token) return; // Avoid making requests if token is missing
 
     axios
-      .get("https://booking.homecert.ie/api/notifications/", {
+      .get("https://backend.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -68,7 +71,7 @@ const LiveJobs = () => {
     // Create an array of POST requests—one for each notification.
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -99,7 +102,7 @@ const LiveJobs = () => {
   const unreadCount = notifications.filter(n => n.status === "unread").length;
 
   return (
-    <div className="dashboard">
+    <div className="dashboard nooverflowy">
       {/* Floating Toast Message */}
       {toastMessage && (
         <div style={{
@@ -116,7 +119,7 @@ const LiveJobs = () => {
         </div>
       )}
 
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           {/* Top Right: Profile Image and Notifications */}
           <div className="col-md-12 text-end position-relative">
@@ -172,12 +175,12 @@ const LiveJobs = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Company Name <IoIosArrowForward /> <span className="text-dark">Live Jobs</span>
+              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Live Jobs</span>
             </p>
           </div>
 
           {/* Page Title */}
-          <div className="col-md-12 text-start d-flex align-items-center flex-row">
+          <div className="col-md-12 col-10  text-start d-flex align-items-center flex-row">
             <div className="d-flex align-items-center">
               <p className="text-dark mb-0">
                 <IoIosArrowBack size={30} />
@@ -187,7 +190,7 @@ const LiveJobs = () => {
           </div>
 
           {/* Live Jobs Table */}
-          <div className="container mt-5 mb-4">
+          <div className="container-fluid  mt-5 mb-4">
             <div>
               <h3>Your live jobs are listed below:</h3>
             </div>
@@ -221,21 +224,31 @@ const LiveJobs = () => {
                     </thead>
                     <tbody>
                       {jobs.map((job, index) => (
-                        <tr className="text-center" key={job.id}>
-                          <td>{index + 1}</td>
-                          <td>{new Date(job.created_at).toLocaleDateString()}</td>
-                          <td>{job.nearest_town || "N/A"}</td>
-                          <td>{job.county || "N/A"}</td>
-                          <td>{job.building_type || "N/A"}</td>
-                          <td>{job.property_size || "N/A"}</td>
-                          <td>{job.bedrooms || "N/A"}</td>
-                          <td>{job.heat_pump_installed || "N/A"}</td>
-                          <td>{job.ber_purpose || "N/A"}</td>
-                          <td>{job.additional_features || "N/A"}</td>
-                          <td>{job.preferred_date || "N/A"}</td>
+                       <tr className="text-center" key={job.id}>
+                       <td data-label="No">{index + 1}</td>
+                       <td data-label="Job Posted">{new Date(job.created_at).toLocaleDateString()}</td>
+                       <td data-label="Town">{job.town || "N/A"}</td>
+                       <td data-label="County">{job.county || "N/A"}</td>
+                       <td data-label="Type">{job.building_type || "N/A"}</td>
+                       <td data-label="Sq. Mt.">{job.property_size || "N/A"}</td>
+                       <td data-label="Beds">{job.bedrooms || "N/A"}</td>
+                       <td data-label="Heat Pump">{job.heat_pump_installed || "N/A"}</td>
+                       <td data-label="Purpose">{job.ber_purpose || "N/A"}</td>
+                       <td data-label="Addition">{job.additional_features || "N/A"}</td>
+                       <td data-label="Preferred Date">{job.preferred_date || "N/A"}</td>
                           <td>
-                            Quote{" "}
-                            <Link to={`/accessor/date/${job.id}`} state={{ jobData: job }}>
+                          <Link className="d-none d-md-block text-dark" to={`/accessor/date/${job.id}`} state={{ jobData: job }}>
+                            Quote {""}
+                              <RiArrowRightUpLine
+                                style={{
+                                  backgroundColor: "#003366",
+                                  color: "white",
+                                  borderRadius: "5px",
+                                }}
+                              />
+                            </Link>
+                            <Link className="btn button1 d-block d-md-none" to={`/accessor/date/${job.id}`} state={{ jobData: job }}>
+                            Quote
                               <RiArrowRightUpLine
                                 style={{
                                   backgroundColor: "#003366",

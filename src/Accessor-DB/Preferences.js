@@ -25,12 +25,14 @@ const Preferences = () => {
     'Offaly', 'Roscommon', 'Sligo', 'Tipperary', 'Waterford',
     'Westmeath', 'Wexford', 'Wicklow'
   ];
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   // Function to update preferences via API
   const updatePreferences = async (county, isSelected) => {
     try {
       const access_token = localStorage.getItem('access_token');
-      const response = await fetch('https://booking.homecert.ie/api/preference/', {
+      const response = await fetch('https://backend.homecert.ie/api/preference/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +74,7 @@ const Preferences = () => {
     if (!token) return;
 
     axios
-      .get("https://booking.homecert.ie/api/notifications/", {
+      .get("https://backend.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -90,7 +92,7 @@ const Preferences = () => {
     // Create an array of POST requests—one for each notification
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -131,7 +133,7 @@ const Preferences = () => {
         </div>
       )}
 
-      <div className="container">
+      <div className="container-fluid">
         {/* Preference Update Notification Banner */}
         {prefNotification.message && (
           <div className={`notification-banner ${prefNotification.type}`}>
@@ -196,7 +198,7 @@ const Preferences = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Company Name <IoIosArrowForward /> <span className="text-dark">Preferences</span>
+              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Preferences</span>
             </p>
           </div>
 

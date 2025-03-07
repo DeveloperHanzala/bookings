@@ -62,7 +62,6 @@ const Assessmentsone = () => {
   };
 
   
-  
   const [formData, setFormData] = useState({
     assessor_name: "",
     ber_reg_no: "",
@@ -751,7 +750,7 @@ individual_chp: false,
   });
   const accessToken = localStorage.getItem("access_token");
   
-  const apiUrl = `https://booking.homecert.ie/api/assessment/${id}/`;
+  const apiUrl = `https://backend.homecert.ie/api/assessment/${id}/`;
 
   // Handle input change and send PUT request
   const handleChange = async (e) => {
@@ -790,7 +789,7 @@ individual_chp: false,
             </div>
 
             <div className="col-md-12 text-start">
-                <p>Company Name  <IoIosArrowForward /> <span className="text-dark">Assessments</span>     </p>  
+                <p>Homecert.ie  <IoIosArrowForward /> <span className="text-dark">Assessments</span>     </p>  
             </div>
 
             
@@ -1117,7 +1116,13 @@ const Step1 = ({ formData, id, handleChange }) => (
   </div>
 );
 
-const Step2 = ({ formData, id, handleChange }) => <div>
+const Step2 = ({ formData, id, handleChange }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+<div>
 
 
     <div className="container">
@@ -1136,12 +1141,23 @@ const Step2 = ({ formData, id, handleChange }) => <div>
                 </div>
         </div>
     </div> 
-   </div>;
+   </div>
+
+  )
+};
 
 
 
 
-const Step3 = ({ formData, id, handleChange }) => <div>
+
+
+const Step3 = ({ formData, id, handleChange }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+<div>
     <div className="container">
          <div>
              <div className="row">
@@ -1193,14 +1209,26 @@ const Step3 = ({ formData, id, handleChange }) => <div>
     </div>
 
 
-</div>;
+</div>
+
+  )
+};
 
 
 
 
 
 
-const Step4 = ({ formData, id, handleChange }) => <div>
+
+
+
+const Step4 = ({ formData, id, handleChange }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+<div>
       <div className="container">
          <div>
              <div className="row">
@@ -1226,14 +1254,27 @@ const Step4 = ({ formData, id, handleChange }) => <div>
     </div>
 
 
-</div>;
+</div>
+
+  )
+};
 
 
 
 
 
 
-const Step5 = ({ formData, id, handleChange }) => <div>
+
+
+
+
+const Step5 = ({ formData, id, handleChange }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+<div>
     <div className="row">
       <div className="col-md-4 mt-3">
       <h6 className="fw-bold"> Heating Controls (tick all that apply) *</h6>
@@ -1246,14 +1287,23 @@ const Step5 = ({ formData, id, handleChange }) => <div>
     </div>
 
 
-</div>;
+</div>
+
+  )
+};
 
 
 
 
 
 
-const Step6 = ({ formData, id, handleChange }) => <div>
+const Step6 = ({ formData, id, handleChange }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+ <div>
      <div className="row">
       <div className="col-md-4 mt-3">
       <h6 className="fw-bold"> Distribution Loss Factor and charge method *</h6>
@@ -1270,7 +1320,10 @@ const Step6 = ({ formData, id, handleChange }) => <div>
 </div>
 
 
-</div>;
+</div>
+
+  )
+};
 
 
 
@@ -1281,17 +1334,32 @@ const Step6 = ({ formData, id, handleChange }) => <div>
 
 
 
-const Step7 = ({ formData, id, handleChange }) => <div className="p-5">
+const Step7 = ({ formData, id, handleChange }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+<div className="p-5">
     
     <Step7_form  formData={formData} handleChange={handleChange} /> 
 
-</div>;
+</div>
+
+  )
+}
 
 
 
 
 
-const Step8 = () =>  <div>
+const Step8 = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+<div>
     
 <div className="container text-center d-flex flex-column align-items-center justify-content-center p-2">
     <div className="col-md-12 ">
@@ -1301,6 +1369,7 @@ const Step8 = () =>  <div>
     </div>
 </div>
 
-</div>;
+</div>)
+}; 
 
 export default Assessmentsone;

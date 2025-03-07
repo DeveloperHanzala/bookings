@@ -8,6 +8,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
+      <Link to={'/'} class="navbar-brand mx-3">HomeCert.ie</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -20,7 +21,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <ul className="navbar-nav me-auto mb-2 px-0 px-md-5 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-2 px-0 px-md-3 mb-lg-0">
             <li className="nav-item">
               <Link
                 to="/"

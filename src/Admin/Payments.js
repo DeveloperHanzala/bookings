@@ -24,6 +24,9 @@ const Payments = () => {
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
   const accessToken = localStorage.getItem("access_token");
 
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   // Card data for payments
   const data = [
     {
@@ -85,7 +88,7 @@ const Payments = () => {
 
   // Fetch notifications on mount
   useEffect(() => {
-    axios.get('https://booking.homecert.ie/api/notifications/', {
+    axios.get('https://backend.homecert.ie/api/notifications/', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -105,7 +108,7 @@ const Payments = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )

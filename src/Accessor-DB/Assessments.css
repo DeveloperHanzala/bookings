@@ -178,6 +178,11 @@
       font-size: 12px;
       padding: 6px;
     }
+  .custom-table {
+    width: 100%;
+    min-width: 300px; /* Ensure horizontal scrollability on smaller screens */
+    border-collapse: collapse;
+  }
 
     .custom-input {
       width: 100%;
@@ -252,4 +257,11 @@
     width: 150px;
   }
 
-  
+  .border-2{
+    border: none;
+  }
+  @media (max-width: 768px) {
+    .border-2{
+      border: 2px solid #003366;
+    }
+  }

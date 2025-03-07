@@ -12,11 +12,17 @@ import axios from 'axios';
 const BERcerti = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  
+
+
   // --- Job creation handler ---
   const handleAddButtonClick = async () => {
     const token = localStorage.getItem("access_token");
     try {
-      const response = await fetch('https://booking.homecert.ie/api/client/jobs/create/', {
+      const response = await fetch('https://backend.homecert.ie/api/client/jobs/create/', {
         method: 'GET', // Changed to POST if needed by your API
         headers: {
           Authorization: `Bearer ${token}`
@@ -49,7 +55,7 @@ const BERcerti = () => {
   // Fetch notifications on mount
   useEffect(() => {
     if (!accessToken) return;
-    axios.get('https://booking.homecert.ie/api/notifications/', {
+    axios.get('https://backend.homecert.ie/api/notifications/', {
       headers: { Authorization: `Bearer ${accessToken}` }
     })
       .then(response => {
@@ -66,7 +72,7 @@ const BERcerti = () => {
 
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
@@ -166,7 +172,7 @@ const BERcerti = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 d-flex align-items-center ">
             <p>
-              Company Name <IoIosArrowForward /> <span className="text-dark">BER get-your-certificate</span>
+              Homecert.ie <IoIosArrowForward /> <span className="text-dark">BER get-your-certificate</span>
             </p>  
           </div>
 

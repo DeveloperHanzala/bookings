@@ -33,109 +33,22 @@ const Summaryss = ({ formData, prevStep, handleChange, submitForm }) => {
 
   return (
     <>
-    <div className="container-fluid step2bg">
-<div>
-    <div className="row">
-        <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">Contact</h1>
-            <p className="step1para text-light"><Link to={'/'} className="decnone"> Home </Link> <IoIosArrowForward /><span className="text-warning"> Contact</span></p>
-
-        </div>
-    </div>
-
-</div>
-</div>
-    <div className="d-flex justify-content-center align-items-center vh-100">
+  
+    <div className="d-flex justify-content-center align-items-center pt-5 pb-5">
       <div className=" p-4" >
-        <h5 className="text-center mb-3">Last Step! Get your BER quotes in Cavan</h5>
+       
         <form onSubmit={(e) => { e.preventDefault(); submitForm(); }}>
-          {/* Name */}
-          <div className="mb-3 row">
-            <label htmlFor="name" className="col-sm-4 col-form-label">Your Name *</label>
-            <div className="col-sm-8">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name || ''}
-                onChange={(e) => handleChange('name')(e.target.value)}
-                className="form-control"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Email */}
-          <div className="mb-3 row">
-            <label htmlFor="email" className="col-sm-4 col-form-label">Your email address *</label>
-            <div className="col-sm-8">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email_address || ''}
-                onChange={(e) => handleChange('email_address')(e.target.value)}
-                className="form-control"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Mobile */}
-          <div className="mb-3 row">
-            <label htmlFor="mobile" className="col-sm-4 col-form-label">Your mobile number *</label>
-            <div className="col-sm-8 d-flex">
-              {/* Country Code Dropdown */}
-              <select
-                name="countryCode"
-                value={formData.countryCode}
-                onChange={handleCountryCode}
-                className="form-select me-2"
-                style={{ width: "30%" }}
-                required
-              >
-               <option value="+353">+353 (Ireland)</option>
-                <option value="+44">+44 (UK)</option>
-                <option value="+1">+1 (USA)</option>
-              </select>
-              {/* Phone Number Input */}
-              <input
-                type="text"
-                id="mobile"
-                name="mobile"
-                value={formData.mobile || ''}
-                onChange={handleMobileChange}
-                className="form-control"
-                style={{ width: "70%" }}
-                required
-              />
-            </div>
-          </div>
-
-          {/* Agree to Terms */}
-          <div className="mb-3 row">
-           
-            <label htmlFor="agreeToTerms" className="form-check-label col-sm-4">
-            I agree to the terms & conditions *
-            </label>
-            <div className="col-sm-8">
-
-            <input
-              type="checkbox"
-              id="agreeToTerms"
-              name="agreeToTerms"
-              checked={formValues.agreeToTerms}
-              onChange={handleInputChange}
-              className="form-check-input shadow-sm"
-              required
-            />
-            </div>
-          </div>
-
-          {/* Submit button */}
-          <button type="submit" className="btn summary-button w-100 mb-3">
-          Get Quotes
+        <div style={styles.container}>
+      <div style={styles.card}>
+        <h1 style={styles.title}> Thank You for Submitting! </h1>
+        <p style={styles.message} className="mt-5"></p>
+         {/* Submit button */}
+         <button type="submit" className="btn summary-button w-100 mb-3">
+         Back To Dashboard
           </button>
+      </div>
+    </div>
+         
         </form>
 
        
@@ -144,5 +57,40 @@ const Summaryss = ({ formData, prevStep, handleChange, submitForm }) => {
     </>
   );
 };
-
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    
+  },
+  card: {
+    background: "white",
+    padding: "30px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+    textAlign: "center",
+    maxWidth: "400px",
+    animation: "fadeIn 4s ease-in-out",
+  },
+  title: {
+    color: "#003366",
+    fontSize: "2rem",
+  },
+  message: {
+    color: "#555",
+    fontSize: "1.2rem",
+    marginBottom: "20px",
+  },
+  button: {
+    backgroundColor: "#003366",
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "5px",
+    fontSize: "1rem",
+    cursor: "pointer",
+  },
+};
 export default Summaryss;

@@ -38,6 +38,7 @@
     padding: 4% 0;
     background-color: #003366;
     color: white !important;
+    overflow-x: hidden !important ;
 }
 .bgfooter p{
    

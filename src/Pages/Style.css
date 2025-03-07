@@ -23,28 +23,54 @@
     color: white;
   }
   @media (max-width: 768px) {
+   
     .font-libre{
       font-family: Libre Baskerville;
-      font-size: 40px;
+      font-size: 30px;
       padding: 0 3%;
   }
   .font-libre1{
     font-family: Libre Baskerville;
-    font-size: 20px;
+    font-size: 15px;
     padding: 0 3%;
-    padding-right: 15%;
+    
     line-height: 2;
     word-spacing: 3px;
     color: white;
   }
   .nooverflowx{
-    overflow-x: hidden;
+    overflow-x: hidden !important;
   }
   }
   .homebutton{
     font-size: 25px;
     font-weight: 700;    
 }
+@media (max-width: 768px){
+  .homebutton{
+    font-size: 18px;
+    font-weight: bold;    
+}
+}
+@media (max-width: 457px) {
+    .homebg{
+    height: 40vh;
+}
+
+    .kmk{
+      padding: 90px 0px;
+    }
+  }
+  @media (max-width: 430px) {
+    .kmk{
+      padding: 70px 0px;
+    }
+  }
+  @media (max-width: 410px) {
+    .kmk{
+      padding: 50px 0px;
+    }
+  }
 .width-icon{
     width: 50px;
 }
@@ -93,6 +119,18 @@
 .button2:hover{
   background-color: #00254b;
     padding: 10px 20px;
+    
+    color: white;
+}
+.button3{
+  background-color: #003366;
+    padding:5px 10px;
+    
+    color: white;
+}
+.button3:hover{
+  background-color: #00254b;
+    padding:5px 10px;
     
     color: white;
 }
@@ -252,6 +290,12 @@
     background-size: cover;
     padding: 5% 0;
   }
+  @media (max-width: 768px) {
+     .accessbg{
+   height: 35vh;
+  }
+  
+  }
   .accesshead{
     font-family: Libre Baskerville;
     color: white;
@@ -309,6 +353,11 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding: 5% 0;
+}
+@media (max-width:768px) {
+   .contactbg{
+   height: 35vh;
+  }
 }
 .contact2bg{
   background-image: url(../Images/contact.jpeg);

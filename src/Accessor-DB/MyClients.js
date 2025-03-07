@@ -20,12 +20,15 @@ const MyClients = () => {
   const [toastMessage, setToastMessage] = useState("");
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
 
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
   // Fetch clients on mount
   useEffect(() => {
     const fetchClients = async () => {
       try {
         const accessToken = localStorage.getItem("access_token");
-        const response = await fetch("https://booking.homecert.ie/api/my-clients/", {
+        const response = await fetch("https://backend.homecert.ie/api/my-clients/", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -47,7 +50,7 @@ const MyClients = () => {
     if (!token) return; // Avoid making requests if token is missing
 
     axios
-      .get("https://booking.homecert.ie/api/notifications/", {
+      .get("https://backend.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -65,7 +68,7 @@ const MyClients = () => {
     // Create an array of POST requests (one for each notification)
     const markReadPromises = notifications.map(notification =>
       axios.post(
-        `https://booking.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+        `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -120,7 +123,7 @@ const MyClients = () => {
         </div>
       )}
       
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           {/* Header Section */}
           <div className="col-md-12 text-end position-relative">
@@ -180,20 +183,22 @@ const MyClients = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Company Name <IoIosArrowForward /> <span className="text-dark">My Clients</span>
+              Homecert.ie <IoIosArrowForward /> <span className="text-dark">My Clients</span>
             </p>
           </div>
 
           {/* Page Title */}
-          <div className="col-md-12 text-start d-flex align-items-center flex-row">
+          <div className="col-md-12 col-12 text-start ">
+            <div className="d-flex align-items-center flex-row">
             <div className="d-flex align-items-center">
               <p className="text-dark mb-0"><IoIosArrowBack size={30} /></p>
             </div>
             <div className="fs-3 mx-2 fw-bold mb-0">My Clients</div>
-          </div>
+            </div>
           <p className="mx-5">
-            Here's your successful quotes on Website.com. Please contact your clients within one business day.
+            Here's your successful quotes on Homecert.ie, Please contact your clients within one business day.
           </p>
+          </div>
 
           {/* Clients Table */}
           <div className="container mt-5 mb-4">
@@ -203,16 +208,11 @@ const MyClients = () => {
                   <thead>
                     <tr className="text-center">
                       <th>No</th>
-                      <th>Job Posted</th>
+                     
                       <th>Town</th>
                       <th>County</th>
                       <th>Type</th>
-                      <th>Sq. Mt.</th>
-                      <th>Beds</th>
-                      <th>Heat Pump</th>
-                      <th>Purpose</th>
-                      <th>Addition</th>
-                      <th>Survey Date</th>
+                      
                       <th>Balance</th>
                       <th>Contact</th>
                     </tr>
@@ -221,16 +221,11 @@ const MyClients = () => {
                     {clients.map((bid, index) => (
                       <tr className="text-center" key={bid.bid_id}>
                         <td>{index + 1}</td>
-                        <td>03 Jan</td> {/* Placeholder */}
+                      
                         <td>{bid.job.nearest_town}</td>
                         <td>{bid.job.county}</td>
                         <td>{bid.job.property_type}</td>
-                        <td>185 - 210</td> {/* Placeholder */}
-                        <td>05</td> {/* Placeholder */}
-                        <td>None</td> {/* Placeholder */}
-                        <td>Letting</td> {/* Placeholder */}
-                        <td>Attic Conversion</td> {/* Placeholder */}
-                        <td>Sun 12 Jan</td> {/* Placeholder */}
+                       
                         <td>€{bid.amount}</td>
                         <td>
                           Contact{" "}

@@ -17,6 +17,9 @@ const ClientSidebar = () => {
   const handleLogout = () => {
     // Remove access token from localStorage
     localStorage.removeItem("access_token");
+    localStorage.removeItem("first");
+    localStorage.removeItem("last");
+ 
     
     // Redirect to login page
     navigate("/login"); // Replace with your actual login route
@@ -30,7 +33,7 @@ const ClientSidebar = () => {
         onClick={toggleSidebar}
         aria-label="Toggle Sidebar"
       >
-        {isOpen ? <CgClose size={30} /> : <AiOutlineBars size={30} className="" />}
+        {isOpen ? <CgClose size={20} color="white" /> : <AiOutlineBars size={20} className="" color="white" />}
       </button>
 
       {/* Sidebar */}
@@ -69,11 +72,15 @@ const ClientSidebar = () => {
               BER Certificate
             </NavLink>
           </li>
-        
+          <li className="d-block d-md-none mt-5 pt-5"> 
+          <button className="sidebar-logout btn " onClick={handleLogout}>
+          Logout
+        </button>
+          </li>
         </ul>
 
         {/* Logout Button */}
-        <div className="">
+        <div className="d-none d-md-block">
         <button className="sidebar-logout btn " onClick={handleLogout}>
           Logout
         </button>

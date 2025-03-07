@@ -34,8 +34,8 @@ const Summary = ({ formData, prevStep, handleChange, submitForm }) => {
   return (
     <>
     <div className="container-fluid step2bg">
-<div>
-    <div className="row">
+<div  className="paDa">
+    <div className="row pt-4 pt-md-0">
         <div className="col-md-12 text-center">
             <h1 className="step1font text-light">Contact</h1>
             <p className="step1para text-light"><Link to={'/'} className="decnone"> Home </Link> <IoIosArrowForward /><span className="text-warning"> Contact</span></p>
@@ -45,8 +45,8 @@ const Summary = ({ formData, prevStep, handleChange, submitForm }) => {
 
 </div>
 </div>
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <div className=" p-4" >
+    <div className="d-flex justify-content-center align-items-center pt-5 pb-5">
+      <div className=" px-4" >
         <h5 className="text-center mb-3">Last Step! Get your BER quotes in Cavan</h5>
         <form onSubmit={(e) => { e.preventDefault(); submitForm(); }}>
           {/* Name */}
@@ -123,14 +123,14 @@ const Summary = ({ formData, prevStep, handleChange, submitForm }) => {
             <div className="col-sm-8">
 
             <input
-              type="checkbox"
-              id="agreeToTerms"
-              name="agreeToTerms"
-              checked={formValues.agreeToTerms}
-              onChange={handleInputChange}
-              className="form-check-input shadow-sm"
-              required
-            />
+  type="checkbox"
+  id="agreeToTerms"
+  name="agreeToTerms"
+  checked={formData.agreeToTerms || false} // Use formData here
+  onChange={(e) => handleChange('agreeToTerms')(e.target.checked)}
+  className="form-check-input shadow-sm"
+  required
+/>
             </div>
           </div>
 

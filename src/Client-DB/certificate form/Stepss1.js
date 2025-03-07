@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Booking.css";
@@ -21,6 +21,9 @@ const Step1 = ({  nextStep, prevStep, handleChange, formData }) => {
       nextStep();
     } 
   };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
 
 
@@ -52,7 +55,8 @@ const Step1 = ({  nextStep, prevStep, handleChange, formData }) => {
 <div>
     <div className="row">
         <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">Your Preferred Date</h1>
+        <h1 className="step1font d-none d-md-block text-light" >Your Preferred Date</h1>
+            <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}}>Your Preferred Date</p>
             <p className="step1para text-light">Not sure yet? Just select 'I'm <span className="text-warning"> Flexible'</span></p>
 
         </div>

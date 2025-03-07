@@ -53,21 +53,21 @@ const ClientCerti = () => {
   };
 
   const submitForm = async () => {
-    const payload = {
-      ...formData,
-      building_type: formData.building_type || "",
-      additional_features: formData.additional_features || "",
-      mobile_number: `${formData.countryCode}${formData.mobile}`,
-      preferred_date: formData.preferred_date || "",
-      preferred_time: formData.preferred_time || "",
-      property_type: formData.building_type || "",
-    };
+      const payload = {
+        ...formData,
+        building_type: formData.building_type || "",
+        additional_features: formData.additional_features || "",
+        mobile_number: `${formData.countryCode}${formData.mobile}`,
+        preferred_date: formData.preferred_date || "",
+        preferred_time: formData.preferred_time || "",
+        property_type: formData.building_type || "",
+      };
     delete payload.countryCode;
     delete payload.mobile;
     console.log("Final Payload:", JSON.stringify(payload, null, 2));
     const token = localStorage.getItem("access_token");
     try {
-      const response = await fetch(`https://booking.homecert.ie/api/job/${jobId}/update/`, {
+      const response = await fetch(`https://backend.homecert.ie/api/job/${jobId}/update/`, {
         method: 'PUT',
         headers: { 
           Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ const ClientCerti = () => {
       });
 
       if (response.ok) {
-        navigate('/client/ber-certificate'); 
+        navigate('/client/dashboard'); 
        
       }
    
@@ -85,6 +85,10 @@ const ClientCerti = () => {
       console.error('Submission error:', error);
     }
   };
+
+  const values = formData.county;
+  localStorage.setItem("selectedcounty", values);
+  console.log(values);
 
   switch (step) {
     case 1: return <Step1 nextStep={nextStep} handleChange={handleChange} formData={formData} />;

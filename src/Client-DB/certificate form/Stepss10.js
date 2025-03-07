@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const Step10 = ({ nextStep, prevStep, handleChange }) => {
@@ -12,7 +12,9 @@ const Step10 = ({ nextStep, prevStep, handleChange }) => {
       nextStep();
     } 
   };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const names = [
     "Selling", "Letting", "New Build","Gov Grant", // Column 1
     //  "Arva", "Finea", "Gowna","Larah", // Column 2

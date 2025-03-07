@@ -18,6 +18,8 @@ const Sidebar = () => {
   const handleLogout = () => {
     // Remove access token from localStorage
     localStorage.removeItem("access_token");
+    localStorage.removeItem("first");
+    localStorage.removeItem("last");
     
     // Redirect to login page
     navigate("/login"); // Replace with your actual login route
@@ -31,7 +33,7 @@ const Sidebar = () => {
         onClick={toggleSidebar}
         aria-label="Toggle Sidebar"
       >
-        {isOpen ? <CgClose size={30} /> : <AiOutlineBars size={30} className="" />}
+        {isOpen ? <CgClose size={20} color="white" /> : <AiOutlineBars size={20} className="" color="white" />}
       </button>
 
       {/* Sidebar */}

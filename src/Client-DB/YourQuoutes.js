@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import axios from "axios";
@@ -14,6 +14,10 @@ const YourQuotes = () => {
   // Get bids from location state passed from ClientDashboard
   const bids = location.state?.bids || [];
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  
   const handleOpenModal = async (bid) => {
     setSelectedBid(bid);
     setShowModal(true);
@@ -23,7 +27,7 @@ const YourQuotes = () => {
 
     try {
       const response = await axios.get(
-        `https://booking.homecert.ie/api/bids/${bid.id}/`,
+        `https://backend.homecert.ie/api/bids/${bid.id}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,7 +51,7 @@ const YourQuotes = () => {
 
     try {
       const response = await axios.post(
-        `https://booking.homecert.ie/api/bids/${selectedBid.id}/accept/`,
+        `https://backend.homecert.ie/api/bids/${selectedBid.id}/accept/`,
         {},
         {
           headers: {
@@ -79,7 +83,7 @@ const YourQuotes = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await axios.get(
-        `https://booking.homecert.ie/api/bids/${bid.id}/`,
+        `https://backend.homecert.ie/api/bids/${bid.id}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -125,18 +129,20 @@ const YourQuotes = () => {
           <tbody>
             {bids.map((bid, index) => (
               <tr key={bid.id}>
-                <td>{index + 1}</td>
-                <td>${bid.amount}</td>
-                <td>{new Date(bid.created_at).toLocaleDateString()}</td>
-                <td>#{bid.assessor.id}</td>
-                <td>
-                  View Profile{" "}
+                <td  data-label="No">{index + 1}</td>
+                <td  data-label="Quote">${bid.amount}</td>
+                <td data-label="Submitted Date">{new Date(bid.created_at).toLocaleDateString()}</td>
+                <td data-label="Assessor ID">#{bid.assessor.id}</td>
+                <td data-label="Profile">
+                  <span  className="btn button3">
+                  View Profile
                   <RiArrowRightUpLine
                     style={{ cursor: "pointer" }}
                     onClick={() => handleOpenModal(bid)}
                   />
+                  </span>
                 </td>
-                <td>
+                <td data-label="Action" className="text-center">
                   <button className="btn btn-success" onClick={() => handleQuoteModal(bid)}>
                     Accept Quote
                   </button>

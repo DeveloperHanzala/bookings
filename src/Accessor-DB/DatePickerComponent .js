@@ -298,8 +298,8 @@ const DatePickerComponent = () => {
           >
             <FaLongArrowAltLeft />
           </button>
-          <Link to={`/accessor/quote/${jobData.id}`}
-          state={{ jobData: jobData }}>
+          <Link to={`/accessor/quote/${jobData.id}` }
+          state={{ jobData: jobData, selectedDate:selectedDate }}>
           <button
             onClick={nextStep}
             style={{

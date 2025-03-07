@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const Step8 = ({ nextStep, prevStep, handleChange }) => {
@@ -12,7 +12,9 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
       nextStep();
     } 
   };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const names = [
     "Carlow", "Cavan", "Clare", "Cork",
     "Donegal", "Dublin", "Galway", "Kerry",
@@ -29,9 +31,10 @@ const Step8 = ({ nextStep, prevStep, handleChange }) => {
 <div>
     <div className="row">
         <div className="col-md-12 text-center">
-            <h1 className="step1font text-light">What county is the property in?</h1>
-            <p className="step1para text-light">Almost done, just 3 more questions.</p>
-
+        <h1 className="step1font d-none d-md-block text-light">What county is the property in?</h1>
+              <p className=" fs-1 d-block d-md-none text-light" style={{fontFamily:'Libre Baskerville'}} >What county is the property in?</p>
+              <p className="step1para text-light">Almost done, just 3 more questions.</p>
+           
         </div>
     </div>
 
