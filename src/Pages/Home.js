@@ -23,8 +23,8 @@ const Home = () => {
     const [activeIndex, setActiveIndex] = useState(null);
 
     const faqs = [
-      { question: "Why should I use BERCert.com?", answer: "Because it provides the best services for certifications." },
-      { question: "Who needs a BERCert?", answer: "Businesses and individuals looking for regulatory compliance." },
+      { question: "Why should I use Homecert.ie?", answer: "Because it provides the best services for certifications." },
+      { question: "Who needs a BER Cert?", answer: "Businesses and individuals looking for regulatory compliance." },
       { question: "How can we help?", answer: "We offer consultancy services tailored to your needs." },
       { question: "Paying for your BER Cert?", answer: "We provide multiple payment options to suit you." },
       { question: "Have more questions?", answer: "Contact us for further assistance." },
@@ -135,8 +135,8 @@ const Home = () => {
             <div className="card d-flex align-items-center bgcolor1" >
   <img src={iconcard1} className="p-3" width={100} alt="..." />
   <div className="card-body text-center ">
-    <h5 className="card-title">Post Your Job</h5>
-    <p class="card-text text-light">Once you post your job online, we notify all the BER Assessors in your area.</p>
+    <h5 className="card-title">Review Quotes</h5>
+    <p class="card-text text-light">Review Submitted Quotes.</p>
   </div>
 </div>
             </div>
@@ -144,8 +144,8 @@ const Home = () => {
             <div className="card d-flex align-items-center bgcolor1" >
   <img src={iconcard2} className="p-3" width={100} alt="..." />
   <div className="card-body text-center ">
-    <h5 className="card-title">Post Your Job</h5>
-    <p class="card-text text-light">Once you post your job online, we notify all the BER Assessors in your area.</p>
+    <h5 className="card-title">Accept Quote</h5>
+    <p class="card-text text-light">Accept your preffered Quote, and pay the deposit fee</p>
   </div>
 </div>
             </div>
@@ -183,7 +183,7 @@ const Home = () => {
     <h5 className="card-title">SEAI Registered BER Assessors</h5>
   </div>
 </div>
-            </div>
+<!--         </div>
         </div>
         <div className='row mt-3'>
             <div className='col-md-4 mt-5 mt-md-0 '>
@@ -210,6 +210,7 @@ const Home = () => {
     <h5 className="card-title">SEAI Registered BER Assessors</h5>
   </div>
 </div>
+-->
             </div>
         </div>
         <div className='text-center'>
