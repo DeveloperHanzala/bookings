@@ -12,7 +12,7 @@ const Footer = () => {
 <div className='row'>
         <div className='col-md-3 px-md-5'>
             <h1>HomeCert.ie</h1>
-            <p>HomeCet.ie offers the best prices in Ireland for your BER Certificate. We provide access to a wide network of BER Assessors, ensuring the lowest prices.</p>
+            <p>HomeCert.ie offers the best prices in Ireland for your BER Certificate. We provide access to a wide network of BER Assessors, ensuring the lowest prices.</p>
         </div>
            
         <div className='col-md-3 d-flex justify-content-start justify-content-md-center'>
@@ -28,8 +28,8 @@ const Footer = () => {
         </div>
         <div className='col-md-2'>
         <h4>Contact me</h4>
-            <p>+(000) 000-0000</p>
-            <p>figma@gmail.com</p>
+            <p>+(353) 87 752 6652</p>
+            <p>info@homecert.ie</p>
            
         </div>
         <div className='col-md-4 '>

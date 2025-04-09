@@ -183,34 +183,7 @@ const Home = () => {
     <h5 className="card-title">SEAI Registered BER Assessors</h5>
   </div>
 </div>
-<!--         </div>
-        </div>
-        <div className='row mt-3'>
-            <div className='col-md-4 mt-5 mt-md-0 '>
-         <div className="card " >
-  <img src={why4} className="card-img-top" alt="..." />
-  <div className="card-body text-center text-color1">
-    <h5 className="card-title">Lowest Prices</h5>
-  </div>
-</div>
 
-            </div>
-            <div className='col-md-4 mt-5  mt-md-0 '>
-            <div className="card" >
-  <img src={why5} className="card-img-top" alt="..." />
-  <div className="card-body text-center ">
-    <h5 className="card-title">Fast Turnaround</h5>
-  </div>
-</div>
-            </div>
-            <div className='col-md-4 mt-5 mt-md-0  '>
-            <div className="card" >
-  <img src={why6} className="card-img-top card-height" alt="..." />
-  <div className="card-body text-center text-color1">
-    <h5 className="card-title">SEAI Registered BER Assessors</h5>
-  </div>
-</div>
--->
             </div>
         </div>
         <div className='text-center'>
@@ -243,11 +216,12 @@ const Home = () => {
           <div className="col-lg-4  ">
             <div className='text-start p-3 shad'>
             <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
+            <p className='text-dark fw-bold'>BER Client</p>
             <p className="text-muted">
               <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
+              "Jason and the HomeCert.ie team made the BER assessment process effortless. 
+              Quick turnaround, professional service, and sound advice throughout. 
+              Couldn’t recommend them more."
             </p>
             
             <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
@@ -260,7 +234,7 @@ const Home = () => {
             </ul>
             <div className='d-flex align-items-center mt-3 '>
             <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
+            <h5 className="mx-2 ">Martin Keane</h5>
             </div>
            
             
@@ -271,11 +245,10 @@ const Home = () => {
           <div className="col-lg-4  ">
             <div className='text-start p-3 shad'>
             <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
+            <p className='text-dark fw-bold'>BER Client</p>
             <p className="text-muted">
               <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
+              "Didn’t know the first thing about BERs but the explained it clearly and sorted it fast. Super value and trustworthy."
             </p>
             
             <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
@@ -288,7 +261,7 @@ const Home = () => {
             </ul>
             <div className='d-flex align-items-center mt-3 '>
             <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
+            <h5 className="mx-2 ">Ciarán Reilly</h5>
             </div>
            
             
@@ -299,11 +272,12 @@ const Home = () => {
           <div className="col-lg-4  ">
             <div className='text-start p-3 shad'>
             <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
+            <p className='text-dark fw-bold'>Architect, Dublin 8</p>
             <p className="text-muted">
               <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
+              "Reliable, efficient, and always responsive — 
+              exactly what we need when we're up against tight timelines for Part L compliance. 
+              HomeCert.ie is now our go-to."
             </p>
             
             <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
@@ -316,7 +290,7 @@ const Home = () => {
             </ul>
             <div className='d-flex align-items-center mt-3 '>
             <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
+            <h5 className="mx-2 ">Siobhán Ní Fhlannagáin</h5>
             </div>
            
             
@@ -327,188 +301,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-    {/* Single item */}
-    <div className="carousel-item">
-      <div className="container">
-      <div className="row">
-          <div className="col-lg-4  ">
-            <div className='text-start p-3 shad'>
-            <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-            
-            <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              
-            </ul>
-            <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
-            </div>
-           
-            
-            </div>
-           
-            
-          </div>
-          <div className="col-lg-4  ">
-            <div className='text-start p-3 shad'>
-            <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-            
-            <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              
-            </ul>
-            <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
-            </div>
-           
-            
-            </div>
-           
-            
-          </div>
-          <div className="col-lg-4  ">
-            <div className='text-start p-3 shad'>
-            <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-            
-            <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              
-            </ul>
-            <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
-            </div>
-           
-            
-            </div>
-           
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    {/* Single item */}
-    <div className="carousel-item">
-      <div className="container">
-      <div className="row">
-          <div className="col-lg-4  ">
-            <div className='text-start p-3 shad'>
-            <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-            
-            <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              
-            </ul>
-            <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
-            </div>
-           
-            
-            </div>
-           
-            
-          </div>
-          <div className="col-lg-4  ">
-            <div className='text-start p-3 shad'>
-            <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-            
-            <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              
-            </ul>
-            <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
-            </div>
-           
-            
-            </div>
-           
-            
-          </div>
-          <div className="col-lg-4  ">
-            <div className='text-start p-3 shad'>
-            <img className=" mb-4" src={quote} alt="avatar" style={{width: 40}} />
-            <p className='text-dark fw-bold'>UX Designer</p>
-            <p className="text-muted">
-              <i className="fas fa-quote-left" />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-              officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-            </p>
-            
-            <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              <li><IoStarSharp /></li>
-              
-            </ul>
-            <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Anna Deynah</h5>
-            </div>
-           
-            
-            </div>
-           
-            
-          </div>
-        </div>
-      </div>
-    </div>
+   
   </div>
   {/* Inner */}
 {/* Controls */}
@@ -540,7 +333,7 @@ const Home = () => {
     <div className='container  pt-5 pb-5'>
        <div className='text-center pb-5'>
         <h2 className='pt-5 '>Are You a BER Assessor?</h2>
-        <p className='text-light'>Register with BerCert.com and receive local job leads, straight to your phone.</p>
+        <p className='text-light'>Register with Homecert.com and receive local job leads, straight to your phone.</p>
         <Link to="/assessor-registration#assessor" className="btn btn-warning fs-5 fw-bold mt-4 px-5">
   Join Now
 </Link>
@@ -554,11 +347,10 @@ const Home = () => {
   <div className="faq-container  mb-5 mb-md-0 pb-md-4 pb-5">
       {/* Left Section */}
       <div className="faq-left text-center text-md-start">
-        <h3>Common</h3>
+        <h3>Frequently Asked Questions</h3>
         <p>
-          Find answers to frequently asked questions about our consulting
-          services in the oil and gas industry, regulatory compliance, and
-          environmental assessments.
+        Find answers to common questions about Building Energy Rating (BER) assessments, 
+        SEAI compliance, home energy upgrades, and what to expect during your appointment.
         </p>
         <Link to={'/contact/#get-in-touch'}><button className="contact-button">Contact Us</button></Link>
       </div>
