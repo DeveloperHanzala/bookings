@@ -64,8 +64,7 @@ const AdminDashboard = () => {
     "#9966FF",
     "#FF9F40",
   ];
-  const first = localStorage.getItem("first");
-  const last = localStorage.getItem("last");
+
 
   // Fetch card data when component mounts
   useEffect(() => {
@@ -154,6 +153,27 @@ const AdminDashboard = () => {
       console.error("Error marking notifications as read:", error);
     }
   };
+ const [user, setuser] = useState();
+
+  const username = async () => {
+    const token = localStorage.getItem("access_token");
+    try {
+      const response = await axios.get("https://backend.homecert.ie/api/user/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setuser(response.data);
+      console.log(response.data)
+    }
+    catch (error) {
+      console.error("Error fetching username:", error);
+    }
+  }
+  useEffect(() => {
+    username();
+  }, []);
+
 
   // Count unread notifications for the badge
   const unreadCount = notifications.filter(n => n.status === "unread").length;
@@ -179,7 +199,7 @@ const AdminDashboard = () => {
 
   return (
     <div className='dashboard'>
-      <div className='container'>
+      <div className='container-fluid'>
         <div className='row'>
           {/* Header with Profile Image and Notifications */}
           <div className="col-md-12 text-end position-relative">
@@ -231,33 +251,48 @@ const AdminDashboard = () => {
             )}
           </div>
 
-          {/* Breadcrumb */}
-          <div className="col-md-12 text-start">
+           {/* Breadcrumb */}
+           <div className="col-md-12 text-start">
             <p>
-              Company Name <IoIosArrowForward /> <span className="text-dark">Dashboard</span>
-            </p>
+              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Dashboard</span>
+            </p>  
           </div>
 
           {/* Page Title */}
           <div className="col-md-12 text-start d-flex align-items-center flex-row">
             <div className="d-flex align-items-center">
-              <p className="text-dark mb-0"><IoIosArrowBack size={30} /></p>
+              <p className="text-dark mb-0">
+                <IoIosArrowBack size={30} />
+              </p>  
             </div>
-            <div className="fs-3 mx-2 fw-bold mb-0">Dashboard</div>
+            <div className="fs-3 mx-2 fw-bold mb-0">Dashboard</div> 
           </div>
 
           {/* Dashboard Header */}
-          <div className="container-fluid bgdash">
+          <div className="container-fluid nooverflowy  bgdash">
             <div className="row">
-              <div className="col-md-8 text-light">
-                <h1 className="display-5">Welcome To Homecert.ie</h1>
-                <h2 className="dashfont">{first + " " + last}</h2>
-              </div>
-              <div className="col-md-4">
-                <img src={img1} alt="" className="img-fluid" />
+            <div className="col-md-8 text-light text-center text-md-start">
+                {user && (
+  <>
+    <h1 className="display-6 display-md-5 d-none d-md-block">
+      Welcome To Homecert.ie
+    </h1>
+    <h1 className="display-6 display-md-5 d-block d-md-none">
+      Welcome <span className="fw-bold">{user.first_name + " " + user.last_name}</span>
+    </h1>
+    <h2 className="dashfont d-none d-md-block">
+      {user.first_name + " " + user.last_name}
+    </h2>
+  </>
+)}
+
+                </div>
+              <div className="col-md-4 col-10">
+                <img src={img1} alt="Dashboard" className="img-fluid d-none d-md-block" />
               </div>
             </div>
           </div>
+
         </div>
       </div>
 

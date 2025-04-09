@@ -142,6 +142,9 @@
       margin-left: 0px;
       padding: 20px;
     }
+    .bgdash{
+      border-radius: 10px;
+    }
   }
 
 
@@ -374,5 +377,38 @@
   .closemodelbutton{
     background-color: rgba(255, 255, 255, 0.5);
   
+  }
+  
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  .table-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+  
+  .table-row {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .table-head {
+    font-weight: bold;
+    background-color: #f1f1f1;
+  }
+  
+  .table-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .table-cell button {
+    padding: 5px 10px;
   }
   

@@ -12,6 +12,7 @@ import ThankYou from "./Pages/ThankYou";
 import ForgetPassword from "./Pages/ForgetPassword";
 import Pin from "./Pages/Pin";
 import ConfirmPassword from "./Pages/ConfirmPasword";
+import JobShow from "./Accessor-DB/JobShow";
 
 // Main layout with Navbar and Footer
 const MainLayout = ({ children }) => (
@@ -75,6 +76,14 @@ const MainApp = () => {
           </NoNavbarFooterLayout>
         }
       />
+      <Route
+                path="/job-details/:jobid"
+                element={
+                  <NoNavbarFooterLayout>
+                    <JobShow />
+                  </NoNavbarFooterLayout>
+                }
+              />
       {/* <Route
         path="/signup"
         element={

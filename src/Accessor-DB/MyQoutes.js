@@ -6,6 +6,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoMdNotifications } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { RiArrowRightUpLine } from "react-icons/ri";
 
 const MyQoutes = () => {
   // State for quotes
@@ -48,6 +50,8 @@ const MyQoutes = () => {
 
     fetchQuotes();
   }, []);
+
+  
 
   // Fetch notifications on mount
   useEffect(() => {
@@ -125,7 +129,7 @@ const MyQoutes = () => {
           {/* Top Bar: Profile Image, Arrow and Notifications */}
           <div className="col-md-12 text-end position-relative">
             <img src={img} alt="" className="img-fluid dashimg mx-2" />
-            <IoIosArrowDown size={20} className="mx-2" />
+           
             {/* Notifications icon with onClick to toggle dropdown */}
             <span 
               className="notibg mx-2 text-center cursor-pointer position-relative" 
@@ -215,14 +219,14 @@ const MyQoutes = () => {
                       <th>Survey Date</th>
                       <th className="text-danger">Lowest Quote</th>
                       <th>My Quote</th>
-                      {/* <th>Re-Quote</th> */}
+                      <th>Re-Quote</th>
                     </tr>
                   </thead>
                   <tbody>
                     {quotes.map((quote, index) => (
                       <tr className="text-center" key={quote.bid_id}>
                         <td data-label="No">{index + 1}</td>
-                        <td data-label="Job Posted">{new Date(quote.job.preferred_date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}</td>
+                        <td data-label="Job Posted">{new Date(quote.job.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })}</td>
                         <td data-label="Town">{quote.job.nearest_town}</td>
                         <td data-label="County">{quote.job.county}</td>
                         <td data-label="Type">{quote.job.property_type}</td>
@@ -231,12 +235,21 @@ const MyQoutes = () => {
                         <td data-label="Heat Pump">{quote.job.heat_pump_installed}</td>
                         <td data-label="Purpose">{quote.job.ber_purpose}</td>
                         <td data-label="Addition">{quote.job.additional_features}</td>
-                        <td data-label="Survey Date">{new Date(quote.job.preferred_date).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' })}</td>
+                        <td data-label="Survey Date">{new Date(quote. availability).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' })}</td>
                         <td data-label="Lowest Quote" className="text-danger">
                           €{quote.job.lowest_bid?.amount.toFixed(2) || 'N/A'}
                         </td>
                         <td data-label="My Quote">€{quote.amount.toFixed(2)}</td>
-                        {/* <td>Re-Quote</td> */}
+                        <td> <Link className="btn btn-warning btn-sm fontqoute" to={`/accessor/re-quote/${quote.bid_id}`}>
+                                                    Re-Quote
+                                                      <RiArrowRightUpLine
+                                                        style={{
+                                                          backgroundColor: "#003366",
+                                                          color: "white",
+                                                          borderRadius: "5px",
+                                                        }}
+                                                      />
+                         </Link></td>
                       </tr>
                     ))}
                   </tbody>

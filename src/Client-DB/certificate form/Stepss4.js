@@ -3,7 +3,7 @@ import { FaLongArrowAltRight, FaLongArrowAltLeft } from "react-icons/fa";
 
 const Step4 = ({ nextStep, prevStep, handleChange }) => {
   const [selectedName, setSelectedName] = useState(null);
-   const [isSquareMeters, setIsSquareMeters] = useState(false);
+   const [isSquareMeters, setIsSquareMeters] = useState(true);
  
    // Handle name selection
    const handleNameClick = (name) => {
@@ -19,17 +19,17 @@ const Step4 = ({ nextStep, prevStep, handleChange }) => {
    }, []);
  
    // Conversion from sq ft to sq meters (1 sq ft = 0.092903 sq meters)
-   const namesSqFt = ["Under 1000", "1000-2500", "2500-3000", "3000-3500", "3500-4000", "4000-4500", "4500-5000", "5000+"];
+   const namesSqFt = ["Under 1000 ft²", "1000-2500 ft²", "2500-3000 ft²", "3000-3500 ft²", "3500-4000 ft²", "4000-4500 ft²", "4500-5000 ft²", "5000+ ft²"];
  
    const convertToSqMeters = (sqFtRange) => {
-     if (sqFtRange === "Under 1000") return "Under 93";
-     if (sqFtRange === "1000-2500") return "93-232";
-     if (sqFtRange === "2500-3000") return "232-279";
-     if (sqFtRange === "3000-3500") return "279-325";
-     if (sqFtRange === "3500-4000") return "325-372";
-     if (sqFtRange === "4000-4500") return "372-418";
-     if (sqFtRange === "4500-5000") return "418-465";
-     return "465+";
+     if (sqFtRange === "Under 1000 ft²") return "Under 93 m²";
+     if (sqFtRange === "1000-2500 ft²") return "93-232 m²";
+     if (sqFtRange === "2500-3000 ft²") return "232-279 m²";
+     if (sqFtRange === "3000-3500 ft²") return "279-325 m²";
+     if (sqFtRange === "3500-4000 ft²") return "325-372 m²";
+     if (sqFtRange === "4000-4500 ft²") return "372-418 m²";
+     if (sqFtRange === "4500-5000 ft²") return "418-465 m²";
+     return "465+ m²"; 
    };
  
    const names = isSquareMeters ? namesSqFt.map(convertToSqMeters) : namesSqFt;
@@ -70,7 +70,7 @@ const Step4 = ({ nextStep, prevStep, handleChange }) => {
                    className={`btn mx-2 step3button w-100 mb-2 ${name === selectedName ? "selected" : ""}`}
                    onClick={() => handleNameClick(name)}
                  >
-                   {name} {isSquareMeters ? "m²" : "ft²"}
+                   {name} {isSquareMeters ? "" : ""}
                  </button>
                ))}
              </div>
@@ -85,7 +85,7 @@ const Step4 = ({ nextStep, prevStep, handleChange }) => {
                    className={`btn mx-2 step3button w-100 mb-2 ${name === selectedName ? "selected" : ""}`}
                    onClick={() => handleNameClick(name)}
                  >
-                   {name} {isSquareMeters ? "m²" : "ft²"}
+                   {name} {isSquareMeters ? "" : ""}
                  </button>
                ))}
              </div>

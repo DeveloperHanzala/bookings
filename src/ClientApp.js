@@ -8,6 +8,10 @@ import DatePickerC from "./Client-DB/certificate form/DatePickerC";
 import ClientCerti from "./Client-DB/certificate form/ClientCeri";
 import Certificate from "./Client-DB/Certificate";
 import YourQuoutes from "./Client-DB/YourQuoutes";
+import Main from "./Checkout/Main";
+import Cancel from "./Checkout/Cancel";
+import Success from "./Checkout/Success";
+import Assessmentsone from "./Client-DB/AssessmentView/Assessmentsone";
 // import LiveJobs from "./Pages/LiveJobs";
 // import MyQuotes from "./Pages/MyQuotes";
 // import MyClients from "./Pages/MyClients";
@@ -35,6 +39,14 @@ const MainLayout = ({ children }) => (
           element={
             <MainLayout>
               <ClientDashboard />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/view-assessment/:assessmentId"
+          element={
+            <MainLayout>
+              <Assessmentsone />
             </MainLayout>
           }
         />
@@ -78,6 +90,30 @@ const MainLayout = ({ children }) => (
           element={
             <NoSidebarLayout>
               <ClientCerti />
+            </NoSidebarLayout>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <NoSidebarLayout>
+              <Main />
+            </NoSidebarLayout>
+          }
+        />
+        <Route
+          path="/Cancel"
+          element={
+            <NoSidebarLayout>
+              <Cancel />
+            </NoSidebarLayout>
+          }
+        />
+        <Route
+          path="/Success"
+          element={
+            <NoSidebarLayout>
+              <Success />
             </NoSidebarLayout>
           }
         />

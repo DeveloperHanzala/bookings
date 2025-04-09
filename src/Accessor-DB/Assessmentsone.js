@@ -38,7 +38,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import img from '../Images/download.jpeg';
 import submit from '../Images/Submit.png';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Age2 from "./Second/Age2";
 import WallConstruction1 from "./Second/WallConstruction1";
 import Roof1 from "./Second/Roof1";
@@ -52,13 +52,18 @@ import Ground4 from "./Second/Ground4";
 import Step7_form from "./Second/Step7/Step7_form";
 const Assessmentsone = () => {
     const { id } = useParams();
+     const navigate = useNavigate();
+    // State for notifications functionality
+         const [notifications, setNotifications] = useState([]);
+         const [showDropdown, setShowDropdown] = useState(false);
+         const [notifToast, setNotifToast] = useState("");
+         const [markAllDisabled, setMarkAllDisabled] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
 
   const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 8));
   const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
   const handleSubmit = () => {
-    console.log("Form submitted");
-    // Add your submission logic here
+    navigate('/accessor/assessments')
   };
 
   
@@ -68,19 +73,19 @@ const Assessmentsone = () => {
     survey_date: "",
     num_storeys: null,
     num_bedrooms: null,
-  num_extensions: "0",
-  type_2_thickness: null,
+  num_extensions: "",
+  type_2_thickness: "",
     property_address: "",
     eircode: "",
     mprn: "",
-    DetachedHouse: false,
-    semiDetached: false,
-    endOfTerrace: false,
-    midTerrace: false,
-    groundFloorApartment: false,
-    midFloorApartment: false,
-    topFloorApartment: false,
-    basementApartment: false,
+    detached_house: false,
+    semi_detached_house: false,
+    end_of_terrace: false,
+    mid_terrace: false,
+    ground_floor_apartment: false,
+    mid_floor_apartment: false,
+    top_floor_apartment: false,
+    basement_apartment: false,
     maisonette: false,
     pre_1900: false,
     between_1900_and_1929: false,
@@ -100,7 +105,7 @@ const Assessmentsone = () => {
     xbetween_1983_and_1993: false,
     xbetween_1994_and_1999: false,
     xfrom_2000_onwards: false,
-    xxpre: false,
+    xxpre_1900: false,
     xxbetween_1900_and_1929: false,
     xxbetween_1930_and_1949: false,
     xxbetween_1950_and_1966: false,
@@ -135,7 +140,7 @@ const Assessmentsone = () => {
     roof_Construction_Other: false,
     roof_Construction_Other_text: null,
     thinkness: null,
-    roof_construction_unknown: null,
+    roof_construction_unknown: false,
     fibre: false,
     warmcell: false,
     eps: false,
@@ -169,8 +174,7 @@ const Assessmentsone = () => {
   type_2_no_heat_loss_roof: false,
   type_2_roof_Construction_Other: false,
   type_2_roof_Construction_Other_text: null,
- 
-  type_2_roof_construction_unknown: "",
+  type_2_roof_construction_unknown: false,
   type_2_fibre: false,
   type_2_warmcell: false,
   type_2_eps: false,
@@ -187,7 +191,7 @@ const Assessmentsone = () => {
      type_2_ground_floor_construction_main_dwelling_eps : false,
      type_2_ground_floor_construction_main_dwelling_min_fibre : false,
      type_2_ground_floor_construction_main_dwelling_dense : false,
-     type_2_ground_floor_construction_main_dwelling_unknow : false,
+     type_2_ground_floor_construction_main_dwelling_unknown : false,
      type_3_stone: false,
      Type_3_solid_brick: false,
      type_3_cavity: false,
@@ -205,8 +209,8 @@ const Assessmentsone = () => {
      type_3_no_heat_loss_roof: false,
      type_3_roof_Construction_Other: false,
      type_3_roof_Construction_Other_text: null,
-     type_3_thinkness: null,
-     type_3_roof_construction_unknown: null,
+     type_3_thinkness: "",
+     type_3_roof_construction_unknown: false,
      type_3_fibre: false,
      type_3_warmcell: false,
      type_3_eps: false,
@@ -222,7 +226,7 @@ const Assessmentsone = () => {
      type_3_ground_floor_construction_main_dwelling_eps: false,
      type_3_ground_floor_construction_main_dwelling_min_fibre: false,
      type_3_ground_floor_construction_main_dwelling_dense: false,
-     type_3_ground_floor_construction_main_dwelling_unknow: false,
+     type_3_ground_floor_construction_main_dwelling_unknown: false,
      type_3_ground_floor_construction_main_dwelling_none: false,
      type_4_stone: false,
   Type_4_solid_brick: false,
@@ -232,7 +236,7 @@ const Assessmentsone = () => {
   type_4_timber_frame: false,
   type_4_ther_unknown: false,
   type_4_ther_unknown_text: null,
-  type_4_insulation_thickness_observable: null,
+  type_4_insulation_thickness_observable: "",
   type_4_insulation_thickness_observable: null,
   type_4_pitched_insulation_btw_joists: false,
   type_4_pitched_insulation_in_rafters: false,
@@ -241,8 +245,8 @@ const Assessmentsone = () => {
   type_4_no_heat_loss_roof: false,
   type_4_roof_Construction_Other: false,
   type_4_roof_Construction_Other_text: null,
-  type_4_thinkness: null,
-  type_4_roof_construction_unknown: null,
+  type_4_thinkness: "",
+  type_4_roof_construction_unknown: false,
   type_4_fibre: false,
   type_4_warmcell: false,
   type_4_eps: false,
@@ -259,9 +263,9 @@ const Assessmentsone = () => {
   type_4_ground_floor_construction_main_dwelling_eps: false,
   type_4_ground_floor_construction_main_dwelling_min_fibre: false,
   type_4_ground_floor_construction_main_dwelling_dense: false,
-  type_4_ground_floor_construction_main_dwelling_unknow: false,
-  comments_on_heating_controls: false,
-  secondary_heating_manufacturer: false,
+  type_4_ground_floor_construction_main_dwelling_unknown: false,
+  comments_on_heating_controls: "",
+  secondary_heating_manufacturer: "",
   ground_storey_heigh: null,
   ground_total_floor_area: null,
   ground_heatloss_floor_1: null,
@@ -442,19 +446,19 @@ const Assessmentsone = () => {
   room_5_rads_with_or_trvs: null,
   room_5_number_of_fixed_lights: null,
   room_5_type_of_fixed_light: null,
-  draught_lobby_on_main_entrance: null,
+  draught_lobby_on_main_entrance: "",
   pressure_test_results_available: null,
-  if_yes_enter_adjusted_results: null,
-  is_there_uninsulated_ductng_on_mvhr: null,
-  number_of_sides_sheltered: null,
-  pressure_test_resut_reference_number: null,
+  if_yes_enter_adjusted_results: "",
+  is_there_uninsulated_ductng_on_mvhr: "",
+  number_of_sides_sheltered: "",
+  pressure_test_result_reference_number: "",
   natural_ventilation: false,
   positive_input_ventilation_from_loft: false,
   positive_input_ventilation_from_outside: false,
   whole_house_extract_ventilation: false,
   balanced_whole_mechanical_ventilation: false,
   exhaust_air_heat_pump: false,
-  air_flow_rate_to_eahp: false,
+  air_flow_rate_to_eahp: "",
   linear_flourescent: null,
   led: null,
   hologen_lv: null,
@@ -532,7 +536,7 @@ const Assessmentsone = () => {
   floor: false,
   auto: false,
   permanent_pilot: false,
-  gas_oil_manufacturer: null,
+  gas_oil_manufacturer: "",
 
   electric_storage_heater: "",
   modern_slimeline: false,
@@ -556,7 +560,7 @@ const Assessmentsone = () => {
   solid_fuel_boilers: "",
 open_fire_back_boiler: false,
 closed_room_heater_back_boiler: false,
-grate: "",
+ grate: "Rectangular",
 manual_feed_boiler: null,
 auto_feed_boiler: false,
 mf_af_boiler_heated_space: false,
@@ -600,7 +604,7 @@ closed_room_heater: false,
 closed_room_heater_with_back_boiler: false,
 stove: false,
 flueless_bioethanol: false,
-comments_on_heating_system: null,
+comments_on_heating_system: "",
 heat_pump: "",
 air_to_air: false,
 air_to_water: false,
@@ -615,7 +619,7 @@ heat_pump_manufacturer: null,
 electric_room_heater: "",
 panel_converter_radiant_heater: false,
 fan_heater: false,
-solid_fuel_manufacturer: "0",
+solid_fuel_manufacturer: "",
 individual_chp: false,
   percentage_heat_from_chp: null,
   electrical: null,
@@ -775,18 +779,128 @@ individual_chp: false,
         }
       }
   };
+  
+   // Fetch notifications on mount
+    useEffect(() => {
+      const token = localStorage.getItem("access_token");
+      if (!token) return;
+      axios
+        .get("https://backend.homecert.ie/api/notifications/", {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(response => {
+          // Assume the response data is an array and each notification has a "status" property.
+          setNotifications(response.data);
+        })
+        .catch(error => console.error("Error fetching notifications:", error));
+    }, []);
+  
+    // Handler to mark all notifications as read.
+    const handleMarkAllAsRead = async () => {
+      const token = localStorage.getItem("access_token");
+      if (!token || notifications.length === 0) return;
+  
+      // Create an array of POST requests (one for each notification)
+      const markReadPromises = notifications.map(notification =>
+        axios.post(
+          `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
+          {},
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+      );
+  
+      try {
+        await Promise.all(markReadPromises);
+        // Update all notifications in state to "read"
+        setNotifications(prev =>
+          prev.map(notification => ({ ...notification, status: "read" }))
+        );
+        setMarkAllDisabled(true);
+        setNotifToast("Notifications are marked as read");
+        setTimeout(() => setNotifToast(""), 3000);
+      } catch (error) {
+        console.error("Error marking notifications as read:", error);
+      }
+    };
+  
+    // Count only unread notifications for the badge.
+    const unreadCount = notifications.filter(n => n.status === "unread").length;
+  
+
   return (
     <div className="dashboard bg-light">
-           <div className="container">
-                <div className="row">
-                <div className="col-md-12 text-end">
-                <img src={img} alt="" className="img-fluid dashimg mx-2" />
-                <IoIosArrowDown size={20} className="mx-2" />
-                <span className="notibg mx-2 text-center">
-                      <IoMdNotifications className="" color="black" size={20} />
+           {/* Floating Toast Message for Notifications */}
+      {notifToast && (
+        <div style={{
+          position: "fixed",
+          top: "20px",
+          right: "20px",
+          backgroundColor: "white",
+          color: "green",
+          padding: "10px 20px",
+          borderRadius: "5px",
+          zIndex: 9999,
+        }}>
+          {notifToast}
+        </div>
+      )}
+
+      <div className="container-fluid">
+        <div className="row">
+          {/* Header Section with Notifications */}
+          <div className="col-md-12 text-end position-relative">
+            <img src={img} alt="" className="img-fluid dashimg mx-2" />
+            
+            <span 
+              className="notibg mx-2 text-center cursor-pointer position-relative"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <IoMdNotifications color="black" size={20} />
+              {unreadCount > 0 && (
+                <span className="badge bg-danger position-absolute top-0 end-0">
+                  {unreadCount}
                 </span>
-              
-            </div>
+              )}
+            </span>
+            {showDropdown && (
+              <div
+                className="dropdown-menu show p-2 position-absolute end-0 bg-white shadow-lg rounded"
+                style={{ width: "300px", maxHeight: "300px", overflowY: "auto" }}
+              >
+                {notifications.length > 0 ? (
+                  <>
+                    <div className="d-flex justify-content-end mb-2">
+                      <button
+                        className="btn btn-link p-0"
+                        style={{textDecoration:'none'}}
+                        onClick={handleMarkAllAsRead}
+                        disabled={markAllDisabled}
+                      >
+                        Mark all as read
+                      </button>
+                    </div>
+                    {notifications.map(notification => (
+                      <div
+                        key={notification.id}
+                        className="p-2 border-bottom"
+                        style={{
+                          backgroundColor: notification.status === "read" ? "#f8f9fa" : "#ffffff"
+                        }}
+                      >
+                        <p className="mb-0 small text-dark">{notification.message}</p>
+                        <small className="text-dark">
+                          {new Date(notification.created_at).toLocaleString()}
+                        </small>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <div className="dropdown-item text-center">No new notifications</div>
+                )}
+              </div>
+            )}
+          </div>
+
 
             <div className="col-md-12 text-start">
                 <p>Homecert.ie  <IoIosArrowForward /> <span className="text-dark">Assessments</span>     </p>  

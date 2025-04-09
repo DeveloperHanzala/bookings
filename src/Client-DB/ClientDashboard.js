@@ -11,15 +11,14 @@ const ClientDashboard = () => {
   // State for jobs list
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [user, setuser] = useState();
   // Notification-related states
   const [notifications, setNotifications] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [markAllDisabled, setMarkAllDisabled] = useState(false);
   const accessToken = localStorage.getItem("access_token");
-  const first = localStorage.getItem("first");
-  const last = localStorage.getItem("last");
+ 
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -62,6 +61,26 @@ const ClientDashboard = () => {
       setLoading(false);
     }
   };
+  
+  const username = async () => {
+    const token = localStorage.getItem("access_token");
+    try {
+      const response = await axios.get("https://backend.homecert.ie/api/user/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setuser(response.data);
+      console.log(response.data)
+    }
+    catch (error) {
+      console.error("Error fetching username:", error);
+    }
+  }
+  useEffect(() => {
+    username();
+  }, []);
+
 
   // Mark all notifications as read
   const handleMarkAllAsRead = async () => {
@@ -191,12 +210,24 @@ const ClientDashboard = () => {
             {/* Welcome Banner */}
             <div className="container-fluid bgdash">
               <div className="row">
-                <div className="col-md-8 text-light">
-                  <h1 className="display-5">Welcome To Homecert.ie</h1>
-                  <h2 className="dashfont"> {first + " " + last} </h2>
+                <div className="col-md-8 text-light text-center text-md-start">
+                {user && (
+  <>
+    <h1 className="display-6 display-md-5 d-none d-md-block">
+      Welcome To Homecert.ie
+    </h1>
+    <h1 className="display-6 display-md-5 d-block d-md-none">
+      Welcome <span className="fw-bold">{user.first_name + " " + user.last_name}</span>
+    </h1>
+    <h2 className="dashfont d-none d-md-block">
+      {user.first_name + " " + user.last_name}
+    </h2>
+  </>
+)}
+
                 </div>
                 <div className="col-md-4">
-                  <img src={img1} alt="Dashboard" className="img-fluid" />
+                  <img src={img1} alt="Dashboard" className="img-fluid d-none d-md-block" />
                 </div>
               </div>
             </div>
@@ -207,40 +238,41 @@ const ClientDashboard = () => {
             {loading ? (
               <p className="text-center">Loading...</p>
             ) : (
-              <table className="table table-bordered table-hover">
-                <thead className="border-0">
-                  <tr>
-                    <th>No</th>
-                    <th>Date</th>
-                    <th>Property</th>
-                    <th>Preferred Date</th>
-                    <th>Quotes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {jobs.length > 0 ? (
-                    jobs.map((job, index) => (
-                      <tr key={job.id}>
-                        <td data-label="No">{index + 1}</td>
-                        <td data-label="Date">{new Date(job.created_at).toLocaleDateString()}</td>
-                        <td data-label="Property">{job.building_type || "N/A"}</td>
-                        <td data-label="Preferred Date">{job.preferred_date || "N/A"}</td>
-                        <td  data-label="Quotes">
-                          <Link to="/client/your-quote" state={{ bids: job.bids }}>
-                            <button className="btn button1">View Quote</button>
-                          </Link>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="5" className="text-center">
-                        No jobs found
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+              <div className="table-container">
+              <div className="table-header">
+                <div className="table-row table-head">
+                  <div className="table-cell d-none d-md-block">No</div>
+                  <div className="table-cell">Date</div>
+                  <div className="table-cell">Property</div>
+                  <div className="table-cell">Preferred Date</div>
+                  <div className="table-cell">Quotes</div>
+                </div>
+              </div>
+              <div className="table-body">
+                {jobs.length > 0 ? (
+                  jobs.map((job, index) => (
+                    <div className="table-row" key={job.id}>
+                      <div className="table-cell  d-none d-md-block">{index + 1}</div>
+                      <div className="table-cell">{new Date(job.created_at).toLocaleDateString()}</div>
+                      <div className="table-cell">{job.building_type || "N/A"}</div>
+                      <div className="table-cell">{job.preferred_date || "N/A"}</div>
+                      <div className="table-cell">
+                        <Link to="/client/your-quote" state={{ bids: job.bids }}>
+                          <button className="btn button1">View Quote</button>
+                        </Link>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="table-row">
+                    <div className="table-cell text-center" colSpan="5">
+                     You have No Bids
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            
             )}
           </div>
         </div>

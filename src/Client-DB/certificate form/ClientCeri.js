@@ -68,7 +68,7 @@ const ClientCerti = () => {
     const token = localStorage.getItem("access_token");
     try {
       const response = await fetch(`https://backend.homecert.ie/api/job/${jobId}/update/`, {
-        method: 'PUT',
+        method: 'POST',
         headers: { 
           Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'

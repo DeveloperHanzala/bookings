@@ -8,11 +8,11 @@ import { RiMessage2Fill } from "react-icons/ri";
 import { IoLocationSharp } from "react-icons/io5";
 
 const Preferences = () => {
-  // State for county preferences and preference update messages
+  // State for county preferences and update messages
   const [selectedCounties, setSelectedCounties] = useState([]);
   const [prefNotification, setPrefNotification] = useState({ message: "", type: "" });
 
-  // New state for notifications functionality
+  // State for notifications functionality
   const [notifications, setNotifications] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [notifToast, setNotifToast] = useState("");
@@ -23,13 +23,48 @@ const Preferences = () => {
     'Galway', 'Kerry', 'Kildare', 'Kilkenny', 'Laois', 'Leitrim',
     'Limerick', 'Longford', 'Louth', 'Mayo', 'Meath', 'Monaghan',
     'Offaly', 'Roscommon', 'Sligo', 'Tipperary', 'Waterford',
-    'Westmeath', 'Wexford', 'Wicklow'
+    'Westmeath', 'Wexford', 'Wicklow',
   ];
+
+  // On mount, scroll to top and load stored preferences from localStorage.
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    const storedPreference = localStorage.getItem("preference");
+    if (storedPreference) {
+      // Stored value assumed as a comma separated string.
+      const preferencesArray = storedPreference.split(",").map(c => c.trim());
+      setSelectedCounties(preferencesArray);
+    }
   }, []);
-  // Function to update preferences via API
-  const updatePreferences = async (county, isSelected) => {
+
+  // Helper function to update state and localStorage from API response.
+  const updatePreferencesState = (prefData) => {
+    if (prefData && prefData.length > 0) {
+      console.log("API returned preference:", prefData);
+      let flatArray = [];
+      if (Array.isArray(prefData)) {
+        // Flatten the array in case some items are comma-separated strings.
+        prefData.forEach(item => {
+          if (typeof item === 'string') {
+            flatArray.push(...item.split(",").map(c => c.trim()));
+          }
+        });
+        // Remove duplicate counties.
+        flatArray = [...new Set(flatArray)];
+      } else if (typeof prefData === 'string') {
+        flatArray = prefData.split(",").map(c => c.trim());
+      }
+      setSelectedCounties(flatArray);
+      localStorage.setItem("preference", flatArray.join(", "));
+    } else {
+      // If no preferences, clear state and remove from localStorage.
+      setSelectedCounties([]);
+      localStorage.removeItem("preference");
+    }
+  };
+
+  // Function to add a county preference (using PUT)
+  const addPreference = async (county) => {
     try {
       const access_token = localStorage.getItem('access_token');
       const response = await fetch('https://backend.homecert.ie/api/preference/', {
@@ -38,47 +73,70 @@ const Preferences = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${access_token}`
         },
-        body: JSON.stringify({ preference: county, selected: isSelected })
+        body: JSON.stringify({ add_preference: county })
       });
-
       if (!response.ok) {
-        throw new Error('Failed to update preferences');
+        console.error("Response status:", response.status);
+        throw new Error('Failed to add preference');
       }
-
-      setPrefNotification({ message: `Preference for ${county} updated successfully!`, type: 'success' });
+      const data = await response.json();
+      console.log("Add preference response:", data);
+      updatePreferencesState(data.preference);
+      setPrefNotification({ message: `Preference for ${county} added successfully!`, type: 'success' });
       setTimeout(() => setPrefNotification({ message: "", type: "" }), 3000);
     } catch (error) {
-      console.error('Error updating preferences:', error);
-      setPrefNotification({ message: 'Error updating preferences. Please try again.', type: 'error' });
+      console.error('Error adding preference:', error);
+      setPrefNotification({ message: 'Error adding preference. Please try again.', type: 'error' });
       setTimeout(() => setPrefNotification({ message: "", type: "" }), 3000);
     }
   };
 
-  const toggleCounty = (county) => {
-    setSelectedCounties(prev => {
-      let updatedCounties;
-      if (prev.includes(county)) {
-        updatedCounties = prev.filter(c => c !== county);
-        updatePreferences(county, false); // Deselect county
-      } else {
-        updatedCounties = [...prev, county];
-        updatePreferences(county, true); // Select county
+  // Function to remove a county preference (using DELETE)
+  const removePreference = async (county) => {
+    try {
+      const access_token = localStorage.getItem('access_token');
+      const response = await fetch('https://backend.homecert.ie/api/preference/', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${access_token}`
+        },
+        body: JSON.stringify({ remove_preference: county })
+      });
+      if (!response.ok) {
+        console.error("Response status:", response.status);
+        throw new Error('Failed to remove preference');
       }
-      return updatedCounties;
-    });
+      const data = await response.json();
+      console.log("Remove preference response:", data);
+      updatePreferencesState(data.preference);
+      setPrefNotification({ message: `Preference for ${county} removed successfully!`, type: 'success' });
+      setTimeout(() => setPrefNotification({ message: "", type: "" }), 3000);
+    } catch (error) {
+      console.error('Error removing preference:', error);
+      setPrefNotification({ message: 'Error removing preference. Please try again.', type: 'error' });
+      setTimeout(() => setPrefNotification({ message: "", type: "" }), 3000);
+    }
+  };
+
+  // Toggle county selection (add or remove accordingly)
+  const toggleCounty = (county) => {
+    if (selectedCounties.includes(county)) {
+      removePreference(county);
+    } else {
+      addPreference(county);
+    }
   };
 
   // Fetch notifications when the component mounts
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (!token) return;
-
     axios
       .get("https://backend.homecert.ie/api/notifications/", {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
-        // Assume the response is an array of notifications where each notification has a "status" property.
         setNotifications(response.data);
       })
       .catch(error => console.error("Error fetching notifications:", error));
@@ -88,8 +146,6 @@ const Preferences = () => {
   const handleMarkAllAsRead = async () => {
     const token = localStorage.getItem("access_token");
     if (!token || notifications.length === 0) return;
-
-    // Create an array of POST requests—one for each notification
     const markReadPromises = notifications.map(notification =>
       axios.post(
         `https://backend.homecert.ie/api/notifications/${notification.id}/mark-as-read/`,
@@ -97,10 +153,8 @@ const Preferences = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       )
     );
-
     try {
       await Promise.all(markReadPromises);
-      // Update notifications state: mark each as "read"
       setNotifications(prev =>
         prev.map(notification => ({ ...notification, status: "read" }))
       );
@@ -142,9 +196,8 @@ const Preferences = () => {
         )}
         <div className="row">
           {/* Header Section with Notifications */}
-          <div className="col-md-12 text-end  position-relative">
+          <div className="col-md-12 text-end position-relative">
             <img src={img} alt="" className="img-fluid dashimg mx-2" />
-           
             <span 
               className="notibg mx-2 text-center cursor-pointer position-relative"
               onClick={() => setShowDropdown(!showDropdown)}
@@ -166,7 +219,7 @@ const Preferences = () => {
                     <div className="d-flex justify-content-end mb-2">
                       <button
                         className="btn btn-link p-0"
-                        style={{textDecoration:'none'}}
+                        style={{ textDecoration: 'none' }}
                         onClick={handleMarkAllAsRead}
                         disabled={markAllDisabled}
                       >

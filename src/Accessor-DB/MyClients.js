@@ -128,7 +128,7 @@ const MyClients = () => {
           {/* Header Section */}
           <div className="col-md-12 text-end position-relative">
             <img src={img} alt="Dashboard" className="img-fluid dashimg mx-2" />
-            <IoIosArrowDown size={20} className="mx-2" />
+        
             <span 
               className="notibg mx-2 text-center cursor-pointer position-relative"
               onClick={() => setShowDropdown(!showDropdown)}
@@ -220,14 +220,15 @@ const MyClients = () => {
                   <tbody>
                     {clients.map((bid, index) => (
                       <tr className="text-center" key={bid.bid_id}>
-                        <td>{index + 1}</td>
+                        <td data-label="No">{index + 1}</td>
                       
-                        <td>{bid.job.nearest_town}</td>
-                        <td>{bid.job.county}</td>
-                        <td>{bid.job.property_type}</td>
+                        <td data-label="Nearest Town">{bid.job.nearest_town}</td>
+                        <td data-label="County">{bid.job.county}</td>
+                        <td data-label="Type">{bid.job.property_type}</td>
                        
-                        <td>€{bid.amount}</td>
-                        <td>
+                        <td data-label="Balance">€{bid.amount}</td>
+                        <td >
+                          {/* <span className="d-none d-md-block">
                           Contact{" "}
                           <RiArrowRightUpLine
                             style={{
@@ -238,6 +239,24 @@ const MyClients = () => {
                             }}
                             onClick={() => handleOpenModal(bid.job.client)}
                           />
+                        </span> */}
+
+
+                        <button className=""  onClick={() => handleOpenModal(bid.job.client)}>
+                          Contact{" "}
+                          <RiArrowRightUpLine
+                            style={{
+                              backgroundColor: "#003366",
+                              color: "white",
+                              borderRadius: "5px",
+                              cursor: 'pointer'
+                            }}
+                           
+                          />
+                        </button>
+
+
+                          
                         </td>
                       </tr>
                     ))}

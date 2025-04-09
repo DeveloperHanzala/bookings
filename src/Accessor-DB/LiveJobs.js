@@ -237,7 +237,7 @@ const LiveJobs = () => {
                        <td data-label="Addition">{job.additional_features || "N/A"}</td>
                        <td data-label="Preferred Date">{job.preferred_date || "N/A"}</td>
                           <td>
-                          <Link className="d-none d-md-block text-dark" to={`/accessor/date/${job.id}`} state={{ jobData: job }}>
+                          {/* <Link className="d-none d-md-block text-dark" to={`/accessor/date/${job.id}`} state={{ jobData: job }}>
                             Quote {""}
                               <RiArrowRightUpLine
                                 style={{
@@ -246,8 +246,8 @@ const LiveJobs = () => {
                                   borderRadius: "5px",
                                 }}
                               />
-                            </Link>
-                            <Link className="btn button1 d-block d-md-none" to={`/accessor/date/${job.id}`} state={{ jobData: job }}>
+                            </Link> */}
+                            <Link className="btn button3 fontqoute " to={`/accessor/date/${job.id}`} state={{ jobData: job }}>
                             Quote
                               <RiArrowRightUpLine
                                 style={{

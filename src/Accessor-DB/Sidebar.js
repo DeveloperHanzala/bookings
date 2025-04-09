@@ -105,10 +105,35 @@ const Sidebar = () => {
               Assessments
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/accessor/private-assessments"
+              className={({ isActive }) =>
+                isActive ? "sidebar-link active" : "sidebar-link"
+              }
+              onClick={toggleSidebar}
+            >
+              <div className="row">
+              <div className="col-md-3 col-3">
+              <BsFillFileBarGraphFill size={25} className="mx-2" />
+                  </div>
+                  <div className="col-md-9 col-9">
+                  <span>Private Assessments</span>
+              </div>
+              </div>
+           
+                        
+            </NavLink>
+          </li>
+          <li className="d-block d-md-none mt-5 pt-5"> 
+          <button className="sidebar-logout btn " onClick={handleLogout}>
+          Logout
+        </button>
+          </li>
         </ul>
 
         {/* Logout Button */}
-        <div className="">
+        <div className="d-none d-md-block">
         <button className="sidebar-logout btn " onClick={handleLogout}>
           Logout
         </button>

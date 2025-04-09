@@ -78,7 +78,7 @@ const AssessorRegistration = () => {
       professional_insurance_policy_holder: formData.professional_insurance_policy_holder === "true",
       VAT_registered: formData.VAT_registered === "true",
       // Convert the array to a comma-separated string.
-      preference: formData.preference.join(', ')
+      preference: formData.preference
     };
 
     try {
@@ -91,7 +91,7 @@ const AssessorRegistration = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+        throw new Error( `Registration failed ${data.detail}` || 'Registration failed Please try again later' );
       }
 
       // Auto-login if a token is returned.

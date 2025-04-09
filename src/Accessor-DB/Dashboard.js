@@ -65,8 +65,7 @@ const Dashboard = () => {
       setLoading(false);
     }
   };
-  const first = localStorage.getItem("first");
-  const last = localStorage.getItem("last");
+  
   // Handler to mark all notifications as read.
   const handleMarkAllAsRead = async () => {
     const token = localStorage.getItem("access_token");
@@ -106,6 +105,29 @@ const Dashboard = () => {
 
   // Count only unread notifications to display in the badge.
   const unreadCount = notifications.filter(notification => notification.status === "unread").length;
+
+
+  const [user, setuser] = useState();
+   
+    const username = async () => {
+      const token = localStorage.getItem("access_token");
+      try {
+        const response = await axios.get("https://backend.homecert.ie/api/user/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setuser(response.data);
+        console.log(response.data)
+      }
+      catch (error) {
+        console.error("Error fetching username:", error);
+      }
+    }
+    useEffect(() => {
+      username();
+    }, []);
+
 
   return (
     <div className="dashboard">
@@ -207,12 +229,24 @@ const Dashboard = () => {
           {/* Dashboard Header */}
           <div className="container-fluid nooverflowy  bgdash">
             <div className="row">
-              <div className="col-md-8 col-10 text-light">
-                <h1 className="display-5">Welcome To Homecert.ie</h1>
-                <h2 className="dashfont">{first + " " + last}</h2>
-              </div>
+               <div className="col-md-8 text-light text-center text-md-start">
+                {user && (
+  <>
+    <h1 className="display-6 display-md-5 d-none d-md-block">
+      Welcome To Homecert.ie
+    </h1>
+    <h1 className="display-6 display-md-5 d-block d-md-none">
+      Welcome <span className="fw-bold">{user.first_name + " " + user.last_name}</span>
+    </h1>
+    <h2 className="dashfont d-none d-md-block">
+      {user.first_name + " " + user.last_name}
+    </h2>
+  </>
+)}
+
+                </div>
               <div className="col-md-4 col-10">
-                <img src={img1} alt="Dashboard" className="img-fluid" />
+                <img src={img1} alt="Dashboard" className="img-fluid d-none d-md-block" />
               </div>
             </div>
           </div>
@@ -220,7 +254,7 @@ const Dashboard = () => {
           {/* Jobs Table */}
           <div className="container-fluid mt-5 mb-4">
             <div>
-              <h3>Your live jobs are listed below:</h3>
+              <h3>Jobs Available</h3>
             </div>
 
             <div className="col-md-12 col-12">

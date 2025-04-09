@@ -393,31 +393,15 @@
 }
 
 @media (max-width: 600px) {
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
-
-  thead tr {
-    display: none; /* Hide table header */
-  }
-
-  tr {
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-  }
-
-  td {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-
-  td::before {
-    content: attr(data-label);
-    font-weight: bold;
-  }
+  
 .nooverflowy{
   overflow-y: none !important;
 }
+.fontnewass{
+  font-size: 12px !important;
 }
+}
+.fontqoute{
+  font-size: 13px !important;
+}
+

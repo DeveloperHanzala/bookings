@@ -6,8 +6,8 @@ const Quote = () => {
       const location = useLocation();
       const navigate = useNavigate();
     const jobData = location.state?.jobData; 
-    const selectedDate = location.state?.selectedDate; 
-    console.log("the job data is" + selectedDate)
+    const { formattedDate, formattedTime } = location.state;
+    console.log("the job data is" +  formattedDate +  "  "  + formattedTime)
      useEffect(() => {
        window.scrollTo({ top: 0, behavior: "smooth" });
      }, []);
@@ -36,11 +36,10 @@ const Quote = () => {
 
         try {
             const storedDate = localStorage.getItem(`jobDate_${jobId}`);
-            const availability = storedDate ? new Date(storedDate).toDateString() : 'Available immediately';
-
+            
             const payload = {
                 amount: Number(formData.amount).toFixed(2).toString(),
-                availability,
+                availability: formattedDate +  " "  + formattedTime,
                 VAT_Registered: formData.VAT_Registered,
                 SEAI_Registered: formData.SEAI_Registered,
                 insurance: formData.insurance
@@ -213,7 +212,7 @@ const Quote = () => {
                                         required
                                     />
                                    <span>I agree to the <span className='text-danger'>terms of use</span> <br/> and I am available from  
-     {""} {selectedDate ? new Date(selectedDate).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' }) : 'N/A'}
+     {""} {formattedDate +  "  "  + formattedTime ? new Date(formattedDate +  "  "  + formattedTime).toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' }) : 'N/A'}
 </span>
 
                                 

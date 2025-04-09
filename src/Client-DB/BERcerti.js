@@ -18,6 +18,32 @@ const BERcerti = () => {
   
 
 
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    
+    // Fetch jobs with assessments
+    const fetchJobs = async () => {
+      const token = localStorage.getItem("access_token");
+      try {
+        const response = await axios.get(
+          'https://backend.homecert.ie/api/jobs/with_assessments/',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setJobs(response.data);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
+    };
+    fetchJobs();
+  }, []);
+
+
   // --- Job creation handler ---
   const handleAddButtonClick = async () => {
     const token = localStorage.getItem("access_token");
@@ -195,26 +221,38 @@ const BERcerti = () => {
 
       {/* Table Section */}
       <div className="table-responsive mt-3">
-        <table className="table table-bordered">
+        <table className="table table-bordered shadow">
           <thead className="border-0">
             <tr className="border-0">
-              <th className="border-0 table-light1">No</th>
-              <th className="border-0 table-light1">Building Name</th>
-              <th className="border-0 table-light1">BER get-your-certificate</th>
-              <th className="border-0 table-light1">Location</th>
+              <th className="border-0 text-center table-light1">No</th>
+              <th className="border-0 text-center table-light1">Building Name</th>
+              <th className="border-0 text-center table-light1">BER Purpose</th>
+              <th className="border-0 text-center table-light1">Property Size</th>
+              <th className="border-0 text-center table-light1">No of Bedroms</th>
+              <th className="border-0 text-center table-light1">Location</th>
+              <th className="border-0 text-center table-light1">View Assessment</th>
             </tr>
           </thead>
           <tbody>
-            {[1, 2, 3, 4, 5].map((item, index) => (
-              <tr className="border-0" key={index}>
-                <td className="border-0">{index + 1}</td>
-                <td className="border-0">Green Town</td>
-                <td className="border-0">get-your-certificate Name</td>
-                <td className="border-0">
-                  <Link to={'/client/get-your-certificate'}>
+            {jobs.map((job, index) => (
+              <tr className="border-0" key={job.id}>
+                <td className="border-0 text-center">{index + 1}</td>
+                <td className="border-0 text-center">{job.building_type}</td>
+                <td className="border-0 text-center">{job.ber_purpose}</td>
+                <td className="border-0 text-center">{job.property_size}</td>
+                <td className="border-0 text-center">{job.bedrooms}</td>
+                <td className="border-0 text-center">
+                  {job.nearest_town}, {job.county}                  
+                </td>
+                <td className="border-0 text-center">
+                  <Link 
+                    to={`/client/view-assessment/${job.assessment_ids[0]}`}
+                    state={{ assessmentIds: job.assessment_ids }}
+                    className="ms-2"
+                  >
                     <button className="btn btn-success">View</button>
                   </Link>
-                </td>
+                  </td>
               </tr>
             ))}
           </tbody>

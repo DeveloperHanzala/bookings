@@ -11,6 +11,11 @@ import Preferences from "./Accessor-DB/Preferences";
 import Assessments from "./Accessor-DB/Assessments";
 import Assessmentsone from "./Accessor-DB/Assessmentsone";
 import ContactInfo from "./Accessor-DB/ContactInfo";
+import ReQuote from "./Accessor-DB/ReQuote";
+import NoJobAssessments from "./Accessor-DB/NoJobAssessments";
+import PrivateAssessment from "./Accessor-DB/PrivateAssessment";
+import JobShow from "./Accessor-DB/JobShow";
+import DateSelector from "./Accessor-DB/DateSelector";
 
 const MainLayout = ({ children }) => (
     <div className="accessor-app">
@@ -84,7 +89,23 @@ const MainLayout = ({ children }) => (
             </MainLayout>
           }
         />
-
+        
+         <Route
+          path="/private-assessments"
+          element={
+            <MainLayout>
+              <PrivateAssessment />
+            </MainLayout>
+          }
+        />
+ <Route
+          path="/assessment-job/:jobId"
+          element={
+            <MainLayout>
+              <NoJobAssessments />
+            </MainLayout>
+          }
+        />
 <Route
           path="/contacts"
           element={
@@ -107,6 +128,22 @@ const MainLayout = ({ children }) => (
           element={
             <NoSidebarLayout>
               <DatePickerComponent />
+            </NoSidebarLayout>
+          }
+        />
+         <Route
+          path="/selectdate/:jobid"
+          element={
+            <NoSidebarLayout>
+              <DateSelector />
+            </NoSidebarLayout>
+          }
+        />
+        <Route
+          path="/re-quote/:jobId"
+          element={
+            <NoSidebarLayout>
+              <ReQuote />
             </NoSidebarLayout>
           }
         />

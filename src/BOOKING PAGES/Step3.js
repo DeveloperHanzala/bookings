@@ -7,7 +7,7 @@ const Step3 = ({ nextStep, prevStep, handleChange }) => {
   // Map display names to backend's stored values
   const validOptions = {
     "Detached": "detached",
-    "Semi-detached": "Semi-detached",
+    "Semi-detached": "semi-detached",
     "Mid-terrace": "mid-terrace",
     "Apartment": "apartment",
     "Duplex": "duplex",

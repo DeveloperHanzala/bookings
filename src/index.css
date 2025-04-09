@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: 'Helvetica Neue Regular', sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: none;
   -moz-osx-font-smoothing: grayscale;
 }
 
