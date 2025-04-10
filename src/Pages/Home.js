@@ -3,7 +3,6 @@ import './Style.css';
 import icon1 from '../Images/image 1.png';
 import icon2 from '../Images/36912166832 1.png';
 import icon3 from '../Images/83455901449 (1) 1.png';
-import cardimg from '../Images/homecard.png';
 import cardimg1 from '../Images/homecard1.png';
 import cardimg2 from '../Images/homecard2.png';
 import iconcard from '../Images/Frame 20.png';
@@ -14,10 +13,10 @@ import { IoStarSharp } from "react-icons/io5";
 import why1 from '../Images/whychose1.png';
 import why2 from '../Images/whychose2.png';
 import why3 from '../Images/whychose3.png';
-import why4 from '../Images/whychose4.png';
-import why5 from '../Images/whychose5.png';
 import why6 from '../Images/whychose6.png';
 import { Link } from 'react-router-dom';
+
+
 
 const Home = () => {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -233,7 +232,6 @@ const Home = () => {
               
             </ul>
             <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
             <h5 className="mx-2 ">Martin Keane</h5>
             </div>
            
@@ -260,7 +258,6 @@ const Home = () => {
               
             </ul>
             <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
             <h5 className="mx-2 ">Ciarán Reilly</h5>
             </div>
            
@@ -289,8 +286,7 @@ const Home = () => {
               
             </ul>
             <div className='d-flex align-items-center mt-3 '>
-            <img className="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" style={{width: 50}} />
-            <h5 className="mx-2 ">Siobhán Ní Fhlannagáin</h5>
+            <h5 className="mx-2 ">Siobhán, Architect</h5>
             </div>
            
             
@@ -333,7 +329,7 @@ const Home = () => {
     <div className='container  pt-5 pb-5'>
        <div className='text-center pb-5'>
         <h2 className='pt-5 '>Are You a BER Assessor?</h2>
-        <p className='text-light'>Register with Homecert.com and receive local job leads, straight to your phone.</p>
+        <p className='text-light'>Register with Homecert.ie and receive local job leads, straight to your phone.</p>
         <Link to="/assessor-registration#assessor" className="btn btn-warning fs-5 fw-bold mt-4 px-5">
   Join Now
 </Link>
@@ -354,7 +350,7 @@ const Home = () => {
         </p>
         <Link to={'/contact/#get-in-touch'}><button className="contact-button">Contact Us</button></Link>
       </div>
-
+      
       {/* Right Section */}
       <div className="faq-right ">
         <h3>Frequent Asked Questions</h3>
