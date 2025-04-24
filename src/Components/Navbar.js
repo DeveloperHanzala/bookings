@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
-      <Link to={'/'} class="navbar-brand mx-3">HomeCert.ie</Link>
+      <Link to={'/'} class="navbar-brand mx-3">Homecert.ie</Link>
         <button
           className="navbar-toggler"
           type="button"
