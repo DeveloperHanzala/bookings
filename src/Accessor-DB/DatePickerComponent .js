@@ -255,7 +255,7 @@ const DatePickerComponent = () => {
         </div>
 
         <div style={{ marginTop: "20px" }}>
-          <Link to={`/accessor/quote/${jobData.id}`} 
+          <Link to={`/accessor/selecttime/${jobData.id}`} 
             state={{ 
               jobData: jobData, 
               formattedDate: formattedDate,

@@ -255,7 +255,9 @@ const ClientDashboard = () => {
                       <div className="table-cell  d-none d-md-block">{index + 1}</div>
                       <div className="table-cell">{new Date(job.created_at).toLocaleDateString()}</div>
                       <div className="table-cell">{job.building_type || "N/A"}</div>
-                      <div className="table-cell">{job.preferred_date || "N/A"}</div>
+                      <div className="table-cell">{job.bids.length > 0
+    ? job.bids[0].availability.split(" ")[0]
+    : "N/A"}</div>
                       <div className="table-cell">
                         <Link to="/client/your-quote" state={{ bids: job.bids }}>
                           <button className="btn button1">View Quote</button>

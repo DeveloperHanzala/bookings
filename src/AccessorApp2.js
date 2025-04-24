@@ -16,6 +16,7 @@ import NoJobAssessments from "./Accessor-DB/NoJobAssessments";
 import PrivateAssessment from "./Accessor-DB/PrivateAssessment";
 import JobShow from "./Accessor-DB/JobShow";
 import DateSelector from "./Accessor-DB/DateSelector";
+import TimePicker from "./Accessor-DB/TimePicker";
 
 const MainLayout = ({ children }) => (
     <div className="accessor-app">
@@ -136,6 +137,14 @@ const MainLayout = ({ children }) => (
           element={
             <NoSidebarLayout>
               <DateSelector />
+            </NoSidebarLayout>
+          }
+        />
+        <Route
+          path="/selecttime/:jobid"
+          element={
+            <NoSidebarLayout>
+              <TimePicker />
             </NoSidebarLayout>
           }
         />

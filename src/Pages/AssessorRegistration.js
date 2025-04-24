@@ -19,22 +19,24 @@ const AssessorRegistration = () => {
     email: '',
     first_name: '',
     last_name: '',
-    phone_number: '',
+    countryCode: '+353', // default to Ireland
+    phone_number: '', // this will store just the number part
     password: '',
-    home_county: 'Dublin', // default value
+    home_county: 'Dublin',
     SEAI_registration: '',
-    SEAI_accessor_since: '', // now empty so user must select
-    professional_insurance_policy_holder: "false", // using strings for select inputs
+    SEAI_accessor_since: '',
+    professional_insurance_policy_holder: "false",
     VAT_registered: "false",
     domestic_or_commercial: 'Domestic',
     preference: [],
     user_type: 'accessor',
-    is_staff: false, // per backend sample
+    is_staff: false,
     is_superuser: false
   });
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false); // New loading state
 
   useEffect(() => {
     if (location.hash) {
@@ -60,24 +62,28 @@ const AssessorRegistration = () => {
     }));
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setLoading(true); // Start loading
 
-    // Ensure the user has selected a year for SEAI_accessor_since
     if (!formData.SEAI_accessor_since) {
       setError("Please select the year you became an SEAI accessor.");
+      setLoading(false); // Stop loading if validation fails
       return;
     }
 
-    // Build payload matching backend parameters.
+    // Combine country code and phone number
+    const fullPhoneNumber = `${formData.countryCode}${formData.phone_number}`;
+
+    // Build payload with combined phone number
     const payload = {
       ...formData,
-      // Use the year selected by the user to build the full date string.
+      phone_number: fullPhoneNumber, // this now includes country code
       SEAI_accessor_since: `${formData.SEAI_accessor_since}-01-01`,
       professional_insurance_policy_holder: formData.professional_insurance_policy_holder === "true",
       VAT_registered: formData.VAT_registered === "true",
-      // Convert the array to a comma-separated string.
       preference: formData.preference
     };
 
@@ -91,10 +97,9 @@ const AssessorRegistration = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error( `Registration failed ${data.detail}` || 'Registration failed Please try again later' );
+        throw new Error(`Registration failed ${data.detail}` || 'Registration failed Please try again later');
       }
 
-      // Auto-login if a token is returned.
       if (data.token) {
         localStorage.setItem('token', data.token);
         setSuccess(true);
@@ -105,18 +110,19 @@ const AssessorRegistration = () => {
       }
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false); // Stop loading in any case
     }
   };
 
   return (
     <>
       <div className='container-fluid accessbg' id='assessor'>
-      <div id='get-in-touch' className='conatiner-fluid paDa'>
-        <div className='text-center'>
+        <div id='get-in-touch' className='conatiner-fluid paDa'>
+          <div className='text-center'>
             <h1 className='accesshead pt-4 pt-md-0'>Assessor Registration</h1>
-            {/* <p><Link to={"/"} className='decnone'> Home <IoIosArrowForward /></Link>  <span className='text-warning'> Assessor Registration</span></p> */}
+          </div>
         </div>
-    </div>
       </div>
 
       <div className='container p-md-0 mt-5 mb-5'>
@@ -140,8 +146,8 @@ const AssessorRegistration = () => {
                 </div>
               </div>
               <div className="mb-3 row d-block d-md-none">
-                <label className="col-sm-4 fw-bold col-form-label">Last Name</label>
-                <div className="col-sm-8">
+                <label className="col-4 fw-bold col-form-label">Last Name</label>
+                <div className="col-8">
                   <input
                     name="last_name"
                     value={formData.last_name}
@@ -168,12 +174,28 @@ const AssessorRegistration = () => {
               {/* Phone */}
               <div className="mb-3 row">
                 <label className="col-sm-4 fw-bold col-form-label">Phone</label>
-                <div className="col-sm-8">
+                <div className="col-sm-8 d-flex">
+                  {/* Country Code Dropdown */}
+                  <select
+                    name="countryCode"
+                    value={formData.countryCode}
+                    onChange={handleInputChange}
+                    className="form-select me-2"
+                    style={{ width: "30%" }}
+                    required
+                  >
+                    <option value="+353">+353 (Ireland)</option>
+                    <option value="+44">+44 (UK)</option>
+                    <option value="+1">+1 (USA)</option>
+                  </select>
+                  {/* Phone Number Input */}
                   <input
+                    type="text"
                     name="phone_number"
                     value={formData.phone_number}
                     onChange={handleInputChange}
                     className="form-control"
+                    style={{ width: "70%" }}
                     required
                   />
                 </div>
@@ -331,8 +353,23 @@ const AssessorRegistration = () => {
           </div>
           {/* Submit Button */}
           <div className='text-center mt-4'>
-            <button type="submit" className='btn button2 fs-5'>
-              Submit Application
+            <button 
+              type="submit" 
+              className='btn button2 fs-5'
+              disabled={loading} // Disable button when loading
+            >
+              {loading ? (
+                <>
+                  <span 
+                    className="spinner-border spinner-border-sm" 
+                    role="status" 
+                    aria-hidden="true"
+                  ></span>
+                  {' '}Processing...
+                </>
+              ) : (
+                'Submit Application'
+              )}
             </button>
             {error && <div className="alert alert-danger mt-3">{error}</div>}
             {success && <div className="alert alert-success mt-3">Registration successful!</div>}

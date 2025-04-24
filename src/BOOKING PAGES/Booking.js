@@ -87,7 +87,7 @@ const Booking = () => {
       const response = await fetch(`https://backend.homecert.ie/api/get-quote/${quoteId}/`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload) // Send flat structure without "quote" wrapper
+        body: JSON.stringify(payload)
       });
   
       const responseData = await response.json();
@@ -102,25 +102,38 @@ const Booking = () => {
       console.error("Submission error:", error);
     }
   };
+
+  // Save county to localStorage if needed
   const values = formData.county;
   localStorage.setItem("countyselected", values);
   console.log(values);
 
- 
-
+  // Render steps conditionally
   switch (step) {
-    case 1: return <Step1 nextStep={nextStep} handleChange={handleChange} formData={formData} />;
-    case 2: return <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 3: return <Step3 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 4: return <Step4 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 5: return <Step5 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 6: return <Step6 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 7: return <Step7 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 8: return <Step8 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 9: return <Step9 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData}   values={values} />;
-    case 10: return <Step10 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
-    case 11: return <Summary formData={formData} prevStep={prevStep} handleChange={handleChange} submitForm={submitForm} />;
-    default: return null;
+    case 1:
+      return <Step1 nextStep={nextStep} handleChange={handleChange} formData={formData} />;
+    case 2:
+      return <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 3:
+      return <Step3 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 4:
+      return <Step4 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 5:
+      return <Step5 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 6:
+      return <Step6 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 7:
+      return <Step7 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 8:
+      return <Step8 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 9:
+      return <Step9 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} values={values} />;
+    case 10:
+      return <Step10 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} formData={formData} />;
+    case 11:
+      return <Summary formData={formData} prevStep={prevStep} handleChange={handleChange} submitForm={submitForm} />;
+    default:
+      return null;
   }
 };
 

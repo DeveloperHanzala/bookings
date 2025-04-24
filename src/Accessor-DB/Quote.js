@@ -6,8 +6,8 @@ const Quote = () => {
       const location = useLocation();
       const navigate = useNavigate();
     const jobData = location.state?.jobData; 
-    const { formattedDate, formattedTime } = location.state;
-    console.log("the job data is" +  formattedDate +  "  "  + formattedTime)
+    const { formattedDate, formattedTime, ampm } = location.state;
+    console.log("the job data is" +  formattedDate +  "  "  + formattedTime, ampm)
      useEffect(() => {
        window.scrollTo({ top: 0, behavior: "smooth" });
      }, []);
@@ -39,10 +39,11 @@ const Quote = () => {
             
             const payload = {
                 amount: Number(formData.amount).toFixed(2).toString(),
-                availability: formattedDate +  " "  + formattedTime,
+                availability: formattedDate +  " "  + formattedTime + ampm,
                 VAT_Registered: formData.VAT_Registered,
                 SEAI_Registered: formData.SEAI_Registered,
-                insurance: formData.insurance
+                insurance: formData.insurance,
+                preferred_time_bid:formattedTime + ampm
             };
 
             const response = await fetch(`https://backend.homecert.ie/api/jobs/${jobId}/bid/`, {
@@ -181,7 +182,7 @@ const Quote = () => {
 
                             <div className=' p-4 text-center'>
                                 <div>
-                                    <span>Include €30 Website fee.</span>
+                                    <span>Include €20 Website fee.</span>
                                 </div>
                             </div>
 

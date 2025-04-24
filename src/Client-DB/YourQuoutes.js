@@ -157,7 +157,7 @@ const YourQuotes = () => {
               {bids.map((bid, index) => (
                 <tr key={bid.id}>
                   <td data-label="No">{index + 1}</td>
-                  <td data-label="Quote">${bid.amount}</td>
+                  <td data-label="Quote">€{bid.amount}</td>
                   <td data-label="Submitted Date">
                     {new Date(bid.created_at).toLocaleDateString()}
                   </td>
@@ -242,7 +242,7 @@ const YourQuotes = () => {
                       className="btn button12"
                       onClick={() => handleSwitchToQuoteModal(selectedBid)}
                     >
-                      Accept ${selectedBid.amount} Quote
+                      Accept €{selectedBid.amount} Quote
                     </button>
                   </div>
                 </div>
@@ -312,7 +312,7 @@ const YourQuotes = () => {
                               *Inclusive of SEAI fees and VAT (if applicable)
                             </span>
                           </span>
-                          <span className="text-success">${bidDetails.amount}</span>
+                          <span className="text-success">€{bidDetails.amount}</span>
                         </div>
 
                         <div className="bgsuccess1 p-3 d-flex mt-2 align-items-center justify-content-between">
@@ -321,13 +321,13 @@ const YourQuotes = () => {
                             <br />
                             <span className="fontquote">Booking Deposit</span>
                           </span>
-                          <span className="text-success">$50</span>
+                          <span className="text-success">€20</span>
                         </div>
 
                         <div className="text-center mt-2 fontquote">
                           <p>
                             Confirm your booking instantly by paying the booking
-                            deposit, then pay the balance (${bidDetails.amount - 50})
+                            deposit, then pay the balance (€{bidDetails.amount - 20})
                             to your assessor on the day of your assessment.
                           </p>
                         </div>
