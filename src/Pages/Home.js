@@ -22,7 +22,7 @@ const Home = () => {
     const [activeIndex, setActiveIndex] = useState(null);
 
     const faqs = [
-      { question: "Why should I use Homecert.ie?", answer: "Because it provides the best services for certifications." },
+      { question: "Why should I use HomeLix?", answer: "Because it provides the best services for certifications." },
       { question: "Who needs a BER Cert?", answer: "Businesses and individuals looking for regulatory compliance." },
       { question: "How can we help?", answer: "We offer consultancy services tailored to your needs." },
       { question: "Paying for your BER Cert?", answer: "We provide multiple payment options to suit you." },
@@ -218,7 +218,7 @@ const Home = () => {
             <p className='text-dark fw-bold'>BER Client</p>
             <p className="text-muted">
               <i className="fas fa-quote-left" />
-              "Jason and the HomeCert.ie team made the BER assessment process effortless. 
+              "Jason and the HomeLix team made the BER assessment process effortless. 
               Quick turnaround, professional service, and sound advice throughout. 
               Couldn’t recommend them more."
             </p>
@@ -274,7 +274,7 @@ const Home = () => {
               <i className="fas fa-quote-left" />
               "Reliable, efficient, and always responsive — 
               exactly what we need when we're up against tight timelines for Part L compliance. 
-              HomeCert.ie is now our go-to."
+              HomeLix is now our go-to."
             </p>
             
             <ul className="list-unstyled d-flex justify-content-start text-warning mb-0">
@@ -329,7 +329,7 @@ const Home = () => {
     <div className='container  pt-5 pb-5'>
        <div className='text-center pb-5'>
         <h2 className='pt-5 '>Are You a BER Assessor?</h2>
-        <p className='text-light'>Register with Homecert.ie and receive local job leads, straight to your phone.</p>
+        <p className='text-light'>Register with HomeLix and receive local job leads, straight to your phone.</p>
         <Link to="/assessor-registration#assessor" className="btn btn-warning fs-5 fw-bold mt-4 px-5">
   Join Now
 </Link>

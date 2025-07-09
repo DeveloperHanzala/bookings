@@ -11,8 +11,8 @@ const Footer = () => {
         <div className=''>
 <div className='row'>
         <div className='col-md-3 px-md-5'>
-            <h1>HomeCert.ie</h1>
-            <p>HomeCert.ie offers the best prices in Ireland for your BER Certificate. We provide access to a wide network of BER Assessors, ensuring the lowest prices.</p>
+            <h1>HomeLix</h1>
+            <p>HomeLix offers the best prices in Ireland for your BER Certificate. We provide access to a wide network of BER Assessors, ensuring the lowest prices.</p>
         </div>
            
         <div className='col-md-3 d-flex justify-content-start justify-content-md-center'>
@@ -29,7 +29,7 @@ const Footer = () => {
         <div className='col-md-2'>
         <h4>Contact me</h4>
             <p>+(353) 87 752 6652</p>
-            <p>info@homecert.ie</p>
+            <p>info@HomeLix</p>
            
         </div>
         <div className='col-md-4 '>

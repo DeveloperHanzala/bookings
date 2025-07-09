@@ -37,7 +37,7 @@ const Contact = () => {
                 <p className='contact-p'>We'd love to hear from you! Whether you have a question about our services, need assistance, or you're in the neighborhood and want to check in, feel free to reach out.</p>
             </div>
             <div >
-              <span className='fs-5 text-white contact-p'>info@homecert.ie</span>
+              <span className='fs-5 text-white contact-p'>info@HomeLix</span>
                 {/* <form className='forma '>
                     <input type='text' className='form-control p-2 mb-3' placeholder='Name *' />
                     <input type='email' className='form-control p-2 mb-3' placeholder='Email' />

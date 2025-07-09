@@ -198,7 +198,7 @@ const BERcerti = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 d-flex align-items-center ">
             <p>
-              Homecert.ie <IoIosArrowForward /> <span className="text-dark">BER get-your-certificate</span>
+              HomeLix <IoIosArrowForward /> <span className="text-dark">BER get-your-certificate</span>
             </p>  
           </div>
 

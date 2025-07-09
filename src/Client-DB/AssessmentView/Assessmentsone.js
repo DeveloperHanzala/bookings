@@ -904,7 +904,7 @@ individual_chp: false,
 
 
             <div className="col-md-12 text-start">
-                <p>Homecert.ie  <IoIosArrowForward /> <span className="text-dark">Assessments</span>     </p>  
+                <p>HomeLix  <IoIosArrowForward /> <span className="text-dark">Assessments</span>     </p>  
             </div>
 
             

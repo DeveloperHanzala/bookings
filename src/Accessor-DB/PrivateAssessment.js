@@ -193,7 +193,7 @@ const PrivateAssessment = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Private Assessments</span>
+              HomeLix <IoIosArrowForward /> <span className="text-dark">Private Assessments</span>
             </p>  
           </div>
 

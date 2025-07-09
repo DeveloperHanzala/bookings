@@ -251,7 +251,7 @@ const Preferences = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Preferences</span>
+              HomeLix <IoIosArrowForward /> <span className="text-dark">Preferences</span>
             </p>
           </div>
 

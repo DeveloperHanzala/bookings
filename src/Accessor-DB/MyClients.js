@@ -183,7 +183,7 @@ const MyClients = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Homecert.ie <IoIosArrowForward /> <span className="text-dark">My Clients</span>
+              HomeLix <IoIosArrowForward /> <span className="text-dark">My Clients</span>
             </p>
           </div>
 
@@ -196,7 +196,7 @@ const MyClients = () => {
             <div className="fs-3 mx-2 fw-bold mb-0">My Clients</div>
             </div>
           <p className="mx-5">
-            Here's your successful quotes on Homecert.ie, Please contact your clients within one business day.
+            Here's your successful quotes on HomeLix, Please contact your clients within one business day.
           </p>
           </div>
 

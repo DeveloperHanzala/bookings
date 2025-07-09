@@ -212,7 +212,7 @@ const Dashboard = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Dashboard</span>
+              HomeLix <IoIosArrowForward /> <span className="text-dark">Dashboard</span>
             </p>  
           </div>
 
@@ -233,7 +233,7 @@ const Dashboard = () => {
                 {user && (
   <>
     <h1 className="display-6 display-md-5 d-none d-md-block">
-      Welcome To Homecert.ie
+      Welcome To HomeLix
     </h1>
     <h1 className="display-6 display-md-5 d-block d-md-none">
       Welcome <span className="fw-bold">{user.first_name + " " + user.last_name}</span>

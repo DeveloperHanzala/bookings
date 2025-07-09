@@ -161,7 +161,7 @@ const Assessments = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Active Jobs</span>
+              HomeLix <IoIosArrowForward /> <span className="text-dark">Active Jobs</span>
             </p>  
           </div>
 

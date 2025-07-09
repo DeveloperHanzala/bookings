@@ -3,7 +3,7 @@ import React from 'react';
 const Blog = () => {
   return (
     <div className="container py-5">
-      <h1>HomeCert.ie Blog</h1>
+      <h1>HomeLix Blog</h1>
       <p>Helpful info and FAQs about BER assessments, energy upgrades, and SEAI grants in Ireland.</p>
 
       <ul>

@@ -175,7 +175,7 @@ const LiveJobs = () => {
           {/* Breadcrumb */}
           <div className="col-md-12 text-start">
             <p>
-              Homecert.ie <IoIosArrowForward /> <span className="text-dark">Live Jobs</span>
+              HomeLix <IoIosArrowForward /> <span className="text-dark">Live Jobs</span>
             </p>
           </div>
 

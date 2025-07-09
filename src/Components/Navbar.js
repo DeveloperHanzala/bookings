@@ -1,14 +1,16 @@
 import React from 'react';
 import './Navbar.css';
 import { Link, useLocation } from 'react-router-dom'; // Import useLocation hook
-
+import img from '../Images/logo.png'
 const Navbar = () => {
   const location = useLocation(); // Use useLocation hook to get the current path
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
-      <Link to={'/'} class="navbar-brand mx-3">Homecert.ie</Link>
+      <Link to={'/'} class="navbar-brand mx-3">
+      <img src={img} alt='logo' width={100} />
+      </Link>
         <button
           className="navbar-toggler"
           type="button"
